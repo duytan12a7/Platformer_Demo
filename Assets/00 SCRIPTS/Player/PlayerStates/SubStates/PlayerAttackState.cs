@@ -16,7 +16,7 @@ public class PlayerAttackState : PlayerState
         if (comboCounter > 2 || Time.time >= lastTimeAttacked + playerData.ComboWindow)
             comboCounter = 0;
 
-        player.Anim.SetInteger("ComboCounter", comboCounter);
+        player.Anim.SetInteger(Global.AnimatorParams.ComboCounter, comboCounter);
 
         player.SetVelocityX(playerData.AttackMovement[comboCounter].x * player.FacingDirection);
 

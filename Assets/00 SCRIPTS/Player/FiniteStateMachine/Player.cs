@@ -42,15 +42,15 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         StateMachine = new PlayerStateMachine();
-        IdleState = new PlayerIdleState(this, StateMachine, playerData, "Idle");
-        MoveState = new PlayerMoveState(this, StateMachine, playerData, "Move");
-        JumpState = new PlayerJumpState(this, StateMachine, playerData, "InAir");
-        InAirState = new PlayerInAirState(this, StateMachine, playerData, "InAir");
-        LandState = new PlayerLandState(this, StateMachine, playerData, "Land");
-        DashState = new PlayerDashState(this, StateMachine, playerData, "Move");
-        WallSlideState = new PlayerWallSlideState(this, StateMachine, playerData, "WallSlide");
-        WallJumpState = new PlayerWallJumpState(this, StateMachine, playerData, "InAir");
-        AttackState = new PlayerAttackState(this, StateMachine, playerData, "Attack");
+        IdleState = new PlayerIdleState(this, StateMachine, playerData, Global.AnimatorParams.Idle);
+        MoveState = new PlayerMoveState(this, StateMachine, playerData, Global.AnimatorParams.Move);
+        JumpState = new PlayerJumpState(this, StateMachine, playerData, Global.AnimatorParams.InAir);
+        InAirState = new PlayerInAirState(this, StateMachine, playerData, Global.AnimatorParams.InAir);
+        LandState = new PlayerLandState(this, StateMachine, playerData, Global.AnimatorParams.Land);
+        DashState = new PlayerDashState(this, StateMachine, playerData, Global.AnimatorParams.Move);
+        WallSlideState = new PlayerWallSlideState(this, StateMachine, playerData, Global.AnimatorParams.WallSlide);
+        WallJumpState = new PlayerWallJumpState(this, StateMachine, playerData, Global.AnimatorParams.InAir);
+        AttackState = new PlayerAttackState(this, StateMachine, playerData, Global.AnimatorParams.Attack);
     }
 
     private void Start()

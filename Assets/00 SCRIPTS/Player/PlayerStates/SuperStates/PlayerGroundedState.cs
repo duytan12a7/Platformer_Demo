@@ -12,6 +12,7 @@ public class PlayerGroundedState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        player.JumpState.ResetAmountJumpsLeft();
     }
 
     public override void Update()
@@ -21,7 +22,7 @@ public class PlayerGroundedState : PlayerState
         if (Input.GetKeyDown(KeyCode.C))
             stateMachine.ChangeState(player.AttackState);
 
-        if (Input.GetKeyDown(KeyCode.X) && player.IsGroundDetected())
+        if (Input.GetKeyDown(KeyCode.X) && player.JumpState.CanJump())
             stateMachine.ChangeState(player.JumpState);
         else if (!player.IsGroundDetected())
             stateMachine.ChangeState(player.InAirState);
