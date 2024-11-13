@@ -50,6 +50,9 @@ TagManager:
   - name: Decoration
     uniqueID: 21327527
     locked: 0
+  - name: Instances
+    uniqueID: 393833685
+    locked: 0
   - name: Player
     uniqueID: 3388933587
     locked: 0

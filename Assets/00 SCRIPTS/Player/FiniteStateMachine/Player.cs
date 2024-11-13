@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
     #region StateMachine Variables
 
@@ -19,28 +19,14 @@ public class Player : MonoBehaviour
 
     #endregion
 
-    #region Components
-
-    public Animator Anim { get; private set; }
-    public Rigidbody2D Rigid { get; private set; }
     [SerializeField] private PlayerData playerData;
 
-    #endregion
 
-    #region Check Transform
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private Transform wallCheck;
-    #endregion
+    #region Unity Callback Functions
 
-    #region Other Variables
-
-    public Vector2 CurrentVelocity;
-    private Vector2 workspace;
-    public int FacingDirection;
-
-    #endregion
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         StateMachine = new PlayerStateMachine();
         IdleState = new PlayerIdleState(this, StateMachine, playerData, Global.AnimatorParams.Idle);
         MoveState = new PlayerMoveState(this, StateMachine, playerData, Global.AnimatorParams.Move);
@@ -53,57 +39,24 @@ public class Player : MonoBehaviour
         AttackState = new PlayerAttackState(this, StateMachine, playerData, Global.AnimatorParams.Attack);
     }
 
-    private void Start()
+    protected override void Start()
     {
-        Anim = GetComponent<Animator>();
-        Rigid = GetComponent<Rigidbody2D>();
-
-        FacingDirection = 1;
-
+        base.Start();
         StateMachine.Initialize(IdleState);
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         CurrentVelocity = Rigid.velocity;
         StateMachine.CurrentState.Update();
 
         CheckIfDashInput();
     }
 
-    #region Set Functions
-
-    public void SetVelocityX(float velocity)
-    {
-        workspace.Set(velocity, CurrentVelocity.y);
-        Rigid.velocity = workspace;
-        CurrentVelocity = workspace;
-    }
-
-    public void SetVelocityY(float velocity)
-    {
-        workspace.Set(CurrentVelocity.y, velocity);
-        Rigid.velocity = workspace;
-        CurrentVelocity = workspace;
-    }
-
-    public void SetVelocity(float xVelocity, float yVelocity)
-    {
-        Rigid.velocity = new Vector2(xVelocity, yVelocity);
-    }
-
     #endregion
 
     #region Check Functions
-
-    public bool IsGroundDetected() => Physics2D.OverlapCircle(groundCheck.position, playerData.GroundCheckRadius, playerData.WhatIsGround);
-    public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, playerData.WallCheckDistance, playerData.WhatIsGround);
-
-    public void CheckFlip(float xInput)
-    {
-        if (xInput != 0 && xInput != FacingDirection)
-            Flip();
-    }
 
     private void CheckIfDashInput()
     {
@@ -115,14 +68,8 @@ public class Player : MonoBehaviour
 
     #region Other Functions
 
-    public void Flip()
-    {
-        FacingDirection *= -1;
-        transform.Rotate(0f, 180f, 0f);
-    }
-
     private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
-    private void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
+    public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
 
     #endregion
 }
