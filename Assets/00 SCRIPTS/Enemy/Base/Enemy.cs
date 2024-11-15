@@ -28,18 +28,22 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     #region Check Surroundings
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private Transform _wallCheck;
-    [SerializeField] private LayerMask whatIsGround;
+    [SerializeField] private LayerMask _whatIsGround;
     [SerializeField] private float _groundCheckRadius = 0.1f;
     [SerializeField] private float _wallCheckDistance = 0.5f;
+    #endregion
+
+    #region Components
+
+    public Rigidbody2D Rigid { get; set; }
+    public Animator Anim { get; set; }
+
     #endregion
 
     #region Other Variables
 
     [field: SerializeField] public float MaxHealth { get; set; } = 100f;
     public float CurrentHealth { get; set; }
-
-    public Rigidbody2D Rigid { get; set; }
-    public Animator Anim { get; set; }
     public int FacingDirection { get; set; }
     public bool IsFacingRight { get; set; }
 
@@ -127,12 +131,6 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 
     #endregion
 
-    public virtual void Flip()
-    {
-        FacingDirection *= -1;
-        IsFacingRight = !IsFacingRight;
-        transform.Rotate(0f, 180f, 0f);
-    }
 
     #region Check Functions
 
@@ -146,9 +144,16 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
         IsWithinAttackDistance = isWithinAttackDistance;
     }
 
-    public bool IsGroundDetected() => Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, whatIsGround);
+    public bool IsGroundDetected() => Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _whatIsGround);
 
-    public bool IsWallDetected() => Physics2D.Raycast(_wallCheck.position, Vector2.right * FacingDirection, _wallCheckDistance, whatIsGround);
+    public bool IsWallDetected() => Physics2D.Raycast(_wallCheck.position, Vector2.right * FacingDirection, _wallCheckDistance, _whatIsGround);
+
+    public virtual void Flip()
+    {
+        FacingDirection *= -1;
+        IsFacingRight = !IsFacingRight;
+        transform.Rotate(0f, 180f, 0f);
+    }
 
     private void OnDrawGizmos()
     {

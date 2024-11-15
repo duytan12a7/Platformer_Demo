@@ -10,6 +10,8 @@ public class EnemyAttackSOBase : ScriptableObject
 
     protected Transform playerTransform;
 
+    protected float stateTimer;
+
     public virtual void Initialize(GameObject gameObject, Enemy enemy)
     {
         this.gameObject = gameObject;
@@ -24,7 +26,10 @@ public class EnemyAttackSOBase : ScriptableObject
     {
         ResetValues();
     }
-    public virtual void Update() { }
+    public virtual void Update()
+    {
+        stateTimer -= Time.deltaTime;
+    }
     public virtual void AnimationTriggerEvent(Enemy.AnimationTriggerType triggerType) { }
     public virtual void ResetValues()
     {

@@ -9230,12 +9230,14 @@ MonoBehaviour:
   _enemyAttackBase: {fileID: 11400000, guid: 7117f356a7f81be41a1f235034850dc0, type: 2}
   _groundCheck: {fileID: 1548064700}
   _wallCheck: {fileID: 208696291}
-  whatIsGround:
+  _whatIsGround:
     serializedVersion: 2
     m_Bits: 64
   _groundCheckRadius: 0.1
   _wallCheckDistance: 0.5
   <MaxHealth>k__BackingField: 100
+  LastTimeAttack: 0
+  AttackCooldown: 5
 --- !u!1 &1953752046
 GameObject:
   m_ObjectHideFlags: 0
@@ -9543,12 +9545,14 @@ MonoBehaviour:
   _enemyAttackBase: {fileID: 11400000, guid: d291fd729b63f9642b617f43490c98c5, type: 2}
   _groundCheck: {fileID: 2110030820}
   _wallCheck: {fileID: 2098228054}
-  whatIsGround:
+  _whatIsGround:
     serializedVersion: 2
     m_Bits: 64
   _groundCheckRadius: 0.42
   _wallCheckDistance: 0
   <MaxHealth>k__BackingField: 100
+  LastTimeAttack: 0
+  AttackCooldown: 0
 --- !u!58 &2136062310
 CircleCollider2D:
   m_ObjectHideFlags: 0

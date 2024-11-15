@@ -5,16 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Chase-Direct Chase", menuName = "Enemy Logic/Chase Logic/ Direct Chase")]
 public class EnemyChaseDirectToPlayer : EnemyChaseSOBase
 {
-    [Range(0f, 5f)][SerializeField] private float _movementSpeed;
-    [Range(0f, 5f)][SerializeField] private float _timeTillExit;
-    [Range(0f, 5f)][SerializeField] private float _distanceToCountExit;
+    [SerializeField] private float _movementSpeed;
+    [SerializeField] private float _timeTillExit;
+    [SerializeField] private float _distanceToCountExit;
 
     private float timer;
 
     public override void Enter()
     {
         base.Enter();
-        timer = 0f;
+        stateTimer = _timeTillExit;
         enemy.Anim.SetBool("Move", true);
     }
 
@@ -32,12 +32,15 @@ public class EnemyChaseDirectToPlayer : EnemyChaseSOBase
         enemy.MoveEnemy(direction * _movementSpeed);
         enemy.CheckFlip(direction.x);
 
-        if (Vector2.Distance(playerTransform.position, enemy.transform.position) > _distanceToCountExit)
-        {
-            timer += Time.deltaTime;
-            if (timer > _timeTillExit)
-                enemy.StateMachine.ChangeState(enemy.IdleState);
-        }
-        else timer = 0f;
+        if (!enemy.IsAggroed && stateTimer < 0)
+            enemy.StateMachine.ChangeState(enemy.IdleState);
+
+        // if (Vector2.Distance(playerTransform.position, enemy.transform.position) > _distanceToCountExit)
+        // {
+        //     timer += Time.deltaTime;
+        //     if (timer > _timeTillExit)
+        //         enemy.StateMachine.ChangeState(enemy.IdleState);
+        // }
+        // else timer = 0f;
     }
 }
