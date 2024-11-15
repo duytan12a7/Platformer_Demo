@@ -21,7 +21,7 @@ public class EnemyAttackSwordProjectile : EnemyAttackSOBase
     {
         base.Update();
 
-        enemy.MoveEnemy(Vector2.zero);
+        enemy.SetVelocity(Vector2.zero);
 
         if (enemy.CurrentTriggerType == Enemy.AnimationTriggerType.EffectAttack)
             enemy.StateMachine.ChangeState(enemy.ChaseState);

@@ -19,7 +19,7 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
     {
         base.Update();
 
-        enemy.MoveEnemy(Vector2.zero);
+        enemy.SetVelocity(Vector2.zero);
 
         if (stateTimer > 0) return;
 
