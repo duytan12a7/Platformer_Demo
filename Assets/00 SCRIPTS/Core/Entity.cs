@@ -22,11 +22,12 @@ public class Entity : MonoBehaviour
     #region Collisions
     [SerializeField] protected Transform groundCheck;
     [SerializeField] protected Transform wallCheck;
-    public Transform attackCheck;
-    public float attackCheckRadius;
     [SerializeField] protected float groundCheckRadius = 0.08f;
     [SerializeField] protected float wallCheckDistance = 0.5f;
     [SerializeField] protected LayerMask whatIsGround;
+    public Transform attackCheck;
+    public float attackCheckRadius;
+    public LayerMask whatIsCharacter;
     #endregion
 
     protected virtual void Awake()
