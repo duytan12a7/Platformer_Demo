@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationTrigger : MonoBehaviour
+public class PlayerAnimationTrigger : MonoBehaviour
 {
     [SerializeField] private Player player;
 

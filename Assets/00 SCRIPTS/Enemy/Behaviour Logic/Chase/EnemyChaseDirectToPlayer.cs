@@ -5,21 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Chase-Direct Chase", menuName = "Enemy Logic/Chase Logic/ Direct Chase")]
 public class EnemyChaseDirectToPlayer : EnemyChaseSOBase
 {
-    [SerializeField] private float _movementSpeed;
-    [SerializeField] private float _timeTillExit;
-    [SerializeField] private float _distanceToCountExit;
+    [Range(0f, 5f)][SerializeField] private float _movementSpeed;
+    [Range(0f, 5f)][SerializeField] private float _timeTillExit;
+    [Range(0f, 5f)][SerializeField] private float _distanceToCountExit;
 
-    private float _timer;
-
-    public override void Initialize(GameObject gameObject, Enemy enemy)
-    {
-        base.Initialize(gameObject, enemy);
-    }
+    private float timer;
 
     public override void Enter()
     {
         base.Enter();
-        _timer = 0f;
+        timer = 0f;
         enemy.Anim.SetBool("Move", true);
     }
 
@@ -35,23 +30,14 @@ public class EnemyChaseDirectToPlayer : EnemyChaseSOBase
 
         Vector2 direction = (playerTransform.position - enemy.transform.position).normalized;
         enemy.MoveEnemy(direction * _movementSpeed);
+        enemy.CheckFlip(direction.x);
 
         if (Vector2.Distance(playerTransform.position, enemy.transform.position) > _distanceToCountExit)
         {
-            _timer += Time.deltaTime;
-            if (_timer > _timeTillExit)
+            timer += Time.deltaTime;
+            if (timer > _timeTillExit)
                 enemy.StateMachine.ChangeState(enemy.IdleState);
         }
-        else _timer = 0f;
-    }
-
-    public override void AnimationTriggerEvent(Enemy.AnimationTriggerType triggerType)
-    {
-        base.AnimationTriggerEvent(triggerType);
-    }
-
-    public override void ResetValues()
-    {
-        base.ResetValues();
+        else timer = 0f;
     }
 }

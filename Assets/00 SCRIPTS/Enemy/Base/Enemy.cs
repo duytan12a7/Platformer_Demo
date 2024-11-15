@@ -15,9 +15,9 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 
     #region ScriptableObject Variables
 
-    [SerializeField] private EnemyIdleSOBase EnemyIdleBase;
-    [SerializeField] private EnemyChaseSOBase EnemyChaseBase;
-    [SerializeField] private EnemyAttackSOBase EnemyAttackBase;
+    [SerializeField] private EnemyIdleSOBase _enemyIdleBase;
+    [SerializeField] private EnemyChaseSOBase _enemyChaseBase;
+    [SerializeField] private EnemyAttackSOBase _enemyAttackBase;
 
     public EnemyIdleSOBase EnemyIdleBaseInstance { get; set; }
     public EnemyChaseSOBase EnemyChaseBaseInstance { get; set; }
@@ -26,11 +26,11 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     #endregion
 
     #region Check Surroundings
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private Transform wallCheck;
+    [SerializeField] private Transform _groundCheck;
+    [SerializeField] private Transform _wallCheck;
     [SerializeField] private LayerMask whatIsGround;
-    private float groundCheckRadius = 0.1f;
-    private float wallCheckDistance = 0.3f;
+    [SerializeField] private float _groundCheckRadius = 0.1f;
+    [SerializeField] private float _wallCheckDistance = 0.5f;
     #endregion
 
     #region Other Variables
@@ -44,7 +44,8 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     public bool IsFacingRight { get; set; }
 
     public bool IsAggroed { get; set; }
-    public bool IsWithinStrikingDistance { get; set; }
+    public bool IsWithinAttackDistance { get; set; }
+    public AnimationTriggerType CurrentTriggerType { get; private set; }
 
     #endregion
 
@@ -53,9 +54,9 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     private void Awake()
     {
 
-        EnemyIdleBaseInstance = Instantiate(EnemyIdleBase);
-        EnemyChaseBaseInstance = Instantiate(EnemyChaseBase);
-        EnemyAttackBaseInstance = Instantiate(EnemyAttackBase);
+        EnemyIdleBaseInstance = Instantiate(_enemyIdleBase);
+        EnemyChaseBaseInstance = Instantiate(_enemyChaseBase);
+        EnemyAttackBaseInstance = Instantiate(_enemyAttackBase);
 
         StateMachine = new EnemyStateMachine();
 
@@ -111,7 +112,6 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
     public void MoveEnemy(Vector2 velocity)
     {
         Rigid.velocity = velocity;
-        CheckFlip(velocity.x);
     }
 
     public void SetVelocityX(float velocity)
@@ -141,32 +141,36 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
         IsAggroed = isAggroed;
     }
 
-    public void SetStrikingDistanceBool(bool isWithinStrikingDistance)
+    public void SetAttackDistanceBool(bool isWithinAttackDistance)
     {
-        IsWithinStrikingDistance = isWithinStrikingDistance;
+        IsWithinAttackDistance = isWithinAttackDistance;
     }
 
-    public bool IsGroundDetected() => Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+    public bool IsGroundDetected() => Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, whatIsGround);
 
-    public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, wallCheckDistance, whatIsGround);
+    public bool IsWallDetected() => Physics2D.Raycast(_wallCheck.position, Vector2.right * FacingDirection, _wallCheckDistance, whatIsGround);
 
-    private void OnDrawGizmos() {
+    private void OnDrawGizmos()
+    {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
-        Gizmos.DrawRay(wallCheck.position, Vector2.right * FacingDirection * wallCheckDistance);
+        Gizmos.DrawWireSphere(_groundCheck.position, _groundCheckRadius);
+        Gizmos.DrawRay(_wallCheck.position, Vector2.right * FacingDirection * _wallCheckDistance);
     }
 
     #endregion
 
     #region Animation Trigger Functions
 
-    private void AnimationTriggerEvent(AnimationTriggerType triggerType)
+    public void AnimationTriggerEvent(AnimationTriggerType triggerType)
     {
+        CurrentTriggerType = triggerType;
         StateMachine.CurrentState.AnimationTriggerEvent(triggerType);
     }
 
     public enum AnimationTriggerType
     {
+        None,
+        EffectAttack,
         EnemyDamaged,
         PlayerFootstepsound
     }

@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48828cda19ee3f841a4f5f0a8f156f08, type: 3}
-  m_Name: Chase-Direct Chase
+  m_Script: {fileID: 11500000, guid: defa350bd21de38419a165c5878c3bd0, type: 3}
+  m_Name: Idle-Random Fly Wander
   m_EditorClassIdentifier: 
-  _movementSpeed: 3
-  _timeTillExit: 3
-  _distanceToCountExit: 3
+  _randomMovementRange: 2
+  _movementSpeed: 1
