@@ -15,9 +15,9 @@ public class PlayerWallJumpState : PlayerState
         player.SetVelocity(playerData.WallJumpVelocityX * -player.FacingDirection, playerData.JumpVelocity);
     }
 
-    public override void Update()
+    public override void LogicUpdate()
     {
-        base.Update();
+        base.LogicUpdate();
 
         if (stateTimer < 0)
             stateMachine.ChangeState(player.InAirState);

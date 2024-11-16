@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Entity, IDamageable
+public class Player : Entity
 {
     #region StateMachine Variables
 
@@ -16,8 +16,6 @@ public class Player : Entity, IDamageable
     public PlayerWallSlideState WallSlideState { get; private set; }
     public PlayerWallJumpState WallJumpState { get; private set; }
     public PlayerAttackState AttackState { get; private set; }
-    public float MaxHealth { get; set; } = 100f;
-    public float CurrentHealth { get; set; }
 
     #endregion
 
@@ -44,7 +42,7 @@ public class Player : Entity, IDamageable
     protected override void Start()
     {
         base.Start();
-        CurrentHealth = MaxHealth;
+        CurrentHealth = playerData.MaxHealth;
         StateMachine.Initialize(IdleState);
     }
 
@@ -52,7 +50,7 @@ public class Player : Entity, IDamageable
     {
         base.Update();
         CurrentVelocity = Rigid.velocity;
-        StateMachine.CurrentState.Update();
+        StateMachine.CurrentState.LogicUpdate();
 
         CheckIfDashInput();
     }
@@ -65,22 +63,6 @@ public class Player : Entity, IDamageable
     {
         if (Input.GetKeyDown(KeyCode.Z) && DashState.CanDash())
             StateMachine.ChangeState(DashState);
-    }
-
-    #endregion
-
-    #region Health / Die Functions
-
-    public virtual void Damage(float damageAmount)
-    {
-        Debug.Log(gameObject.name + " was damaged");
-        CurrentHealth -= damageAmount;
-        if (CurrentHealth <= 0f)
-            Die();
-    }
-
-    public virtual void Die()
-    {
     }
 
     #endregion

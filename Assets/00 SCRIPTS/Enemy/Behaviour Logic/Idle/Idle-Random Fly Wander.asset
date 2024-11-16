@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: defa350bd21de38419a165c5878c3bd0, type: 3}
   m_Name: Idle-Random Fly Wander
   m_EditorClassIdentifier: 
+  AggroCheckDistance: 0
+  AggroCheckRadius: 6
   _randomMovementRange: 2
   _movementSpeed: 1

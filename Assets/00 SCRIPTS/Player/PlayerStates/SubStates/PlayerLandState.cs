@@ -14,9 +14,9 @@ public class PlayerLandState : PlayerGroundedState
         player.SetVelocityX(0f);
     }
 
-    public override void Update()
+    public override void LogicUpdate()
     {
-        base.Update();
+        base.LogicUpdate();
 
         if (xInput != 0)
             stateMachine.ChangeState(player.MoveState);

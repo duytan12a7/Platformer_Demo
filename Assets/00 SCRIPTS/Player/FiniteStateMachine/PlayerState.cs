@@ -38,7 +38,7 @@ public class PlayerState
         player.Anim.SetBool(animBoolName, false);
     }
 
-    public virtual void Update()
+    public virtual void LogicUpdate()
     {
         stateTimer -= Time.deltaTime;
         xInput = Input.GetAxisRaw("Horizontal");

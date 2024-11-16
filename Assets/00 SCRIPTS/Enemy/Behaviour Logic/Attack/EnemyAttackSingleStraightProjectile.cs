@@ -15,11 +15,11 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
         stateTimer = _timeBetweenShot;
     }
 
-    public override void Update()
+    public override void LogicUpdate()
     {
-        base.Update();
+        base.LogicUpdate();
 
-        enemy.SetVelocity(Vector2.zero);
+        enemy.SetZeroVelocity();
 
         if (stateTimer > 0) return;
 

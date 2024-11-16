@@ -12,6 +12,9 @@ public class EnemyChaseSOBase : ScriptableObject
 
     protected float stateTimer;
 
+    public float AttackCheckDistance;
+    public float AttackCheckRadius;
+
     public virtual void Initialize(GameObject gameObject, Enemy enemy)
     {
         this.gameObject = gameObject;
@@ -26,13 +29,15 @@ public class EnemyChaseSOBase : ScriptableObject
     {
         ResetValues();
     }
-    public virtual void Update()
+    public virtual void LogicUpdate()
     {
         stateTimer -= Time.deltaTime;
 
-        if (enemy.IsWithinAttackDistance)
+        if (enemy.CheckAttackDistance() || enemy.CheckAttackRadius())
             enemy.StateMachine.ChangeState(enemy.AttackState);
     }
+
     public virtual void AnimationTriggerEvent(Enemy.AnimationTriggerType triggerType) { }
+
     public virtual void ResetValues() { }
 }

@@ -11,25 +11,18 @@ public class EnemyChaseDirectXToPlayer : EnemyChaseSOBase
     public override void Enter()
     {
         base.Enter();
-        enemy.Anim.SetBool("Move", true);
         stateTimer = _timeTillExit;
     }
 
-    public override void Exit()
+    public override void LogicUpdate()
     {
-        base.Exit();
-        enemy.Anim.SetBool("Move", false);
-    }
-
-    public override void Update()
-    {
-        base.Update();
+        base.LogicUpdate();
 
         Vector2 direction = (playerTransform.position - enemy.transform.position).normalized;
         enemy.SetVelocityX(direction.x * _movementSpeed);
         enemy.CheckFlip(direction.x);
 
-        if (!enemy.IsAggroed && stateTimer < 0 || !enemy.IsGroundDetected())
+        if (!enemy.CheckAggroDistance() && stateTimer < 0 || !enemy.IsGroundDetected())
             enemy.StateMachine.ChangeState(enemy.IdleState);
     }
 }

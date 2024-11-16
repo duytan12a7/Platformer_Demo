@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48828cda19ee3f841a4f5f0a8f156f08, type: 3}
   m_Name: Chase-Direct Chase
   m_EditorClassIdentifier: 
+  AttackCheckDistance: 0
+  AttackCheckRadius: 3
   _movementSpeed: 3
-  _timeTillExit: 3
+  _timeTillExit: 5
   _distanceToCountExit: 3

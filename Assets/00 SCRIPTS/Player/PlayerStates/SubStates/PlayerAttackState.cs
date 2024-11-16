@@ -30,9 +30,9 @@ public class PlayerAttackState : PlayerState
         lastTimeAttacked = Time.time;
     }
 
-    public override void Update()
+    public override void LogicUpdate()
     {
-        base.Update();
+        base.LogicUpdate();
 
         if (stateTimer < 0 && player.IsGroundDetected())
             player.SetVelocity(0f, 0f);

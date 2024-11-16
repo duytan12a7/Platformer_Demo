@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Callbacks;
 using UnityEngine;
 
-public class Entity : MonoBehaviour
+public class Entity : MonoBehaviour, IDamageable
 {
     #region Components
     public Animator Anim { get; private set; }
     public Rigidbody2D Rigid { get; private set; }
+    public EntityFX entityFX { get; private set; }
+    public float MaxHealth { get; set; }
+    public float CurrentHealth { get; set; }
 
     #endregion
 
@@ -18,7 +22,16 @@ public class Entity : MonoBehaviour
     protected bool isFacingRight;
 
     #endregion
+    #region Knockback Variables
 
+    [Header("Knockback Variables")]
+    [SerializeField] protected Vector2 knockbackVelocity;
+    [SerializeField] protected float knockBackDuration;
+    protected bool isKnocked;
+
+    #endregion
+
+    [Header("Check Collisions")]
     #region Collisions
     [SerializeField] protected Transform groundCheck;
     [SerializeField] protected Transform wallCheck;
@@ -39,6 +52,7 @@ public class Entity : MonoBehaviour
     {
         Anim = GetComponentInChildren<Animator>();
         Rigid = GetComponent<Rigidbody2D>();
+        entityFX = GetComponentInChildren<EntityFX>();
 
         isFacingRight = true;
         FacingDirection = 1;
@@ -52,6 +66,8 @@ public class Entity : MonoBehaviour
 
     public virtual void SetVelocityX(float velocity)
     {
+        if (isKnocked) return;
+
         workspace.Set(velocity, CurrentVelocity.y);
         Rigid.velocity = workspace;
         CurrentVelocity = workspace;
@@ -59,6 +75,8 @@ public class Entity : MonoBehaviour
 
     public virtual void SetVelocityY(float velocity)
     {
+        if (isKnocked) return;
+
         workspace.Set(CurrentVelocity.y, velocity);
         Rigid.velocity = workspace;
         CurrentVelocity = workspace;
@@ -66,7 +84,16 @@ public class Entity : MonoBehaviour
 
     public virtual void SetVelocity(float xVelocity, float yVelocity)
     {
+        if (isKnocked) return;
+
         Rigid.velocity = new Vector2(xVelocity, yVelocity);
+    }
+
+    public virtual void SetZeroVelocity()
+    {
+        if (isKnocked) return;
+
+        Rigid.velocity = Vector2.zero;
     }
 
     #endregion
@@ -85,6 +112,23 @@ public class Entity : MonoBehaviour
 
     #endregion
 
+    #region Health / Die Functions
+
+    public virtual void Damage(float damageAmount)
+    {
+        StartCoroutine(HitKnockback());
+        entityFX.StartCoroutine(entityFX.HitFlashFX());
+        CurrentHealth -= damageAmount;
+        if (CurrentHealth <= 0f)
+            Die();
+    }
+
+    public virtual void Die()
+    {
+    }
+
+    #endregion
+
     #region Other Functions
 
     public virtual void Flip()
@@ -92,6 +136,15 @@ public class Entity : MonoBehaviour
         FacingDirection *= -1;
         isFacingRight = !isFacingRight;
         transform.Rotate(0f, 180f, 0f);
+    }
+
+    protected virtual IEnumerator HitKnockback()
+    {
+        isKnocked = true;
+        Rigid.velocity = new Vector2(knockbackVelocity.x * -FacingDirection, knockbackVelocity.y);
+
+        yield return new WaitForSeconds(knockBackDuration);
+        isKnocked = false;
     }
 
     protected virtual void OnDrawGizmos()

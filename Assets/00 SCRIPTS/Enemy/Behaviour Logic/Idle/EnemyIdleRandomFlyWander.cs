@@ -15,18 +15,11 @@ public class EnemyIdleRandomFlyWander : EnemyIdleSOBase
         base.Enter();
 
         _targetPos = GetRandomPointInCircle();
-        enemy.Anim.SetBool("Move", true);
     }
 
-    public override void Exit()
+    public override void LogicUpdate()
     {
-        base.Exit();
-        enemy.Anim.SetBool("Move", false);
-    }
-
-    public override void Update()
-    {
-        base.Update();
+        base.LogicUpdate();
 
         if (enemy.IsGroundDetected())
             ChangeDirection();

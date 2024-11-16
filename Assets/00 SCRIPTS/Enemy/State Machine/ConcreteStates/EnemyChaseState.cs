@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyChaseState : EnemyState
 {
-    public EnemyChaseState(Enemy enemy, EnemyStateMachine stateMachine) : base(enemy, stateMachine)
+    public EnemyChaseState(Enemy enemy, EnemyStateMachine stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
     {
     }
 
@@ -22,11 +22,11 @@ public class EnemyChaseState : EnemyState
         enemy.EnemyChaseBaseInstance.Exit();
     }
 
-    public override void Update()
+    public override void LogicUpdate()
     {
-        base.Update();
+        base.LogicUpdate();
 
-        enemy.EnemyChaseBaseInstance.Update();
+        enemy.EnemyChaseBaseInstance.LogicUpdate();
     }
 
     public override void AnimationTriggerEvent(Enemy.AnimationTriggerType triggerType)

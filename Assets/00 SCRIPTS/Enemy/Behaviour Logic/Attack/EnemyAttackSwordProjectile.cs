@@ -5,23 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Attack-Sword Projectile", menuName = "Enemy Logic/Attack Logic/Sword Projectile")]
 public class EnemyAttackSwordProjectile : EnemyAttackSOBase
 {
-    public override void Enter()
+    public override void LogicUpdate()
     {
-        base.Enter();
-        enemy.Anim.SetBool("Attack", true);
-    }
+        base.LogicUpdate();
 
-    public override void Exit()
-    {
-        base.Exit();
-        enemy.Anim.SetBool("Attack", false);
-    }
-
-    public override void Update()
-    {
-        base.Update();
-
-        enemy.SetVelocity(Vector2.zero);
+        enemy.SetZeroVelocity();
 
         if (enemy.CurrentTriggerType == Enemy.AnimationTriggerType.EffectAttack)
             enemy.StateMachine.ChangeState(enemy.ChaseState);

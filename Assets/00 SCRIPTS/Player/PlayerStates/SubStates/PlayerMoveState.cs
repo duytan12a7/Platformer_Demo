@@ -8,9 +8,9 @@ public class PlayerMoveState : PlayerGroundedState
     {
     }
 
-    public override void Update()
+    public override void LogicUpdate()
     {
-        base.Update();
+        base.LogicUpdate();
 
         player.CheckFlip(xInput);
         player.SetVelocity(xInput * playerData.MovementVelocity, rb.velocity.y);

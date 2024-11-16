@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyIdleState : EnemyState
 {
 
-    public EnemyIdleState(Enemy enemy, EnemyStateMachine stateMachine) : base(enemy, stateMachine)
+    public EnemyIdleState(Enemy enemy, EnemyStateMachine stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
     {
     }
 
@@ -24,11 +24,11 @@ public class EnemyIdleState : EnemyState
         enemy.EnemyIdleBaseInstance.Exit();
     }
 
-    public override void Update()
+    public override void LogicUpdate()
     {
-        base.Update();
+        base.LogicUpdate();
 
-        enemy.EnemyIdleBaseInstance.Update();
+        enemy.EnemyIdleBaseInstance.LogicUpdate();
     }
 
     public override void AnimationTriggerEvent(Enemy.AnimationTriggerType triggerType)
