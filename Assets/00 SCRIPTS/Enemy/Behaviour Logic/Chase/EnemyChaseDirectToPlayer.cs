@@ -5,16 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Chase-Direct Chase", menuName = "Enemy Logic/Chase Logic/ Direct Chase")]
 public class EnemyChaseDirectToPlayer : EnemyChaseSOBase
 {
-    [SerializeField] private float _movementSpeed;
-    [SerializeField] private float _timeTillExit;
-    [SerializeField] private float _distanceToCountExit;
-
-    private float timer;
+    [SerializeField] private float movementSpeed;
+    [SerializeField] private float timeTillExit;
 
     public override void Enter()
     {
         base.Enter();
-        stateTimer = _timeTillExit;
+        stateTimer = timeTillExit;
     }
 
     public override void LogicUpdate()
@@ -22,7 +19,7 @@ public class EnemyChaseDirectToPlayer : EnemyChaseSOBase
         base.LogicUpdate();
 
         Vector2 direction = (playerTransform.position - enemy.transform.position).normalized;
-        enemy.SetVelocity(direction * _movementSpeed);
+        enemy.SetVelocity(direction * movementSpeed);
         enemy.CheckFlip(direction.x);
 
         if (!enemy.CheckAggroRadius() && stateTimer < 0)

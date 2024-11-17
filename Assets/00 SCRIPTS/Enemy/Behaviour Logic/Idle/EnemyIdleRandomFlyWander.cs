@@ -5,16 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Idle-Random Fly Wander", menuName = "Enemy Logic/Idle Logic/Random Fly Wander")]
 public class EnemyIdleRandomFlyWander : EnemyIdleSOBase
 {
-    [SerializeField] private float _randomMovementRange;
-    [SerializeField] private float _movementSpeed;
-    private Vector3 _targetPos;
-    private Vector3 _direction;
+    [SerializeField] private float randomMovementRange;
+    [SerializeField] private float movementSpeed;
+    private Vector3 targetPos;
+    private Vector3 direction;
 
     public override void Enter()
     {
         base.Enter();
 
-        _targetPos = GetRandomPointInCircle();
+        targetPos = GetRandomPointInCircle();
     }
 
     public override void LogicUpdate()
@@ -24,22 +24,22 @@ public class EnemyIdleRandomFlyWander : EnemyIdleSOBase
         if (enemy.IsGroundDetected())
             ChangeDirection();
 
-        _direction = (_targetPos - enemy.transform.position).normalized;
+        direction = (targetPos - enemy.transform.position).normalized;
 
-        enemy.SetVelocity(_direction * _movementSpeed);
-        enemy.CheckFlip(_direction.x);
+        enemy.SetVelocity(direction * movementSpeed);
+        enemy.CheckFlip(direction.x);
 
-        if ((enemy.transform.position - _targetPos).sqrMagnitude < 0.01f)
-            _targetPos = GetRandomPointInCircle();
+        if ((enemy.transform.position - targetPos).sqrMagnitude < 0.01f)
+            targetPos = GetRandomPointInCircle();
     }
 
-    private Vector3 GetRandomPointInCircle() => enemy.transform.position + (Vector3)Random.insideUnitCircle * _randomMovementRange;
+    private Vector3 GetRandomPointInCircle() => enemy.transform.position + (Vector3)Random.insideUnitCircle * randomMovementRange;
 
     private void ChangeDirection()
     {
         enemy.Flip();
-        _targetPos = GetRandomPointInCircle();
+        targetPos = GetRandomPointInCircle();
 
-        _direction = (_targetPos - enemy.transform.position).normalized;
+        direction = (targetPos - enemy.transform.position).normalized;
     }
 }

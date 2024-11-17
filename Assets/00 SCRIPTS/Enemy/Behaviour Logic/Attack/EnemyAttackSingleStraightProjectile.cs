@@ -5,14 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Attack-Single-Straight Projectile", menuName = "Enemy Logic/Attack Logic/Single Straight Projectile")]
 public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
 {
-    [SerializeField] private Rigidbody2D _bulletPrefab;
-    [SerializeField] private float _timeBetweenShot;
-    [SerializeField] private float _bulletSpeed;
+    [SerializeField] private Rigidbody2D bulletPrefab;
+    [SerializeField] private float timeBetweenShot;
+    [SerializeField] private float bulletSpeed;
 
     public override void Enter()
     {
         base.Enter();
-        stateTimer = _timeBetweenShot;
+        stateTimer = timeBetweenShot;
     }
 
     public override void LogicUpdate()
@@ -25,8 +25,8 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
 
         Vector2 dir = (playerTransform.position - enemy.transform.position).normalized;
 
-        Rigidbody2D bullet = GameObject.Instantiate(_bulletPrefab, enemy.transform.position, Quaternion.identity);
-        bullet.velocity = dir * _bulletSpeed;
+        Rigidbody2D bullet = GameObject.Instantiate(bulletPrefab, enemy.transform.position, Quaternion.identity);
+        bullet.velocity = dir * bulletSpeed;
 
         enemy.StateMachine.ChangeState(enemy.ChaseState);
     }
