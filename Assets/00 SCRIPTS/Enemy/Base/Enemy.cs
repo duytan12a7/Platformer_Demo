@@ -6,10 +6,11 @@ public class Enemy : Entity
 {
     #region State Machine Variables
 
-    public EnemyStateMachine StateMachine { get; set; }
-    public EnemyIdleState IdleState { get; set; }
-    public EnemyChaseState ChaseState { get; set; }
-    public EnemyAttackState AttackState { get; set; }
+    public EnemyStateMachine StateMachine { get; private set; }
+    public EnemyIdleState IdleState { get; private set; }
+    public EnemyChaseState ChaseState { get; private set; }
+    public EnemyAttackState AttackState { get; private set; }
+    public EnemyHurtState HurtState { get; private set; }
 
     #endregion
 
@@ -19,9 +20,9 @@ public class Enemy : Entity
     [SerializeField] private EnemyChaseSOBase _enemyChaseBase;
     [SerializeField] private EnemyAttackSOBase _enemyAttackBase;
 
-    public EnemyIdleSOBase EnemyIdleBaseInstance { get; set; }
-    public EnemyChaseSOBase EnemyChaseBaseInstance { get; set; }
-    public EnemyAttackSOBase EnemyAttackBaseInstance { get; set; }
+    public EnemyIdleSOBase EnemyIdleBaseInstance { get; private set; }
+    public EnemyChaseSOBase EnemyChaseBaseInstance { get; private set; }
+    public EnemyAttackSOBase EnemyAttackBaseInstance { get; private set; }
 
     #endregion
 
@@ -43,6 +44,7 @@ public class Enemy : Entity
         IdleState = new EnemyIdleState(this, StateMachine, "Move");
         ChaseState = new EnemyChaseState(this, StateMachine, "Move");
         AttackState = new EnemyAttackState(this, StateMachine, "Attack");
+        HurtState = new EnemyHurtState(this, StateMachine, "Hurt");
     }
 
     protected override void Start()
@@ -59,6 +61,27 @@ public class Enemy : Entity
     protected override void Update()
     {
         StateMachine.CurrentState.LogicUpdate();
+    }
+
+    #endregion
+
+    #region Health / Die Functions
+
+    public override void Damage(float damageAmount)
+    {
+        StartCoroutine(HitKnockback());
+
+        entityFX.StartCoroutine(entityFX.HitFlashFX());
+
+        StateMachine.ChangeState(HurtState);
+
+        CurrentHealth -= damageAmount;
+        if (CurrentHealth <= 0f)
+            Die();
+    }
+
+    public override void Die()
+    {
     }
 
     #endregion
@@ -99,6 +122,8 @@ public class Enemy : Entity
         CurrentTriggerType = triggerType;
         StateMachine.CurrentState.AnimationTriggerEvent(triggerType);
     }
+
+    public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
 
     public enum AnimationTriggerType
     {
