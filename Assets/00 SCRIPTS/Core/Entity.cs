@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Callbacks;
 using UnityEngine;
 
-public class Entity : MonoBehaviour, IDamageable
+public class Entity : MonoBehaviour
 {
     #region Components
     public Animator Anim { get; private set; }
@@ -112,22 +112,11 @@ public class Entity : MonoBehaviour, IDamageable
 
     #endregion
 
-    #region Health / Die Functions
-
-    public virtual void Damage(float damageAmount)
+    public virtual void DamageEffect()
     {
         StartCoroutine(HitKnockback());
         entityFX.StartCoroutine(entityFX.HitFlashFX());
-        CurrentHealth -= damageAmount;
-        if (CurrentHealth <= 0f)
-            Die();
     }
-
-    public virtual void Die()
-    {
-    }
-
-    #endregion
 
     #region Other Functions
 
