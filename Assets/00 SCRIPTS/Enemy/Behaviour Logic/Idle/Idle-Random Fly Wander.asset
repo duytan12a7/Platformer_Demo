@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AggroCheckDistance: 0
   AggroCheckRadius: 6
-  _randomMovementRange: 2
-  _movementSpeed: 1
+  randomMovementRange: 5
+  movementSpeed: 1.75
