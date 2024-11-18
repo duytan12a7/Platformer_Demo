@@ -24,8 +24,9 @@ public class PlayerAnimationTrigger : MonoBehaviour
 
         foreach (Collider2D hit in colliders)
         {
-            if (hit.TryGetComponent(out EnemyStats target))
-                player.Stats.DoDamage(target);
+            EnemyStats target = hit.GetComponentInChildren<EnemyStats>();
+            if (target == null) continue;
+            player.Stats.DoDamage(target);
 
         }
     }

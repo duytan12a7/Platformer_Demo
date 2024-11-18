@@ -71,28 +71,6 @@ public class Enemy : Entity
     }
 
     #endregion
-
-    #region Health / Die Functions
-
-    public override void Damage(float damageAmount)
-    {
-        StartCoroutine(HitKnockback());
-
-        entityFX.StartCoroutine(entityFX.HitFlashFX());
-
-        StateMachine.ChangeState(HurtState);
-
-        CurrentHealth -= damageAmount;
-        if (CurrentHealth <= 0f)
-            Die();
-    }
-
-    public override void Die()
-    {
-    }
-
-    #endregion
-
     #region Check Functions
 
     public override void CheckFlip(float xInput)
