@@ -175,13 +175,16 @@ MonoBehaviour:
   FacingDirection: 0
   groundCheck: {fileID: 1631631200}
   wallCheck: {fileID: 604559887}
-  attackCheck: {fileID: 415082518}
-  attackCheckRadius: 0.8
   groundCheckRadius: 0.08
   wallCheckDistance: 0.5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  attackCheck: {fileID: 415082518}
+  attackCheckRadius: 0.8
+  whatIsCharacter:
+    serializedVersion: 2
+    m_Bits: 0
   playerData: {fileID: 11400000, guid: 64ae970fa63229b48a4a6cea75ae6e98, type: 2}
 --- !u!61 &2898098
 BoxCollider2D:
@@ -417,7 +420,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 208696291}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -769,7 +772,7 @@ GameObject:
   - component: {fileID: 579478340}
   - component: {fileID: 579478341}
   - component: {fileID: 579478342}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1953,13 +1956,16 @@ MonoBehaviour:
   FacingDirection: 0
   groundCheck: {fileID: 1642287486}
   wallCheck: {fileID: 1483630393}
-  attackCheck: {fileID: 153555184}
-  attackCheckRadius: 0.8
   groundCheckRadius: 0.08
   wallCheckDistance: 0.5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  attackCheck: {fileID: 153555184}
+  attackCheckRadius: 0.8
+  whatIsCharacter:
+    serializedVersion: 2
+    m_Bits: 128
   playerData: {fileID: 11400000, guid: 64ae970fa63229b48a4a6cea75ae6e98, type: 2}
 --- !u!61 &1228800323
 BoxCollider2D:
@@ -2361,7 +2367,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1448307060}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: AttackCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20652,7 +20658,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1548064700}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20883,7 +20889,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1758535963}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: AttackCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20917,7 +20923,7 @@ GameObject:
   - component: {fileID: 1813894122}
   - component: {fileID: 1813894121}
   - component: {fileID: 1813894124}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Skeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21030,13 +21036,16 @@ MonoBehaviour:
   FacingDirection: 0
   groundCheck: {fileID: 1548064700}
   wallCheck: {fileID: 208696291}
-  attackCheck: {fileID: 1758535963}
-  attackCheckRadius: 0.68
   groundCheckRadius: 0.08
   wallCheckDistance: 0.5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  attackCheck: {fileID: 1758535963}
+  attackCheckRadius: 0.68
+  whatIsCharacter:
+    serializedVersion: 2
+    m_Bits: 8
   _enemyIdleBase: {fileID: 11400000, guid: dc44e881bf0c98b40bf2db9b548fb58e, type: 2}
   _enemyChaseBase: {fileID: 11400000, guid: 8480a3f6244c91a448da5fbb661cd6e4, type: 2}
   _enemyAttackBase: {fileID: 11400000, guid: 7117f356a7f81be41a1f235034850dc0, type: 2}
@@ -21287,7 +21296,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2098228054}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21318,7 +21327,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2110030820}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21405,7 +21414,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &2136062307
 Rigidbody2D:
   serializedVersion: 4
@@ -21467,13 +21476,16 @@ MonoBehaviour:
   FacingDirection: 0
   groundCheck: {fileID: 2110030820}
   wallCheck: {fileID: 2098228054}
-  attackCheck: {fileID: 1448307060}
-  attackCheckRadius: 0
   groundCheckRadius: 0.42
   wallCheckDistance: 0.5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  attackCheck: {fileID: 1448307060}
+  attackCheckRadius: 0
+  whatIsCharacter:
+    serializedVersion: 2
+    m_Bits: 8
   _enemyIdleBase: {fileID: 11400000, guid: e7e60569aeb82bb41a5f01dd87f3ae9d, type: 2}
   _enemyChaseBase: {fileID: 11400000, guid: 35f9da9d4f7baa244bd3cbc516957ce2, type: 2}
   _enemyAttackBase: {fileID: 11400000, guid: d291fd729b63f9642b617f43490c98c5, type: 2}
