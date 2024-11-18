@@ -1554,6 +1554,7 @@ GameObject:
   - component: {fileID: 1079555106}
   - component: {fileID: 1079555107}
   - component: {fileID: 1079555108}
+  - component: {fileID: 1079555109}
   m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
@@ -1649,6 +1650,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1079555109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079555105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee53fd20b4e74bf4e9cb79af7c8ca220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 2136062309}
 --- !u!1 &1092284115
 GameObject:
   m_ObjectHideFlags: 0
@@ -1717,8 +1731,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentVelocity: {x: 0, y: 0}
   FacingDirection: 0
-  knockbackVelocity: {x: 0, y: 0}
-  knockBackDuration: 0
+  knockbackVelocity: {x: 7, y: 5}
+  knockBackDuration: 0.07
   groundCheck: {fileID: 1642287486}
   wallCheck: {fileID: 1483630393}
   groundCheckRadius: 0.08
@@ -21110,8 +21124,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentVelocity: {x: 0, y: 0}
   FacingDirection: 0
-  knockbackVelocity: {x: 0, y: 0}
-  knockBackDuration: 0
+  knockbackVelocity: {x: 1, y: 1}
+  knockBackDuration: 0.07
   groundCheck: {fileID: 2110030820}
   wallCheck: {fileID: 2098228054}
   groundCheckRadius: 0.42

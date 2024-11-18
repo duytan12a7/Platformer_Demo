@@ -11,6 +11,11 @@ public class EnemyAnimationTrigger : MonoBehaviour
         enemy = GetComponentInParent<Enemy>();
     }
 
+    private void AnimationFinishTrigger()
+    {
+        enemy.AnimationFinishTrigger();
+    }
+
     private void AnimationTriggerEvent(Enemy.AnimationTriggerType triggerType)
     {
         enemy.AnimationTriggerEvent(triggerType);
