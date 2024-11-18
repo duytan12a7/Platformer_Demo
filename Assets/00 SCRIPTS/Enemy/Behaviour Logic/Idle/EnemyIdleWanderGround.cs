@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Idle-Wander Ground", menuName = "Enemy Logic/Idle Logic/Wander Ground")]
 public class EnemyIdleWanderGround : EnemyIdleSOBase
 {
-    [Range(0f, 5f)][SerializeField] private float _movementSpeed;
+    [SerializeField] private float _movementSpeed;
 
     public override void Enter()
     {
@@ -25,7 +25,7 @@ public class EnemyIdleWanderGround : EnemyIdleSOBase
         base.Update();
 
         enemy.SetVelocityX(enemy.FacingDirection * _movementSpeed);
-        
+
         if (!enemy.IsGroundDetected() || enemy.IsWallDetected())
             enemy.Flip();
     }

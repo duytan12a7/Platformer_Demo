@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Attack-Sword Projectile", menuName = "Enemy Logic/Attack Logic/Sword Projectile")]
 public class EnemyAttackSwordProjectile : EnemyAttackSOBase
 {
-
     public override void Enter()
     {
         base.Enter();

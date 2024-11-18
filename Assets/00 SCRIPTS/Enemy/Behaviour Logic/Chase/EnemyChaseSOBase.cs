@@ -10,6 +10,8 @@ public class EnemyChaseSOBase : ScriptableObject
 
     protected Transform playerTransform;
 
+    protected float stateTimer;
+
     public virtual void Initialize(GameObject gameObject, Enemy enemy)
     {
         this.gameObject = gameObject;
@@ -26,6 +28,8 @@ public class EnemyChaseSOBase : ScriptableObject
     }
     public virtual void Update()
     {
+        stateTimer -= Time.deltaTime;
+
         if (enemy.IsWithinAttackDistance)
             enemy.StateMachine.ChangeState(enemy.AttackState);
     }

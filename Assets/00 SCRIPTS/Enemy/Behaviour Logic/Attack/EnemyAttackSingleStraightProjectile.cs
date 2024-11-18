@@ -6,10 +6,14 @@ using UnityEngine;
 public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
 {
     [SerializeField] private Rigidbody2D _bulletPrefab;
-    [Range(1f, 5f)][SerializeField] private float _timeBetweenShot;
-    [Range(1f, 5f)][SerializeField] private float _bulletSpeed;
+    [SerializeField] private float _timeBetweenShot;
+    [SerializeField] private float _bulletSpeed;
 
-    private float timer;
+    public override void Enter()
+    {
+        base.Enter();
+        stateTimer = _timeBetweenShot;
+    }
 
     public override void Update()
     {
@@ -17,17 +21,13 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
 
         enemy.MoveEnemy(Vector2.zero);
 
-        if (timer > _timeBetweenShot)
-        {
-            timer = 0f;
-            Vector2 dir = (playerTransform.position - enemy.transform.position).normalized;
+        if (stateTimer > 0) return;
 
-            Rigidbody2D bullet = GameObject.Instantiate(_bulletPrefab, enemy.transform.position, Quaternion.identity);
-            bullet.velocity = dir * _bulletSpeed;
+        Vector2 dir = (playerTransform.position - enemy.transform.position).normalized;
 
-            enemy.StateMachine.ChangeState(enemy.ChaseState);
-        }
+        Rigidbody2D bullet = GameObject.Instantiate(_bulletPrefab, enemy.transform.position, Quaternion.identity);
+        bullet.velocity = dir * _bulletSpeed;
 
-        timer += Time.deltaTime;
+        enemy.StateMachine.ChangeState(enemy.ChaseState);
     }
 }
