@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
 using UnityEngine;
 
 public class PlayerAnimationTrigger : MonoBehaviour
@@ -19,12 +20,13 @@ public class PlayerAnimationTrigger : MonoBehaviour
     private void AttackTrigger()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(player.attackCheck.position, player.attackCheckRadius, player.whatIsCharacter);
+        if (colliders.Length == 0) return;
 
         foreach (Collider2D hit in colliders)
         {
-            if (!hit.GetComponent<Enemy>()) return;
+            if (hit.TryGetComponent(out EnemyStats target))
+                player.Stats.DoDamage(target);
 
-            hit.GetComponent<Enemy>().Damage(10f);
         }
     }
 }

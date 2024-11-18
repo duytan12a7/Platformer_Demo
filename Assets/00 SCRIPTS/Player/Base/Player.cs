@@ -19,7 +19,12 @@ public class Player : Entity
 
     #endregion
 
+    #region Components
+
     [SerializeField] private PlayerData playerData;
+    public PlayerStats Stats { get; private set; }
+
+    #endregion
 
 
     #region Unity Callback Functions
@@ -42,6 +47,7 @@ public class Player : Entity
     protected override void Start()
     {
         base.Start();
+        Stats = GetComponentInChildren<PlayerStats>();
         CurrentHealth = playerData.MaxHealth;
         StateMachine.Initialize(IdleState);
     }

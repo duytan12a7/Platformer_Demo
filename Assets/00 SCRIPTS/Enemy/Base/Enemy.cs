@@ -26,6 +26,12 @@ public class Enemy : Entity
 
     #endregion
 
+    #region Components
+
+    public EnemyStats Stats { get; private set; }
+
+    #endregion
+
     #region Other Variables
     public AnimationTriggerType CurrentTriggerType { get; private set; }
 
@@ -50,6 +56,7 @@ public class Enemy : Entity
     protected override void Start()
     {
         base.Start();
+        Stats = GetComponentInChildren<EnemyStats>();
 
         EnemyIdleBaseInstance.Initialize(gameObject, this);
         EnemyChaseBaseInstance.Initialize(gameObject, this);
@@ -140,12 +147,12 @@ public class Enemy : Entity
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
-        // Gizmos.color = Color.yellow;
+        Gizmos.color = Color.yellow;
         // Gizmos.DrawRay(wallCheck.position, Vector2.right * FacingDirection * _enemyIdleBase.AggroCheckDistance);
-        // Gizmos.DrawWireSphere(wallCheck.position, _enemyIdleBase.AggroCheckRadius);
-        // Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(wallCheck.position, _enemyIdleBase.AggroCheckRadius);
+        Gizmos.color = Color.blue;
         // Gizmos.DrawRay(wallCheck.position, Vector2.right * FacingDirection * _enemyChaseBase.AttackCheckDistance);
-        // Gizmos.DrawWireSphere(wallCheck.position, _enemyChaseBase.AttackCheckRadius);
+        Gizmos.DrawWireSphere(wallCheck.position, _enemyChaseBase.AttackCheckRadius);
     }
 
     #endregion

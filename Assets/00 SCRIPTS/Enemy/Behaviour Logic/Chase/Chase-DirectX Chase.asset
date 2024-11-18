@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackCheckDistance: 0.8
   AttackCheckRadius: 0
-  _movementSpeed: 5
-  _timeTillExit: 2
+  movementSpeed: 3
+  timeTillExit: 3
