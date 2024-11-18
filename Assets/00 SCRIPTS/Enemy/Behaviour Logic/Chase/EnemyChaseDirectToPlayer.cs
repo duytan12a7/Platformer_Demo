@@ -29,7 +29,7 @@ public class EnemyChaseDirectToPlayer : EnemyChaseSOBase
         base.Update();
 
         Vector2 direction = (playerTransform.position - enemy.transform.position).normalized;
-        enemy.MoveEnemy(direction * _movementSpeed);
+        enemy.SetVelocity(direction * _movementSpeed);
         enemy.CheckFlip(direction.x);
 
         if (!enemy.IsAggroed && stateTimer < 0)

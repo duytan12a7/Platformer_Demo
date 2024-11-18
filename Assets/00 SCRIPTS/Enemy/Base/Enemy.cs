@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckable
+public class Enemy : Entity, IDamageable, ITriggerCheckable
 {
     #region State Machine Variables
 
@@ -25,27 +25,10 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 
     #endregion
 
-    #region Check Surroundings
-    [SerializeField] private Transform _groundCheck;
-    [SerializeField] private Transform _wallCheck;
-    [SerializeField] private LayerMask _whatIsGround;
-    [SerializeField] private float _groundCheckRadius = 0.1f;
-    [SerializeField] private float _wallCheckDistance = 0.5f;
-    #endregion
-
-    #region Components
-
-    public Rigidbody2D Rigid { get; set; }
-    public Animator Anim { get; set; }
-
-    #endregion
-
     #region Other Variables
 
     [field: SerializeField] public float MaxHealth { get; set; } = 100f;
     public float CurrentHealth { get; set; }
-    public int FacingDirection { get; set; }
-    public bool IsFacingRight { get; set; }
 
     public bool IsAggroed { get; set; }
     public bool IsWithinAttackDistance { get; set; }
@@ -55,9 +38,8 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 
     #region Unity Callback Functions
 
-    private void Awake()
+    protected override void Awake()
     {
-
         EnemyIdleBaseInstance = Instantiate(_enemyIdleBase);
         EnemyChaseBaseInstance = Instantiate(_enemyChaseBase);
         EnemyAttackBaseInstance = Instantiate(_enemyAttackBase);
@@ -69,24 +51,19 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
         AttackState = new EnemyAttackState(this, StateMachine);
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         CurrentHealth = MaxHealth;
-
-        Rigid = GetComponent<Rigidbody2D>();
-        Anim = GetComponentInChildren<Animator>();
 
         EnemyIdleBaseInstance.Initialize(gameObject, this);
         EnemyChaseBaseInstance.Initialize(gameObject, this);
         EnemyAttackBaseInstance.Initialize(gameObject, this);
 
-        FacingDirection = 1;
-        IsFacingRight = true;
-
         StateMachine.Initialize(IdleState);
     }
 
-    private void Update()
+    protected override void Update()
     {
         StateMachine.CurrentState.Update();
     }
@@ -95,44 +72,31 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
 
     #region Health / Die Functions
 
-    public void Damage(float damageAmount)
+    public virtual void Damage(float damageAmount)
     {
+        Debug.Log(gameObject.name + " was damaged");
         CurrentHealth -= damageAmount;
-
         if (CurrentHealth <= 0f)
             Die();
     }
 
-    public void Die()
+    public virtual void Die()
     {
-
     }
 
     #endregion
 
+    #region Check Functions
 
-    #region Movement Functions
-
-    public void MoveEnemy(Vector2 velocity)
+    public override void CheckFlip(float xInput)
     {
-        Rigid.velocity = velocity;
-    }
-
-    public void SetVelocityX(float velocity)
-    {
-        Rigid.velocity = new Vector2(velocity, Rigid.velocity.y);
-    }
-
-    public virtual void CheckFlip(float xInput)
-    {
-        if (xInput < 0f && IsFacingRight || xInput > 0f && !IsFacingRight)
+        if (xInput < 0f && isFacingRight || xInput > 0f && !isFacingRight)
             Flip();
     }
 
     #endregion
 
-
-    #region Check Functions
+    #region Set Functions
 
     public void SetAggroStatus(bool isAggroed)
     {
@@ -144,22 +108,9 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckab
         IsWithinAttackDistance = isWithinAttackDistance;
     }
 
-    public bool IsGroundDetected() => Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _whatIsGround);
-
-    public bool IsWallDetected() => Physics2D.Raycast(_wallCheck.position, Vector2.right * FacingDirection, _wallCheckDistance, _whatIsGround);
-
-    public virtual void Flip()
+    public void SetVelocity(Vector2 velocity)
     {
-        FacingDirection *= -1;
-        IsFacingRight = !IsFacingRight;
-        transform.Rotate(0f, 180f, 0f);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(_groundCheck.position, _groundCheckRadius);
-        Gizmos.DrawRay(_wallCheck.position, Vector2.right * FacingDirection * _wallCheckDistance);
+        Rigid.velocity = velocity;
     }
 
     #endregion

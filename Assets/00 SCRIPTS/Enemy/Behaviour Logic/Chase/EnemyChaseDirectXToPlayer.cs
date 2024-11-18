@@ -29,7 +29,7 @@ public class EnemyChaseDirectXToPlayer : EnemyChaseSOBase
         enemy.SetVelocityX(direction.x * _movementSpeed);
         enemy.CheckFlip(direction.x);
 
-        if (!enemy.IsAggroed && stateTimer < 0)
+        if (!enemy.IsAggroed && stateTimer < 0 || !enemy.IsGroundDetected())
             enemy.StateMachine.ChangeState(enemy.IdleState);
     }
 }

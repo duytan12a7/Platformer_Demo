@@ -15,12 +15,15 @@ public class Entity : MonoBehaviour
     [HideInInspector] public Vector2 CurrentVelocity;
     protected Vector2 workspace;
     [HideInInspector] public int FacingDirection;
+    protected bool isFacingRight;
 
     #endregion
 
-    #region Check Transform
+    #region Collisions
     [SerializeField] protected Transform groundCheck;
     [SerializeField] protected Transform wallCheck;
+    public Transform attackCheck;
+    public float attackCheckRadius;
     [SerializeField] protected float groundCheckRadius = 0.08f;
     [SerializeField] protected float wallCheckDistance = 0.5f;
     [SerializeField] protected LayerMask whatIsGround;
@@ -36,6 +39,7 @@ public class Entity : MonoBehaviour
         Anim = GetComponentInChildren<Animator>();
         Rigid = GetComponent<Rigidbody2D>();
 
+        isFacingRight = true;
         FacingDirection = 1;
     }
 
@@ -71,6 +75,7 @@ public class Entity : MonoBehaviour
     public virtual bool IsGroundDetected() => Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
     public virtual bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, wallCheckDistance, whatIsGround);
 
+
     public virtual void CheckFlip(float xInput)
     {
         if (xInput != 0 && xInput != FacingDirection)
@@ -84,6 +89,7 @@ public class Entity : MonoBehaviour
     public virtual void Flip()
     {
         FacingDirection *= -1;
+        isFacingRight = !isFacingRight;
         transform.Rotate(0f, 180f, 0f);
     }
 
@@ -92,6 +98,7 @@ public class Entity : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawRay(wallCheck.position, Vector3.right * FacingDirection * wallCheckDistance);
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        Gizmos.DrawWireSphere(attackCheck.position, attackCheckRadius);
     }
 
     #endregion

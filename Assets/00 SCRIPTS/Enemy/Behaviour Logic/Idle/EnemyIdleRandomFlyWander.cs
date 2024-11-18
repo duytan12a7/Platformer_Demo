@@ -33,7 +33,7 @@ public class EnemyIdleRandomFlyWander : EnemyIdleSOBase
 
         _direction = (_targetPos - enemy.transform.position).normalized;
 
-        enemy.MoveEnemy(_direction * _movementSpeed);
+        enemy.SetVelocity(_direction * _movementSpeed);
         enemy.CheckFlip(_direction.x);
 
         if ((enemy.transform.position - _targetPos).sqrMagnitude < 0.01f)
