@@ -18,7 +18,7 @@ public class PlayerAttackState : PlayerState
 
         player.Anim.SetInteger(Global.AnimatorParams.ComboCounter, comboCounter);
 
-        player.SetVelocityX(playerData.AttackMovement[comboCounter].x * player.FacingDirection);
+        player.SetVelocity(playerData.AttackMovement[comboCounter].x * player.FacingDirection, playerData.AttackMovement[comboCounter].y);
 
         stateTimer = playerData.AttackDuration;
     }
