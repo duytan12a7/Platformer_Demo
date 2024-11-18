@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a5bada7de2ab5a428c1ef42be659aa4, type: 3}
   m_Name: Idle-Wander Ground
   m_EditorClassIdentifier: 
+  AggroCheckDistance: 12
+  AggroCheckRadius: 0
   _movementSpeed: 1.75

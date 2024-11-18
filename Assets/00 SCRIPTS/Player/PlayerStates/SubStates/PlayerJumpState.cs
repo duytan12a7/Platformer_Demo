@@ -18,9 +18,9 @@ public class PlayerJumpState : PlayerState
         amountOfJumpsLeft--;
     }
 
-    public override void Update()
+    public override void LogicUpdate()
     {
-        base.Update();
+        base.LogicUpdate();
 
         if (!player.IsGroundDetected())
             stateMachine.ChangeState(player.InAirState);

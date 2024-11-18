@@ -26,7 +26,7 @@ public class EnemyAttackSOBase : ScriptableObject
     {
         ResetValues();
     }
-    public virtual void Update()
+    public virtual void LogicUpdate()
     {
         stateTimer -= Time.deltaTime;
     }

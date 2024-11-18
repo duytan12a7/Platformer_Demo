@@ -10,6 +10,9 @@ public class EnemyIdleSOBase : ScriptableObject
 
     protected Transform playerTransform;
 
+    public float AggroCheckDistance;
+    public float AggroCheckRadius;
+
     public virtual void Initialize(GameObject gameObject, Enemy enemy)
     {
         this.gameObject = gameObject;
@@ -24,9 +27,9 @@ public class EnemyIdleSOBase : ScriptableObject
     {
         ResetValues();
     }
-    public virtual void Update()
+    public virtual void LogicUpdate()
     {
-        if (enemy.IsAggroed)
+        if (enemy.CheckAggroDistance() || enemy.CheckAggroRadius())
             enemy.StateMachine.ChangeState(enemy.ChaseState);
     }
     public virtual void AnimationTriggerEvent(Enemy.AnimationTriggerType triggerType) { }

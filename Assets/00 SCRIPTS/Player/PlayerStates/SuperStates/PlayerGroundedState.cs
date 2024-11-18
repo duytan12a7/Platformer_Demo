@@ -15,9 +15,9 @@ public class PlayerGroundedState : PlayerState
         player.JumpState.ResetAmountJumpsLeft();
     }
 
-    public override void Update()
+    public override void LogicUpdate()
     {
-        base.Update();
+        base.LogicUpdate();
 
         if (Input.GetKeyDown(KeyCode.C))
             stateMachine.ChangeState(player.AttackState);

@@ -8,21 +8,9 @@ public class EnemyIdleWanderGround : EnemyIdleSOBase
 {
     [SerializeField] private float _movementSpeed;
 
-    public override void Enter()
+    public override void LogicUpdate()
     {
-        base.Enter();
-        enemy.Anim.SetBool("Move", true);
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-        enemy.Anim.SetBool("Move", false);
-    }
-
-    public override void Update()
-    {
-        base.Update();
+        base.LogicUpdate();
 
         enemy.SetVelocityX(enemy.FacingDirection * _movementSpeed);
 

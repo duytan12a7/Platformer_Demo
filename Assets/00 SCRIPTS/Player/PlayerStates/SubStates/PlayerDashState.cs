@@ -17,9 +17,9 @@ public class PlayerDashState : PlayerState
         player.StartCoroutine(Dash());
     }
 
-    public override void Update()
+    public override void LogicUpdate()
     {
-        base.Update();
+        base.LogicUpdate();
 
         if (!player.IsGroundDetected() && player.IsWallDetected())
             stateMachine.ChangeState(player.WallSlideState);

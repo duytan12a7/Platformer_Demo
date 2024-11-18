@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : Entity, IDamageable, ITriggerCheckable
+public class Enemy : Entity
 {
     #region State Machine Variables
 
@@ -26,12 +26,6 @@ public class Enemy : Entity, IDamageable, ITriggerCheckable
     #endregion
 
     #region Other Variables
-
-    [field: SerializeField] public float MaxHealth { get; set; } = 100f;
-    public float CurrentHealth { get; set; }
-
-    public bool IsAggroed { get; set; }
-    public bool IsWithinAttackDistance { get; set; }
     public AnimationTriggerType CurrentTriggerType { get; private set; }
 
     #endregion
@@ -46,15 +40,14 @@ public class Enemy : Entity, IDamageable, ITriggerCheckable
 
         StateMachine = new EnemyStateMachine();
 
-        IdleState = new EnemyIdleState(this, StateMachine);
-        ChaseState = new EnemyChaseState(this, StateMachine);
-        AttackState = new EnemyAttackState(this, StateMachine);
+        IdleState = new EnemyIdleState(this, StateMachine, "Move");
+        ChaseState = new EnemyChaseState(this, StateMachine, "Move");
+        AttackState = new EnemyAttackState(this, StateMachine, "Attack");
     }
 
     protected override void Start()
     {
         base.Start();
-        CurrentHealth = MaxHealth;
 
         EnemyIdleBaseInstance.Initialize(gameObject, this);
         EnemyChaseBaseInstance.Initialize(gameObject, this);
@@ -65,23 +58,7 @@ public class Enemy : Entity, IDamageable, ITriggerCheckable
 
     protected override void Update()
     {
-        StateMachine.CurrentState.Update();
-    }
-
-    #endregion
-
-    #region Health / Die Functions
-
-    public virtual void Damage(float damageAmount)
-    {
-        Debug.Log(gameObject.name + " was damaged");
-        CurrentHealth -= damageAmount;
-        if (CurrentHealth <= 0f)
-            Die();
-    }
-
-    public virtual void Die()
-    {
+        StateMachine.CurrentState.LogicUpdate();
     }
 
     #endregion
@@ -90,23 +67,23 @@ public class Enemy : Entity, IDamageable, ITriggerCheckable
 
     public override void CheckFlip(float xInput)
     {
+        if (isKnocked) return;
+
         if (xInput < 0f && isFacingRight || xInput > 0f && !isFacingRight)
             Flip();
     }
 
+    public bool CheckAggroDistance() => Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, _enemyIdleBase.AggroCheckDistance, whatIsCharacter);
+
+    public bool CheckAttackDistance() => Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, _enemyChaseBase.AttackCheckDistance, whatIsCharacter);
+
+    public bool CheckAggroRadius() => Physics2D.OverlapCircle(wallCheck.position, _enemyIdleBase.AggroCheckRadius, whatIsCharacter);
+
+    public bool CheckAttackRadius() => Physics2D.OverlapCircle(wallCheck.position, _enemyChaseBase.AttackCheckRadius, whatIsCharacter);
+
     #endregion
 
     #region Set Functions
-
-    public void SetAggroStatus(bool isAggroed)
-    {
-        IsAggroed = isAggroed;
-    }
-
-    public void SetAttackDistanceBool(bool isWithinAttackDistance)
-    {
-        IsWithinAttackDistance = isWithinAttackDistance;
-    }
 
     public void SetVelocity(Vector2 velocity)
     {
@@ -129,6 +106,21 @@ public class Enemy : Entity, IDamageable, ITriggerCheckable
         EffectAttack,
         EnemyDamaged,
         PlayerFootstepsound
+    }
+
+    #endregion
+
+    #region Other Functions
+
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+        // Gizmos.color = Color.yellow;
+        // Gizmos.DrawRay(wallCheck.position, Vector2.right * FacingDirection * _enemyIdleBase.AggroCheckDistance);
+        // Gizmos.DrawWireSphere(wallCheck.position, _enemyIdleBase.AggroCheckRadius);
+        // Gizmos.color = Color.blue;
+        // Gizmos.DrawRay(wallCheck.position, Vector2.right * FacingDirection * _enemyChaseBase.AttackCheckDistance);
+        // Gizmos.DrawWireSphere(wallCheck.position, _enemyChaseBase.AttackCheckRadius);
     }
 
     #endregion

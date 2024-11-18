@@ -15,32 +15,17 @@ public class EnemyChaseDirectToPlayer : EnemyChaseSOBase
     {
         base.Enter();
         stateTimer = _timeTillExit;
-        enemy.Anim.SetBool("Move", true);
     }
 
-    public override void Exit()
+    public override void LogicUpdate()
     {
-        base.Exit();
-        enemy.Anim.SetBool("Move", false);
-    }
-
-    public override void Update()
-    {
-        base.Update();
+        base.LogicUpdate();
 
         Vector2 direction = (playerTransform.position - enemy.transform.position).normalized;
         enemy.SetVelocity(direction * _movementSpeed);
         enemy.CheckFlip(direction.x);
 
-        if (!enemy.IsAggroed && stateTimer < 0)
+        if (!enemy.CheckAggroRadius() && stateTimer < 0)
             enemy.StateMachine.ChangeState(enemy.IdleState);
-
-        // if (Vector2.Distance(playerTransform.position, enemy.transform.position) > _distanceToCountExit)
-        // {
-        //     timer += Time.deltaTime;
-        //     if (timer > _timeTillExit)
-        //         enemy.StateMachine.ChangeState(enemy.IdleState);
-        // }
-        // else timer = 0f;
     }
 }
