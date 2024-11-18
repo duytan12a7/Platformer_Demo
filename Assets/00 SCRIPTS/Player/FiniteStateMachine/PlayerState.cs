@@ -43,8 +43,8 @@ public class PlayerState
         stateTimer -= Time.deltaTime;
         xInput = Input.GetAxisRaw("Horizontal");
         yInput = Input.GetAxisRaw("Vertical");
-        player.Anim.SetFloat("xVelocity", rb.velocity.x);
-        player.Anim.SetFloat("yVelocity", rb.velocity.y);
+        player.Anim.SetFloat(Global.AnimatorParams.xVelocity, rb.velocity.x);
+        player.Anim.SetFloat(Global.AnimatorParams.yVelocity, rb.velocity.y);
     }
 
     public virtual void AnimationTrigger() { }

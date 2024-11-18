@@ -15,10 +15,13 @@ public class PlayerInAirState : PlayerState
         if (Input.GetKeyDown(KeyCode.C))
             stateMachine.ChangeState(player.AttackState);
 
+        if (Input.GetKeyDown(KeyCode.X) && player.JumpState.CanJump())
+            stateMachine.ChangeState(player.JumpState);
+
         if (player.IsWallDetected())
             stateMachine.ChangeState(player.WallSlideState);
 
-        if (rb.velocity.y == 0)
+        if (player.IsGroundDetected())
             stateMachine.ChangeState(player.LandState);
 
         if (xInput != 0)

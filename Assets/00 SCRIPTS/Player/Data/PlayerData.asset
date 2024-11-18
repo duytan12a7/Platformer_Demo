@@ -29,7 +29,7 @@ MonoBehaviour:
   WallJumpVelocityX: 5
   CoyoteTime: 0
   JumpHeightMultiplier: 0.4
-  GroundCheckRadius: 0.1
+  GroundCheckRadius: 0.08
   WallCheckDistance: 0.5
   WhatIsGround:
     serializedVersion: 2
