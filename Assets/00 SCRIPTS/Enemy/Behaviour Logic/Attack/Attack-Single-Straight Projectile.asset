@@ -14,6 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 337032138170727871, guid: 1e7eefe39d599a344bf82cd286dd927c, type: 3}
   _timeBetweenShot: 2
-  _timeTillExit: 3
-  _distanceToCountExit: 3
-  _bulletSpeed: 10
+  _bulletSpeed: 5

@@ -16,7 +16,7 @@ public class EnemyChaseSOBase : ScriptableObject
         transform = gameObject.transform;
         this.enemy = enemy;
 
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        playerTransform = GameObject.FindGameObjectWithTag(Global.Tags.Player).transform;
     }
 
     public virtual void Enter() { }
@@ -26,7 +26,7 @@ public class EnemyChaseSOBase : ScriptableObject
     }
     public virtual void Update()
     {
-        if (enemy.IsWithinStrikingDistance)
+        if (enemy.IsWithinAttackDistance)
             enemy.StateMachine.ChangeState(enemy.AttackState);
     }
     public virtual void AnimationTriggerEvent(Enemy.AnimationTriggerType triggerType) { }

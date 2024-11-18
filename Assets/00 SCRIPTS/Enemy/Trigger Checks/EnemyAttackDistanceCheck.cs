@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAggroCheck : MonoBehaviour
+public class EnemyAttackDistanceCheck : MonoBehaviour
 {
     public GameObject PlayerTarget { get; private set; }
     private Enemy _enemy;
@@ -17,12 +17,12 @@ public class EnemyAggroCheck : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer(Global.Tags.Player))
-            _enemy.SetAggroStatus(true);
+            _enemy.SetAttackDistanceBool(true);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer(Global.Tags.Player))
-            _enemy.SetAggroStatus(false);
+            _enemy.SetAttackDistanceBool(false);
     }
 }

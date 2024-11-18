@@ -16,7 +16,7 @@ public class EnemyAttackSOBase : ScriptableObject
         transform = gameObject.transform;
         this.enemy = enemy;
 
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        playerTransform = GameObject.FindGameObjectWithTag(Global.Tags.Player).transform;
     }
 
     public virtual void Enter() { }
@@ -26,5 +26,8 @@ public class EnemyAttackSOBase : ScriptableObject
     }
     public virtual void Update() { }
     public virtual void AnimationTriggerEvent(Enemy.AnimationTriggerType triggerType) { }
-    public virtual void ResetValues() { }
+    public virtual void ResetValues()
+    {
+        enemy.AnimationTriggerEvent(Enemy.AnimationTriggerType.None);
+    }
 }

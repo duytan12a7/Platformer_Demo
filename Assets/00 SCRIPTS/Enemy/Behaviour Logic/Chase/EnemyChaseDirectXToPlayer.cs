@@ -5,16 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Chase-DirectX Chase", menuName = "Enemy Logic/Chase Logic/ Direct Chase X")]
 public class EnemyChaseDirectXToPlayer : EnemyChaseSOBase
 {
-    [SerializeField] private float _movementSpeed;
-    [SerializeField] private float _timeTillExit;
-    [SerializeField] private float _distanceToCountExit;
+    [Range(0f, 5f)][SerializeField] private float _movementSpeed;
+    [Range(0f, 5f)][SerializeField] private float _timeTillExit;
+    [Range(0f, 5f)][SerializeField] private float _distanceToCountExit;
 
     private float _timer;
-
-    public override void Initialize(GameObject gameObject, Enemy enemy)
-    {
-        base.Initialize(gameObject, enemy);
-    }
 
     public override void Enter()
     {
@@ -44,15 +39,5 @@ public class EnemyChaseDirectXToPlayer : EnemyChaseSOBase
                 enemy.StateMachine.ChangeState(enemy.IdleState);
         }
         else _timer = 0f;
-    }
-
-    public override void AnimationTriggerEvent(Enemy.AnimationTriggerType triggerType)
-    {
-        base.AnimationTriggerEvent(triggerType);
-    }
-
-    public override void ResetValues()
-    {
-        base.ResetValues();
     }
 }

@@ -447,10 +447,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 495067480}
-  - component: {fileID: 495067482}
   - component: {fileID: 495067481}
+  - component: {fileID: 495067482}
   m_Layer: 7
-  m_Name: StrikingDistance
+  m_Name: AttackDistance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -515,9 +515,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.30377692, y: -0.4087177}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 0.5
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,6 +736,7 @@ GameObject:
   - component: {fileID: 579478339}
   - component: {fileID: 579478340}
   - component: {fileID: 579478341}
+  - component: {fileID: 579478342}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -831,6 +832,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &579478342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579478338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee53fd20b4e74bf4e9cb79af7c8ca220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 1813894124}
 --- !u!1 &604559886
 GameObject:
   m_ObjectHideFlags: 0
@@ -1630,7 +1644,7 @@ GameObject:
   - component: {fileID: 992662520}
   - component: {fileID: 992662519}
   m_Layer: 7
-  m_Name: StrikingDistance
+  m_Name: AttackDistance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1813,8 +1827,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1272439452}
-  - component: {fileID: 1272439454}
   - component: {fileID: 1272439453}
+  - component: {fileID: 1272439454}
   m_Layer: 7
   m_Name: AggroRadius
   m_TagString: Untagged
@@ -1849,8 +1863,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab89afd1090495449a4909c5bfda6bd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!58 &1272439454
-CircleCollider2D:
+--- !u!61 &1272439454
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1882,8 +1896,18 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 6
+  m_Size: {x: 10, y: 4}
+  m_EdgeRadius: 0
 --- !u!1 &1328049648
 GameObject:
   m_ObjectHideFlags: 0
@@ -9201,14 +9225,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d31c013079d1d154e8e7c46492ae1ec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyIdleBase: {fileID: 11400000, guid: dc44e881bf0c98b40bf2db9b548fb58e, type: 2}
-  EnemyChaseBase: {fileID: 11400000, guid: 8480a3f6244c91a448da5fbb661cd6e4, type: 2}
-  EnemyAttackBase: {fileID: 11400000, guid: d291fd729b63f9642b617f43490c98c5, type: 2}
-  groundCheck: {fileID: 1548064700}
-  wallCheck: {fileID: 208696291}
+  _enemyIdleBase: {fileID: 11400000, guid: dc44e881bf0c98b40bf2db9b548fb58e, type: 2}
+  _enemyChaseBase: {fileID: 11400000, guid: 8480a3f6244c91a448da5fbb661cd6e4, type: 2}
+  _enemyAttackBase: {fileID: 11400000, guid: 7117f356a7f81be41a1f235034850dc0, type: 2}
+  _groundCheck: {fileID: 1548064700}
+  _wallCheck: {fileID: 208696291}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  _groundCheckRadius: 0.1
+  _wallCheckDistance: 0.5
   <MaxHealth>k__BackingField: 100
 --- !u!1 &1953752046
 GameObject:
@@ -9446,6 +9472,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2136062308}
   - component: {fileID: 2136062307}
+  - component: {fileID: 2136062310}
   - component: {fileID: 2136062309}
   m_Layer: 7
   m_Name: 01
@@ -9490,7 +9517,7 @@ Transform:
   m_GameObject: {fileID: 2136062306}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.51, y: 5.15, z: 0}
+  m_LocalPosition: {x: 12.4, y: 6.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9511,15 +9538,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecf164eda55948429d36b31a2348d01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyIdleBase: {fileID: 11400000, guid: e7e60569aeb82bb41a5f01dd87f3ae9d, type: 2}
-  EnemyChaseBase: {fileID: 11400000, guid: 35f9da9d4f7baa244bd3cbc516957ce2, type: 2}
-  EnemyAttackBase: {fileID: 11400000, guid: d291fd729b63f9642b617f43490c98c5, type: 2}
-  groundCheck: {fileID: 2110030820}
-  wallCheck: {fileID: 2098228054}
+  _enemyIdleBase: {fileID: 11400000, guid: e7e60569aeb82bb41a5f01dd87f3ae9d, type: 2}
+  _enemyChaseBase: {fileID: 11400000, guid: 35f9da9d4f7baa244bd3cbc516957ce2, type: 2}
+  _enemyAttackBase: {fileID: 11400000, guid: d291fd729b63f9642b617f43490c98c5, type: 2}
+  _groundCheck: {fileID: 2110030820}
+  _wallCheck: {fileID: 2098228054}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  _groundCheckRadius: 0.42
+  _wallCheckDistance: 0
   <MaxHealth>k__BackingField: 100
+--- !u!58 &2136062310
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136062306}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.4
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

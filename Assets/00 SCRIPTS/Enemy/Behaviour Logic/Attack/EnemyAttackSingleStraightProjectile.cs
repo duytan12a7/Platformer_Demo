@@ -6,29 +6,10 @@ using UnityEngine;
 public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
 {
     [SerializeField] private Rigidbody2D _bulletPrefab;
-    [SerializeField] private float _timeBetweenShot;
-    [SerializeField] private float _timeTillExit;
-    [SerializeField] private float _distanceToCountExit;
-    [SerializeField] private float _bulletSpeed;
+    [Range(1f, 5f)][SerializeField] private float _timeBetweenShot;
+    [Range(1f, 5f)][SerializeField] private float _bulletSpeed;
 
-    private float _timer;
-    private float _exitTimer;
-
-    public override void Initialize(GameObject gameObject, Enemy enemy)
-    {
-        base.Initialize(gameObject, enemy);
-    }
-
-    public override void Enter()
-    {
-        base.Enter();
-        _exitTimer = 0f;
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-    }
+    private float timer;
 
     public override void Update()
     {
@@ -36,33 +17,17 @@ public class EnemyAttackSingleStraightProjectile : EnemyAttackSOBase
 
         enemy.MoveEnemy(Vector2.zero);
 
-        if (_timer > _timeBetweenShot)
+        if (timer > _timeBetweenShot)
         {
-            _timer = 0f;
+            timer = 0f;
             Vector2 dir = (playerTransform.position - enemy.transform.position).normalized;
 
             Rigidbody2D bullet = GameObject.Instantiate(_bulletPrefab, enemy.transform.position, Quaternion.identity);
             bullet.velocity = dir * _bulletSpeed;
+
+            enemy.StateMachine.ChangeState(enemy.ChaseState);
         }
 
-        if (Vector2.Distance(playerTransform.position, enemy.transform.position) > _distanceToCountExit)
-        {
-            _exitTimer += Time.deltaTime;
-            if (_exitTimer > _timeTillExit)
-                enemy.StateMachine.ChangeState(enemy.IdleState);
-        }
-        else _exitTimer = 0f;
-
-        _timer += Time.deltaTime;
-    }
-
-    public override void AnimationTriggerEvent(Enemy.AnimationTriggerType triggerType)
-    {
-        base.AnimationTriggerEvent(triggerType);
-    }
-
-    public override void ResetValues()
-    {
-        base.ResetValues();
+        timer += Time.deltaTime;
     }
 }

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716f79bcf6242884797ecd18933b4650, type: 3}
   m_Name: Chase-DirectX Chase
   m_EditorClassIdentifier: 
-  _movementSpeed: 1.75
-  _timeTillExit: 3
-  _distanceToCountExit: 3
+  _movementSpeed: 3
+  _timeTillExit: 2
+  _distanceToCountExit: 2
