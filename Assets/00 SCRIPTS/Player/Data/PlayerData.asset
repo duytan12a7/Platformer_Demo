@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 100
   MovementVelocity: 8
-  JumpVelocity: 15
+  JumpVelocity: 20
   AmountOfJumps: 2
   DashSpeed: 25
   DashDuration: 0.4

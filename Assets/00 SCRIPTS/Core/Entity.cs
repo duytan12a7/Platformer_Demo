@@ -89,6 +89,13 @@ public class Entity : MonoBehaviour
         Rigid.velocity = new Vector2(xVelocity, yVelocity);
     }
 
+    public virtual void SetVelocity(Vector2 velocity)
+    {
+        if (isKnocked) return;
+
+        Rigid.velocity = velocity;
+    }
+
     public virtual void SetZeroVelocity()
     {
         if (isKnocked) return;
@@ -139,9 +146,8 @@ public class Entity : MonoBehaviour
     protected virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(wallCheck.position, Vector3.right * FacingDirection * wallCheckDistance);
-        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
-        Gizmos.DrawWireSphere(attackCheck.position, attackCheckRadius);
+        // Gizmos.DrawRay(wallCheck.position, Vector3.right * FacingDirection * wallCheckDistance);
+        // Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
 
     #endregion

@@ -33,13 +33,13 @@ public class Player : Entity
     protected override void Awake()
     {
         base.Awake();
-
-        StateMachine = new PlayerStateMachine();
-        InitializeState();
+        InitializeStateMachine();
     }
 
-    private void InitializeState()
+    private void InitializeStateMachine()
     {
+        StateMachine = new PlayerStateMachine();
+
         IdleState = new PlayerIdleState(this, StateMachine, playerData, Global.AnimatorParams.Idle);
         MoveState = new PlayerMoveState(this, StateMachine, playerData, Global.AnimatorParams.Move);
         JumpState = new PlayerJumpState(this, StateMachine, playerData, Global.AnimatorParams.InAir);
@@ -55,6 +55,7 @@ public class Player : Entity
     protected override void Start()
     {
         base.Start();
+
         Stats = GetComponentInChildren<PlayerStats>();
         StateMachine.Initialize(IdleState);
     }
