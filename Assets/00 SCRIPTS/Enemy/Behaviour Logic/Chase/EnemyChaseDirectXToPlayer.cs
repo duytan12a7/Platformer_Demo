@@ -22,7 +22,9 @@ public class EnemyChaseDirectXToPlayer : EnemyChaseSOBase
         enemy.SetVelocityX(direction.x * movementSpeed);
         enemy.CheckFlip(direction.x);
 
-        if (!enemy.CheckAggroDistance() && stateTimer < 0 || !enemy.IsGroundDetected())
+        if (!enemy.CheckAggroDistance() && stateTimer < 0)
             enemy.StateMachine.ChangeState(enemy.WanderState);
+        else if (!enemy.IsGroundDetected())
+            enemy.SetZeroVelocity();
     }
 }

@@ -13,7 +13,7 @@ public class PlayerAttackState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        if (comboCounter > 2 || Time.time >= lastTimeAttacked + playerData.ComboWindow)
+        if (comboCounter > 1 || Time.time >= lastTimeAttacked + playerData.ComboWindow)
             comboCounter = 0;
 
         player.Anim.SetInteger(Global.AnimatorParams.ComboCounter, comboCounter);

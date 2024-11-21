@@ -8,6 +8,7 @@ public static class Global
     {
         public static string Idle = "Idle";
         public static string Move = "Move";
+        public static string Dash = "Dash";
         public static string InAir = "InAir";
         public static string WallSlide = "WallSlide";
         public static string Land = "Land";

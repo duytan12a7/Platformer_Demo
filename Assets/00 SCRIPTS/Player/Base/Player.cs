@@ -45,7 +45,7 @@ public class Player : Entity
         JumpState = new PlayerJumpState(this, StateMachine, playerData, Global.AnimatorParams.InAir);
         InAirState = new PlayerInAirState(this, StateMachine, playerData, Global.AnimatorParams.InAir);
         LandState = new PlayerLandState(this, StateMachine, playerData, Global.AnimatorParams.Land);
-        DashState = new PlayerDashState(this, StateMachine, playerData, Global.AnimatorParams.Move);
+        DashState = new PlayerDashState(this, StateMachine, playerData, Global.AnimatorParams.Dash);
         WallSlideState = new PlayerWallSlideState(this, StateMachine, playerData, Global.AnimatorParams.WallSlide);
         WallJumpState = new PlayerWallJumpState(this, StateMachine, playerData, Global.AnimatorParams.InAir);
         AttackState = new PlayerAttackState(this, StateMachine, playerData, Global.AnimatorParams.Attack);

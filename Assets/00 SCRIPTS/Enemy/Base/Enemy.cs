@@ -39,6 +39,8 @@ public class Enemy : Entity
 
     #endregion
 
+    public System.Action OnFlipped;
+
     #region Unity Callback Functions
 
     protected override void Awake()
@@ -48,6 +50,7 @@ public class Enemy : Entity
         InitializeEnemyInstances();
         InitializeStateMachine();
     }
+
     private void InitializeEnemyInstances()
     {
         EnemyWanderBaseInstance = Instantiate(_enemyWanderBase);
@@ -98,6 +101,12 @@ public class Enemy : Entity
 
         if (xInput < 0f && isFacingRight || xInput > 0f && !isFacingRight)
             Flip();
+    }
+
+    public override void Flip()
+    {
+        base.Flip();
+        OnFlipped();
     }
 
     public bool CheckAggroDistance() => Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, _enemyWanderBase.AggroCheckDistance, whatIsCharacter);
