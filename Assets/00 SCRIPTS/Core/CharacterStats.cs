@@ -19,7 +19,7 @@ public class CharacterStats : MonoBehaviour
     public Stat Armor;
     public Stat Evasion;
 
-    [SerializeField] private int currentHealth;
+    public int CurrentHealth;
 
     private const int DefaultCritPower = 150;
     private const int MaxChance = 100;
@@ -27,14 +27,14 @@ public class CharacterStats : MonoBehaviour
     protected virtual void Start()
     {
         CriticalPower.SetDefaultValue(DefaultCritPower);
-        currentHealth = MaxHealth.GetValue();
+        CurrentHealth = GetMaxHealthValue();
     }
 
     public virtual void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-
-        if (currentHealth <= 0)
+        CurrentHealth -= damage;
+        EventHandler.CallOnHealthChanged();
+        if (CurrentHealth <= 0)
             Die();
     }
 
@@ -82,4 +82,6 @@ public class CharacterStats : MonoBehaviour
     {
         // TODO
     }
+
+    public int GetMaxHealthValue() => MaxHealth.GetValue() + Vitality.GetValue() * 5;
 }

@@ -16,8 +16,8 @@ MonoBehaviour:
   MovementVelocity: 8
   JumpVelocity: 20
   AmountOfJumps: 2
-  DashSpeed: 25
-  DashDuration: 0.4
+  DashSpeed: 20
+  DashDuration: 0.3
   DashCoolDown: 1
   AttackMovement:
   - {x: 2, y: 3}
