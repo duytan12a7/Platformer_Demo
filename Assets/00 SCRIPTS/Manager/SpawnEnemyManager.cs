@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyWave : MonoBehaviour
+public class SpawnEnemyManager : MonoBehaviour
 {
+
+
     [Serializable]
     public class EnemyGroup
     {
@@ -25,14 +27,6 @@ public class EnemyWave : MonoBehaviour
     private List<GameObject> waveEnemies;
     private System.Random randomGenerator;
 
-    public enum WaveState
-    {
-        Waiting,
-        Spawned,
-        Cleared
-    }
-    private WaveState currentState = WaveState.Waiting;
-
     private void Awake()
     {
         randomGenerator = new System.Random();
@@ -46,10 +40,7 @@ public class EnemyWave : MonoBehaviour
 
         remainingEnemies = waveEnemies.Count;
 
-        if (deactiveOnAwake)
-        {
-            SetEnemiesActiveState(false);
-        }
+        if (deactiveOnAwake) SetEnemiesActiveState(false);
     }
 
     private void SpawnAllEnemyGroups()
@@ -90,14 +81,6 @@ public class EnemyWave : MonoBehaviour
         }
     }
 
-    public void SpawnWave()
-    {
-        if (currentState != WaveState.Waiting) return;
-
-        currentState = WaveState.Spawned;
-        SetEnemiesActiveState(true);
-    }
-
     public void OnEnemyDied(GameObject enemy)
     {
         waveEnemies.Remove(enemy);
@@ -105,15 +88,7 @@ public class EnemyWave : MonoBehaviour
 
         if (remainingEnemies <= 0)
         {
-            ClearWave();
+            Debug.Log("Clear Wave");
         }
-    }
-
-    private void ClearWave()
-    {
-        if (currentState == WaveState.Cleared) return;
-
-        currentState = WaveState.Cleared;
-        Debug.Log("Wave cleared");
     }
 }
