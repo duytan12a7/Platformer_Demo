@@ -12,6 +12,8 @@ public static class Global
         public static string WallSlide = "WallSlide";
         public static string Land = "Land";
         public static string Attack = "Attack";
+        public static string Hurt = "Hurt";
+        public static string Die = "Die";
         public static string ComboCounter = "ComboCounter";
         public static string xVelocity = "xVelocity";
         public static string yVelocity = "yVelocity";

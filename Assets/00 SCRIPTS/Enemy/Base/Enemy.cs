@@ -11,6 +11,7 @@ public class Enemy : Entity
     public EnemyChaseState ChaseState { get; private set; }
     public EnemyAttackState AttackState { get; private set; }
     public EnemyHurtState HurtState { get; private set; }
+    public EnemyDieState DieState { get; private set; }
 
     #endregion
 
@@ -47,10 +48,11 @@ public class Enemy : Entity
 
         StateMachine = new EnemyStateMachine();
 
-        IdleState = new EnemyIdleState(this, StateMachine, "Move");
-        ChaseState = new EnemyChaseState(this, StateMachine, "Move");
-        AttackState = new EnemyAttackState(this, StateMachine, "Attack");
-        HurtState = new EnemyHurtState(this, StateMachine, "Hurt");
+        IdleState = new EnemyIdleState(this, StateMachine, Global.AnimatorParams.Move);
+        ChaseState = new EnemyChaseState(this, StateMachine, Global.AnimatorParams.Move);
+        AttackState = new EnemyAttackState(this, StateMachine, Global.AnimatorParams.Attack);
+        HurtState = new EnemyHurtState(this, StateMachine, Global.AnimatorParams.Hurt);
+        DieState = new EnemyDieState(this, StateMachine, Global.AnimatorParams.Die);
     }
 
     protected override void Start()

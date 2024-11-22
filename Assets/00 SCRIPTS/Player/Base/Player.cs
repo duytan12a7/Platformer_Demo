@@ -16,6 +16,7 @@ public class Player : Entity
     public PlayerWallSlideState WallSlideState { get; private set; }
     public PlayerWallJumpState WallJumpState { get; private set; }
     public PlayerAttackState AttackState { get; private set; }
+    public PlayerDieState DieState { get; private set; }
 
     #endregion
 
@@ -32,7 +33,13 @@ public class Player : Entity
     protected override void Awake()
     {
         base.Awake();
+
         StateMachine = new PlayerStateMachine();
+        InitializeState();
+    }
+
+    private void InitializeState()
+    {
         IdleState = new PlayerIdleState(this, StateMachine, playerData, Global.AnimatorParams.Idle);
         MoveState = new PlayerMoveState(this, StateMachine, playerData, Global.AnimatorParams.Move);
         JumpState = new PlayerJumpState(this, StateMachine, playerData, Global.AnimatorParams.InAir);
@@ -42,13 +49,13 @@ public class Player : Entity
         WallSlideState = new PlayerWallSlideState(this, StateMachine, playerData, Global.AnimatorParams.WallSlide);
         WallJumpState = new PlayerWallJumpState(this, StateMachine, playerData, Global.AnimatorParams.InAir);
         AttackState = new PlayerAttackState(this, StateMachine, playerData, Global.AnimatorParams.Attack);
+        DieState = new PlayerDieState(this, StateMachine, playerData, Global.AnimatorParams.Die);
     }
 
     protected override void Start()
     {
         base.Start();
         Stats = GetComponentInChildren<PlayerStats>();
-        CurrentHealth = playerData.MaxHealth;
         StateMachine.Initialize(IdleState);
     }
 
