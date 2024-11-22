@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : Entity
@@ -39,7 +37,7 @@ public class Enemy : Entity
 
     #endregion
 
-    public System.Action OnFlipped;
+    public Action OnFlipped;
 
     #region Unity Callback Functions
 
@@ -79,7 +77,6 @@ public class Enemy : Entity
 
     private void InitializeBase()
     {
-
         EnemyWanderBaseInstance.Initialize(gameObject, this);
         EnemyChaseBaseInstance.Initialize(gameObject, this);
         EnemyAttackBaseInstance.Initialize(gameObject, this);
@@ -93,6 +90,7 @@ public class Enemy : Entity
     }
 
     #endregion
+    
     #region Check Functions
 
     public override void CheckFlip(float xInput)

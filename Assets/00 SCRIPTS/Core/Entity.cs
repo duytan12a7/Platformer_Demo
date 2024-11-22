@@ -146,9 +146,11 @@ public class Entity : MonoBehaviour
     protected virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(wallCheck.position, Vector3.right * FacingDirection * wallCheckDistance);
-        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        // Gizmos.DrawRay(wallCheck.position, Vector3.right * FacingDirection * wallCheckDistance);
+        // Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
+
+    public virtual bool IsKnocked() => isKnocked;
 
     #endregion
 }

@@ -12,7 +12,6 @@ public class EnemyAttackState : EnemyState
     public override void Enter()
     {
         base.Enter();
-
         enemy.EnemyAttackBaseInstance.Enter();
     }
 

@@ -21,19 +21,20 @@ public class CharacterStats : MonoBehaviour
 
     public int CurrentHealth;
 
-    private const int DefaultCritPower = 150;
-    private const int MaxChance = 100;
+    private const int defaultCritPower = 150;
+    private const int maxChance = 100;
+    private const float multiplier = 0.01f;
 
     protected virtual void Start()
     {
-        CriticalPower.SetDefaultValue(DefaultCritPower);
+        CriticalPower.SetDefaultValue(defaultCritPower);
         CurrentHealth = GetMaxHealthValue();
     }
 
     public virtual void TakeDamage(int damage)
     {
         CurrentHealth -= damage;
-        EventHandler.CallOnHealthChanged();
+        GameEvent.CallOnHealthChanged();
         if (CurrentHealth <= 0)
             Die();
     }
@@ -55,7 +56,7 @@ public class CharacterStats : MonoBehaviour
     private bool IsAttackEvaded(CharacterStats target)
     {
         int evasionChance = target.Evasion.GetValue() + target.Agility.GetValue();
-        return Random.Range(0, MaxChance) < evasionChance;
+        return Random.Range(0, maxChance) < evasionChance;
     }
 
     private int CalculateBaseDamage() => PhysicalDamage.GetValue() + Strength.GetValue();
@@ -63,12 +64,12 @@ public class CharacterStats : MonoBehaviour
     private bool IsCriticalHit()
     {
         int critChance = CriticalChance.GetValue() + Agility.GetValue();
-        return Random.Range(0, MaxChance) < critChance;
+        return Random.Range(0, maxChance) < critChance;
     }
 
     private int CalculateCriticalDamage(int baseDamage)
     {
-        float critMultiplier = (CriticalPower.GetValue() + Strength.GetValue()) * 0.01f;
+        float critMultiplier = (CriticalPower.GetValue() + Strength.GetValue()) * multiplier;
         return Mathf.RoundToInt(baseDamage * critMultiplier);
     }
 

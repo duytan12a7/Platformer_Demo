@@ -28,7 +28,6 @@ public class EnemyAvoidance : MonoBehaviour
     {
         Vector2 avoidanceVector = CalculateAvoidanceVector();
         ApplyAvoidanceForce(avoidanceVector);
-        // LimitSpeed();
     }
 
     private Vector2 CalculateAvoidanceVector()
@@ -63,7 +62,6 @@ public class EnemyAvoidance : MonoBehaviour
     {
         if (avoidanceVector != Vector2.zero)
         {
-            // Nếu giới hạn chuyển động theo chiều dọc
             if (restrictVerticalMovement)
             {
                 avoidanceVector.y = 0;
@@ -73,15 +71,6 @@ public class EnemyAvoidance : MonoBehaviour
         }
     }
 
-    private void LimitSpeed()
-    {
-        if (rb.velocity.magnitude > maxSpeed)
-        {
-            rb.velocity = rb.velocity.normalized * maxSpeed;
-        }
-    }
-
-    // Để debug và điều chỉnh trong Unity Editor
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
