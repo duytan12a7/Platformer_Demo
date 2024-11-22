@@ -27,7 +27,6 @@ public class PlayerAnimationTrigger : MonoBehaviour
             EnemyStats target = hit.GetComponentInChildren<EnemyStats>();
             if (target == null) continue;
             player.Stats.DoDamage(target);
-
         }
     }
 }

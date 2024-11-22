@@ -23,6 +23,6 @@ public class EnemyChaseDirectToPlayer : EnemyChaseSOBase
         enemy.CheckFlip(direction.x);
 
         if (!enemy.CheckAggroRadius() && stateTimer < 0)
-            enemy.StateMachine.ChangeState(enemy.IdleState);
+            enemy.StateMachine.ChangeState(enemy.WanderState);
     }
 }
