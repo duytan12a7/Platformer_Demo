@@ -1,12 +1,10 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnEnemyManager : MonoBehaviour
 {
 
-
-    [Serializable]
+    [System.Serializable]
     public class EnemyGroup
     {
         public GameObject[] enemyPrefabs;
@@ -14,81 +12,67 @@ public class SpawnEnemyManager : MonoBehaviour
         public int maxSpawnCount;
     }
 
-    [SerializeField]
-    private EnemyGroup[] enemyGroups;
+    [SerializeField] private EnemyGroup[] enemyGroups;
 
-    [SerializeField]
-    private Transform[] spawnPoints;
+    [SerializeField] private Transform[] spawnPoints;
 
-    [SerializeField]
-    private bool deactiveOnAwake = true;
-
-    private int remainingEnemies;
-    private List<GameObject> waveEnemies;
-    private System.Random randomGenerator;
-
-    private void Awake()
+    private void Start()
     {
-        randomGenerator = new System.Random();
-        InitializeWave();
-    }
-
-    private void InitializeWave()
-    {
-        waveEnemies = new List<GameObject>();
         SpawnAllEnemyGroups();
-
-        remainingEnemies = waveEnemies.Count;
-
-        if (deactiveOnAwake) SetEnemiesActiveState(false);
     }
 
     private void SpawnAllEnemyGroups()
     {
-        foreach (var group in enemyGroups)
+        foreach (EnemyGroup group in enemyGroups)
         {
-            int spawnCount = randomGenerator.Next(
+            int spawnCount = Random.Range(
                 group.minSpawnCount,
-                group.maxSpawnCount + 1
+                group.maxSpawnCount
             );
 
-            for (int i = 0; i < spawnCount; i++)
-            {
-                GameObject enemyPrefab = group.enemyPrefabs[
-                    randomGenerator.Next(group.enemyPrefabs.Length)
-                ];
-
-                int spawnIndex = (0 + i) % spawnPoints.Length;
-                Transform spawnPoint = spawnPoints[spawnIndex];
-
-                GameObject spawnedEnemy = Instantiate(
-                    enemyPrefab,
-                    spawnPoint.position,
-                    Quaternion.identity,
-                    transform
-                );
-
-                waveEnemies.Add(spawnedEnemy);
-            }
+            SpawnAllEnemyGroup(group, spawnCount);
         }
     }
 
-    private void SetEnemiesActiveState(bool isActive)
+    private void SpawnAllEnemyGroup(EnemyGroup group, int spawnCount)
     {
-        foreach (var enemy in waveEnemies)
+        Vector2 lastSpawnPosition = Vector2.zero;
+
+        for (int i = 0; i < spawnCount; i++)
         {
-            enemy.SetActive(isActive);
+            GameObject enemyPrefab = GetRandomEnemyPrefab(group);
+
+            Transform spawnPoint = GetSpawnPoint(i);
+
+            Vector2 spawnPosition = GetRandomSpawnPosition(spawnPoint, lastSpawnPosition);
+            lastSpawnPosition = spawnPosition;
+
+            GameObject spawnedEnemy = PoolManager.Instance.SpawnObject(enemyPrefab);
+            spawnedEnemy.transform.SetLocalPositionAndRotation(spawnPosition, Quaternion.identity);
+            spawnedEnemy.SetActive(true);
         }
     }
 
-    public void OnEnemyDied(GameObject enemy)
+    private GameObject GetRandomEnemyPrefab(EnemyGroup group)
     {
-        waveEnemies.Remove(enemy);
-        remainingEnemies--;
+        int prefabIndex = Random.Range(0, group.enemyPrefabs.Length);
+        return group.enemyPrefabs[prefabIndex];
+    }
 
-        if (remainingEnemies <= 0)
+    private Transform GetSpawnPoint(int index) => spawnPoints[index % spawnPoints.Length];
+
+    private Vector2 GetRandomSpawnPosition(Transform spawnPoint, Vector2 lastPosition)
+    {
+        Vector2 spawnPosition;
+
+        do
         {
-            Debug.Log("Clear Wave");
-        }
+            spawnPosition = new Vector2(
+                Random.Range(spawnPoint.position.x - 3f, spawnPoint.position.x + 3f),
+                spawnPoint.position.y
+            );
+        } while (Vector2.Distance(lastPosition, spawnPosition) < 0.5f);
+
+        return spawnPosition;
     }
 }

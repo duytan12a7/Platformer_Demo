@@ -22,6 +22,11 @@ public class EntityFX : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
 
+        Reset();
+    }
+
+    public void Reset()
+    {
         spriteRenderer.material = orignalMaterial;
     }
 }

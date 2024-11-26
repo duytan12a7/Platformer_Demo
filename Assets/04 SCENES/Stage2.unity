@@ -186,8 +186,12 @@ MonoBehaviour:
   enemyGroups:
   - enemyPrefabs:
     - {fileID: 8582206008634180872, guid: 6a0029372ea529d41aa7b0ef1c8a0e79, type: 3}
-    minSpawnCount: 10
-    maxSpawnCount: 12
+    minSpawnCount: 3
+    maxSpawnCount: 6
+  - enemyPrefabs:
+    - {fileID: 2106460836267844155, guid: 34a1dc6429c608b4f8cdfe733cddc1f9, type: 3}
+    minSpawnCount: 1
+    maxSpawnCount: 1
   spawnPoints:
   - {fileID: 193686295}
   - {fileID: 703719591}

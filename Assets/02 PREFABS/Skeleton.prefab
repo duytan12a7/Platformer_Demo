@@ -63,7 +63,7 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   MaxHealth:
-    baseValue: 100
+    baseValue: 50
     modifiers: 
   Armor:
     baseValue: 0
@@ -882,5 +882,4 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  maxSpeed: 5
   restrictVerticalMovement: 1

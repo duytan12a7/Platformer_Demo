@@ -21,24 +21,22 @@ public class EnemyWanderGround : EnemyWanderSOBase
     {
         base.LogicUpdate();
 
+        changeDirectionTimer -= Time.deltaTime;
+
         enemy.SetVelocityX(enemy.FacingDirection * movementSpeed);
 
-        if (!enemy.IsGroundDetected() || enemy.IsWallDetected())
-        {
-            enemy.Flip();
-            ResetChangeDirectionTimer();
-        }
-
-        changeDirectionTimer -= Time.deltaTime;
-        if (changeDirectionTimer <= 0)
-        {
-            enemy.Flip();
-            ResetChangeDirectionTimer();
-        }
+        if (ShouldFlipDirection())
+            HandleDirectionChange();
     }
 
-    private void ResetChangeDirectionTimer()
+    private bool ShouldFlipDirection() => !enemy.IsGroundDetected() || enemy.IsWallDetected() || changeDirectionTimer <= 0;
+
+    private void ResetChangeDirectionTimer() => changeDirectionTimer = Random.Range(minChangeDirectionTime, maxChangeDirectionTime);
+
+    private void HandleDirectionChange()
     {
-        changeDirectionTimer = Random.Range(minChangeDirectionTime, maxChangeDirectionTime);
+        enemy.Flip();
+        ResetChangeDirectionTimer();
+        enemy.StateMachine.ChangeState(enemy.IdleState);
     }
 }

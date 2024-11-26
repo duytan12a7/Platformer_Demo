@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterStats : MonoBehaviour
+public abstract class CharacterStats : MonoBehaviour
 {
     [Header("Primary Attributes")]
     public Stat Strength; // Increases physical damage and critical power.
@@ -79,10 +79,14 @@ public class CharacterStats : MonoBehaviour
         return Mathf.Clamp(reducedDamage, 0, int.MaxValue);
     }
 
-    protected virtual void Die()
+    public int GetMaxHealthValue() => MaxHealth.GetValue() + Vitality.GetValue() * 5;
+
+    public void Reset()
     {
-        // TODO
+        CurrentHealth = GetMaxHealthValue(); 
+        CriticalPower.SetDefaultValue(defaultCritPower);
+        GameEvent.CallOnHealthChanged();
     }
 
-    public int GetMaxHealthValue() => MaxHealth.GetValue() + Vitality.GetValue() * 5;
+    protected abstract void Die();
 }

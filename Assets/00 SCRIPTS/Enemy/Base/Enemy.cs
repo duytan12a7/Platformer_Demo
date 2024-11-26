@@ -6,6 +6,7 @@ public class Enemy : Entity
     #region State Machine Variables
 
     public EnemyStateMachine StateMachine { get; private set; }
+    public EnemyIdleState IdleState { get; private set; }
     public EnemyWanderState WanderState { get; private set; }
     public EnemyChaseState ChaseState { get; private set; }
     public EnemyAttackState AttackState { get; private set; }
@@ -60,6 +61,7 @@ public class Enemy : Entity
     {
         StateMachine = new EnemyStateMachine();
 
+        IdleState = new EnemyIdleState(this, StateMachine, Global.AnimatorParams.Idle);
         WanderState = new EnemyWanderState(this, StateMachine, Global.AnimatorParams.Move);
         ChaseState = new EnemyChaseState(this, StateMachine, Global.AnimatorParams.Move);
         AttackState = new EnemyAttackState(this, StateMachine, Global.AnimatorParams.Attack);
@@ -81,7 +83,7 @@ public class Enemy : Entity
         EnemyChaseBaseInstance.Initialize(gameObject, this);
         EnemyAttackBaseInstance.Initialize(gameObject, this);
 
-        StateMachine.Initialize(WanderState);
+        StateMachine.Initialize(IdleState);
     }
 
     protected override void Update()
@@ -90,7 +92,7 @@ public class Enemy : Entity
     }
 
     #endregion
-    
+
     #region Check Functions
 
     public override void CheckFlip(float xInput)
@@ -149,6 +151,14 @@ public class Enemy : Entity
     //     // Gizmos.DrawRay(wallCheck.position, Vector2.right * FacingDirection * _enemyChaseBase.AttackCheckDistance);
     //     Gizmos.DrawWireSphere(wallCheck.position, _enemyChaseBase.AttackCheckRadius);
     // }
+
+    public virtual void Reset()
+    {
+        StateMachine.Initialize(IdleState);
+        DefaultFacing();
+        Stats.Reset();
+        entityFX.Reset();
+    }
 
     #endregion
 }
