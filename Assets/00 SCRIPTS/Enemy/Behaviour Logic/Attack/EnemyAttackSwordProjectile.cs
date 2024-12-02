@@ -11,9 +11,9 @@ public class EnemyAttackSwordProjectile : EnemyAttackSOBase
 
         enemy.SetZeroVelocity();
 
-        if (enemy.IsKnocked())
-            enemy.StateMachine.ChangeState(enemy.HurtState);
-        else if (enemy.CurrentTriggerType == Enemy.AnimationTriggerType.EffectAttack)
+        // if (enemy.IsKnocked())
+        //     enemy.StateMachine.ChangeState(enemy.HurtState);
+        if (enemy.CurrentTriggerType == Enemy.AnimationTriggerType.EffectAttack)
             enemy.StateMachine.ChangeState(enemy.ChaseState);
     }
 }
