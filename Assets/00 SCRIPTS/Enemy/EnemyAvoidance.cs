@@ -9,7 +9,6 @@ public class EnemyAvoidance : MonoBehaviour
     [SerializeField] private LayerMask enemyLayer;
 
     [Header("Movement Limits")]
-    [SerializeField] private float maxSpeed = 5f;
     [SerializeField] private bool restrictVerticalMovement = true;
 
     private Rigidbody2D rb;
