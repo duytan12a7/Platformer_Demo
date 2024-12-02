@@ -26,8 +26,8 @@ MonoBehaviour:
   ComboWindow: 2
   AttackDuration: 0.1
   WallSlideVelocity: 0.7
-  WallJumpDuration: 0.4
-  WallJumpVelocityX: 5
+  WallJumpDuration: 0.5
+  WallJumpVelocityX: 10
   CoyoteTime: 0
   JumpHeightMultiplier: 0.4
   GroundCheckRadius: 0.08

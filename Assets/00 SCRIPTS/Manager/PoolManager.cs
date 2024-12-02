@@ -26,12 +26,6 @@ public class PoolManager : MonoBehaviour
         if (availableObject != null)
             return availableObject;
 
-        GameObject newObject = Instantiate(objectKey, poolParent.transform);
-        newObject.name = objectKey.name;
-        newObject.SetActive(false);
-
-        pooledObjects[objectKey].Add(newObject);
-
         return CreateNewPooledObject(objectKey, poolParent);
     }
 

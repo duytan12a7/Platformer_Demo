@@ -10,14 +10,16 @@ public class EnemyHealthBar_UI : MonoBehaviour
     private RectTransform rectTransform;
     private Slider slider;
 
-    private void Start()
+    private void Awake()
     {
         enemy = GetComponentInParent<Enemy>();
         enemyStats = enemy.GetComponentInChildren<EnemyStats>();
-
         rectTransform = GetComponent<RectTransform>();
         slider = GetComponentInChildren<Slider>();
+    }
 
+    private void OnEnable()
+    {
         enemy.OnFlipped += Flip;
         GameEvent.OnHealthChanged += UpdateHealthUI;
     }

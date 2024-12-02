@@ -53,9 +53,14 @@ public class Entity : MonoBehaviour
         Anim = GetComponentInChildren<Animator>();
         Rigid = GetComponent<Rigidbody2D>();
         entityFX = GetComponentInChildren<EntityFX>();
+        DefaultFacing();
+    }
 
+    protected virtual void DefaultFacing()
+    {
         isFacingRight = true;
         FacingDirection = 1;
+        transform.localScale = Vector3.one;
     }
 
     protected virtual void Update()

@@ -16,7 +16,7 @@ public class EnemyDieState : EnemyState
 
         if (isAnimationFinished)
         {
-            parentWave.OnEnemyDied(enemy.gameObject);
+            enemy.Reset();
             enemy.gameObject.SetActive(false);
         }
     }
