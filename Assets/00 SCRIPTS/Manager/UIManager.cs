@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
 
     private void OnEnable()
     {
-        EventHandler.OnHealthChanged += UpdateUI;
+        GameEvent.OnHealthChanged += UpdateUI;
     }
 
     private void UpdateUI()
@@ -26,6 +26,6 @@ public class UIManager : MonoBehaviour
 
     private void OnDisable()
     {
-        EventHandler.OnHealthChanged -= UpdateUI;
+        GameEvent.OnHealthChanged -= UpdateUI;
     }
 }

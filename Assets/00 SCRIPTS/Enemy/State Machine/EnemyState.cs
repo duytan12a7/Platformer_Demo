@@ -25,10 +25,12 @@ public class EnemyState
         enemy.Anim.SetBool(animBoolName, true);
         isAnimationFinished = false;
     }
+    
     public virtual void Exit()
     {
         enemy.Anim.SetBool(animBoolName, false);
     }
+
     public virtual void LogicUpdate()
     {
         stateTimer -= Time.deltaTime;

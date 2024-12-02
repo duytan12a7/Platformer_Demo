@@ -19,7 +19,7 @@ public class EnemyHealthBar_UI : MonoBehaviour
         slider = GetComponentInChildren<Slider>();
 
         enemy.OnFlipped += Flip;
-        EventHandler.OnHealthChanged += UpdateHealthUI;
+        GameEvent.OnHealthChanged += UpdateHealthUI;
     }
 
     private void UpdateHealthUI()
@@ -33,6 +33,6 @@ public class EnemyHealthBar_UI : MonoBehaviour
     private void OnDisable()
     {
         enemy.OnFlipped -= Flip;
-        EventHandler.OnHealthChanged -= UpdateHealthUI;
+        GameEvent.OnHealthChanged -= UpdateHealthUI;
     }
 }
