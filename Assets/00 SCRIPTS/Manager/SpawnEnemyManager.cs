@@ -27,7 +27,7 @@ public class SpawnEnemyManager : MonoBehaviour
         {
             int spawnCount = Random.Range(
                 group.minSpawnCount,
-                group.maxSpawnCount
+                group.maxSpawnCount + 1
             );
 
             SpawnAllEnemyGroup(group, spawnCount);
