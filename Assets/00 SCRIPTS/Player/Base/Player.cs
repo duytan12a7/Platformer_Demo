@@ -55,6 +55,7 @@ public class Player : Entity
     protected override void Start()
     {
         base.Start();
+        DefaultFacing();
 
         Stats = GetComponentInChildren<PlayerStats>();
         StateMachine.Initialize(IdleState);

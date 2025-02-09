@@ -20,6 +20,7 @@ public class EnemyHealthBar_UI : MonoBehaviour
 
     private void OnEnable()
     {
+        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         enemy.OnFlipped += Flip;
         GameEvent.OnHealthChanged += UpdateHealthUI;
     }
@@ -30,7 +31,7 @@ public class EnemyHealthBar_UI : MonoBehaviour
         slider.value = enemyStats.CurrentHealth;
     }
 
-    private void Flip() => rectTransform.Rotate(0, 180, 0);
+    private void Flip() => rectTransform.Rotate(0f, 180f, 0f);
 
     private void OnDisable()
     {
