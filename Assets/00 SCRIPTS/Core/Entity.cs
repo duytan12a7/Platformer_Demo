@@ -61,11 +61,10 @@ public class Entity : MonoBehaviour
         isFacingRight = true;
         FacingDirection = 1;
         transform.localScale = Vector3.one;
+        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
     }
 
-    protected virtual void Update()
-    {
-    }
+    protected virtual void Update() { }
 
     #region Set Functions
 
