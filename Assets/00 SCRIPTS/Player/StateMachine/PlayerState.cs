@@ -41,8 +41,12 @@ public class PlayerState
     public virtual void LogicUpdate()
     {
         stateTimer -= Time.deltaTime;
-        xInput = Input.GetAxisRaw("Horizontal");
-        yInput = Input.GetAxisRaw("Vertical");
+        // xInput = Input.GetAxisRaw("Horizontal");
+        // yInput = Input.GetAxisRaw("Vertical");
+
+        xInput = (Input.GetKey(KeyCode.RightArrow) ? 1 : 0) - (Input.GetKey(KeyCode.LeftArrow) ? 1 : 0);
+        yInput = (Input.GetKey(KeyCode.UpArrow) ? 1 : 0) - (Input.GetKey(KeyCode.DownArrow) ? 1 : 0);
+
         player.Anim.SetFloat(Global.AnimatorParams.xVelocity, rb.velocity.x);
         player.Anim.SetFloat(Global.AnimatorParams.yVelocity, rb.velocity.y);
     }

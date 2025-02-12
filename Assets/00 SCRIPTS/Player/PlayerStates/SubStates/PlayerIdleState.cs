@@ -20,5 +20,7 @@ public class PlayerIdleState : PlayerGroundedState
 
         if (xInput != 0)
             stateMachine.ChangeState(player.MoveState);
+        else if (Input.GetKeyDown(KeyCode.A))
+            stateMachine.ChangeState(player.HealState);
     }
 }
