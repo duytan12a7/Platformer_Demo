@@ -20,7 +20,7 @@ public class SceneLoadTrigger : MonoBehaviour
         if (col.gameObject == _player.gameObject)
         {
             LoadScenes();
-            UnloadScenes();
+            UnloadScenes(); 
         }
     }
 
@@ -30,9 +30,9 @@ public class SceneLoadTrigger : MonoBehaviour
         for (int i = 0; i < _scenesToLoad.Length; i++)
         {
             isSceneLoaded = false;
-            for (int j = 0; j < SceneManager.sceneCount; j++)
+            for (int j = 0; j < UnityEngine.SceneManagement.SceneManager.sceneCount; j++)
             {
-                Scene loadedScene = SceneManager.GetSceneAt(j);
+                Scene loadedScene = UnityEngine.SceneManagement.SceneManager.GetSceneAt(j);
                 if (loadedScene.name == _scenesToLoad[i].SceneName)
                 {
                     isSceneLoaded = true;
@@ -40,7 +40,7 @@ public class SceneLoadTrigger : MonoBehaviour
                 }
             }
             if (!isSceneLoaded)
-                SceneManager.LoadSceneAsync(_scenesToLoad[i], LoadSceneMode.Additive);
+                UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(_scenesToLoad[i], LoadSceneMode.Additive);
         }
     }
 
@@ -48,12 +48,12 @@ public class SceneLoadTrigger : MonoBehaviour
     {
         for (int i = 0; i < _scenesToUnload.Length; i++)
         {
-            for (int j = 0; j < SceneManager.sceneCount; j++)
+            for (int j = 0; j < UnityEngine.SceneManagement.SceneManager.sceneCount; j++)
             {
-                Scene loadedScene = SceneManager.GetSceneAt(j);
+                Scene loadedScene = UnityEngine.SceneManagement.SceneManager.GetSceneAt(j);
                 if (loadedScene.name == _scenesToUnload[i].SceneName)
                 {
-                    SceneManager.UnloadSceneAsync(_scenesToUnload[i]);
+                    UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(_scenesToUnload[i]);
                 }
             }
         }

@@ -17,6 +17,7 @@ public class Player : Entity
     public PlayerWallJumpState WallJumpState { get; private set; }
     public PlayerAttackState AttackState { get; private set; }
     public PlayerDieState DieState { get; private set; }
+    public PlayerHealState HealState { get; private set; }
 
     #endregion
 
@@ -26,7 +27,6 @@ public class Player : Entity
     public PlayerStats Stats { get; private set; }
 
     #endregion
-
 
     #region Unity Callback Functions
 
@@ -50,6 +50,7 @@ public class Player : Entity
         WallJumpState = new PlayerWallJumpState(this, StateMachine, playerData, Global.AnimatorParams.InAir);
         AttackState = new PlayerAttackState(this, StateMachine, playerData, Global.AnimatorParams.Attack);
         DieState = new PlayerDieState(this, StateMachine, playerData, Global.AnimatorParams.Die);
+        HealState = new PlayerHealState(this, StateMachine, playerData, Global.AnimatorParams.Heal);
     }
 
     protected override void Start()

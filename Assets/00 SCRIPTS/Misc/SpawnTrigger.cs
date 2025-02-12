@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class SpawnTrigger : MonoBehaviour
 {
-    private SpawnEnemy spawnEnemy;
+    private SpawnEnemyManager spawnEnemy;
 
     private void Start()
     {
-        spawnEnemy = FindObjectOfType<SpawnEnemy>();
+        spawnEnemy = GetComponentInParent<SpawnEnemyManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)

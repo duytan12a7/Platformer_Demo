@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class DespawnAllEnemy : MonoBehaviour
 {
+    public static event Action OnDespawnAllEnemy;
     private Player _player;
 
     private void Start()
@@ -13,7 +13,6 @@ public class DespawnAllEnemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject == _player.gameObject)
-            SpawnEnemy.Instance.ResetAllSpawns();
+        OnDespawnAllEnemy?.Invoke();
     }
 }
