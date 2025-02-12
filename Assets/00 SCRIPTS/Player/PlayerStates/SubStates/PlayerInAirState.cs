@@ -18,8 +18,8 @@ public class PlayerInAirState : PlayerState
         if (Input.GetKeyDown(KeyCode.X) && player.JumpState.CanJump())
             stateMachine.ChangeState(player.JumpState);
 
-        if (player.IsWallDetected() && rb.velocity.y < 0.01f)
-            stateMachine.ChangeState(player.WallSlideState);
+        // if (player.IsWallDetected() && rb.velocity.y < 0.01f)
+        //     stateMachine.ChangeState(player.WallSlideState);
 
         if (player.IsGroundDetected())
             stateMachine.ChangeState(player.LandState);

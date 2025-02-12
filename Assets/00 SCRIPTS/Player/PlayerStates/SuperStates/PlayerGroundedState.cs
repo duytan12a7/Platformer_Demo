@@ -22,7 +22,9 @@ public class PlayerGroundedState : PlayerState
         if (Input.GetKeyDown(KeyCode.C))
             stateMachine.ChangeState(player.AttackState);
 
-        if (Input.GetKeyDown(KeyCode.X) && player.JumpState.CanJump())
+        if (Input.GetKeyDown(KeyCode.X) && yInput < 0)
+            player.DownJump();
+        else if (Input.GetKeyDown(KeyCode.X) && player.JumpState.CanJump())
             stateMachine.ChangeState(player.JumpState);
         else if (!player.IsGroundDetected())
             stateMachine.ChangeState(player.InAirState);

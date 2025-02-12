@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerDashState : PlayerState
 {
     private bool canDash;
+    public bool IsDashing { get; private set; }
 
     public PlayerDashState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
@@ -27,6 +28,7 @@ public class PlayerDashState : PlayerState
 
     public IEnumerator Dash()
     {
+        IsDashing = true;
         canDash = false;
 
         float originalGravity = rb.gravityScale;
@@ -37,6 +39,7 @@ public class PlayerDashState : PlayerState
         yield return new WaitForSeconds(playerData.DashDuration);
         rb.gravityScale = originalGravity;
 
+        IsDashing = false;
         stateMachine.ChangeState(player.IdleState);
 
         yield return new WaitForSeconds(playerData.DashCoolDown);

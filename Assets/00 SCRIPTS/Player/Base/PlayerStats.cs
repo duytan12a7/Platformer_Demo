@@ -14,8 +14,9 @@ public class PlayerStats : CharacterStats
 
     public override void TakeDamage(int damage)
     {
-        base.TakeDamage(damage);
+        if (player.IsDashing()) return;
 
+        base.TakeDamage(damage);
         player.DamageEffect();
     }
 
