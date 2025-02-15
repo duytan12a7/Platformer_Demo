@@ -3,6 +3,12 @@ using UnityEngine;
 public class ChangeSceneTrigger : MonoBehaviour
 {
     public GameObject nextScenePrefab;
+    public ParticleSystem glowEffect;
+
+    private void OnEnable()
+    {
+        glowEffect.Play();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {

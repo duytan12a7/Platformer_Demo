@@ -5,9 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerData", menuName = "Scriptable Objects/Create Player Data")]
 public class PlayerData : ScriptableObject
 {
-    [Header("Status Player")]
-    public float MaxHealth;
-
     [Header("Movement State")]
     public float MovementVelocity;
 
@@ -33,9 +30,4 @@ public class PlayerData : ScriptableObject
     [Header("InAir State")]
     public float CoyoteTime;
     public float JumpHeightMultiplier;
-
-    [Header("Check Variables")]
-    public float GroundCheckRadius;
-    public float WallCheckDistance;
-    public LayerMask WhatIsGround;
 }
