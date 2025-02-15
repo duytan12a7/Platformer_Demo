@@ -26,6 +26,8 @@ public class Player : Entity
     [SerializeField] private PlayerData playerData;
     public PlayerStats Stats { get; private set; }
 
+    [SerializeField] private LayerMask platformLayer;
+
     #endregion
 
     #region Unity Callback Functions
@@ -80,6 +82,26 @@ public class Player : Entity
         if (Input.GetKeyDown(KeyCode.Z) && DashState.CanDash())
             StateMachine.ChangeState(DashState);
     }
+
+    public bool IsDashing() => DashState.IsDashing;
+
+    public void DownJump()
+    {
+        Collider2D playerCollider = GetComponent<Collider2D>();
+
+        RaycastHit2D rayHit = Physics2D.Raycast(transform.position, Vector2.down, 1.5f, whatIsGround);
+
+        if (rayHit.collider.GetComponent<PlatformEffector2D>())
+            StartCoroutine(IEDownJump(playerCollider, rayHit.collider.GetComponent<CompositeCollider2D>()));
+    }
+
+    IEnumerator IEDownJump(Collider2D playerCollider, Collider2D collider)
+    {
+        Physics2D.IgnoreCollision(playerCollider, collider);
+        yield return new WaitForSeconds(0.3f);
+        Physics2D.IgnoreCollision(playerCollider, collider, false);
+    }
+
 
     #endregion
 

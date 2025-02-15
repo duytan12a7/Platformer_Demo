@@ -21,7 +21,6 @@ public class EnemySpawner : MonoBehaviour
     public List<Wave> waves;
     public float timeBetweenWaves = 0f;
     private int currentWaveIndex = 0;
-    private bool spawning = false;
     private List<GameObject> aliveEnemies = new List<GameObject>();
 
     [SerializeField] private GameObject sceneTrigger;
@@ -37,7 +36,6 @@ public class EnemySpawner : MonoBehaviour
         while (currentWaveIndex < waves.Count)
         {
             yield return new WaitForSeconds(timeBetweenWaves);
-            spawning = true;
             yield return StartCoroutine(SpawnWave(waves[currentWaveIndex]));
 
             while (aliveEnemies.Count > 0)
@@ -48,8 +46,6 @@ public class EnemySpawner : MonoBehaviour
             currentWaveIndex++;
         }
 
-        // Hiện thông báo khi đã spawn hết tất cả đợt quái
-        Debug.Log("Đã spawn hết tất cả đợt quái");
         sceneTrigger.SetActive(true);
     }
 
@@ -65,7 +61,5 @@ public class EnemySpawner : MonoBehaviour
             aliveEnemies.Add(enemy);
             enemy.GetComponentInChildren<EnemyStats>().OnDeath += () => aliveEnemies.Remove(enemy);
         }
-
-        spawning = false;
     }
 }
