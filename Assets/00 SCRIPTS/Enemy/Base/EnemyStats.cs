@@ -1,12 +1,11 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyStats : CharacterStats
 {
     public event Action OnDeath;
     private Enemy enemy;
+    public bool CanKnock = true;
 
     protected override void Start()
     {
@@ -15,6 +14,7 @@ public class EnemyStats : CharacterStats
     }
     public override void TakeDamage(int damage)
     {
+        enemy.EnterHurtState();
         base.TakeDamage(damage);
         enemy.DamageEffect();
     }
@@ -24,4 +24,5 @@ public class EnemyStats : CharacterStats
         enemy.StateMachine.ChangeState(enemy.DieState);
         OnDeath?.Invoke();
     }
+
 }

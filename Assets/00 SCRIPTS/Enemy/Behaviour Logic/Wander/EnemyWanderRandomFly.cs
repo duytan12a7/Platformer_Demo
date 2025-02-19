@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Random Wander Fly", menuName = "Enemy Logic/Wander Logic/Random Wander Fly")]
 public class EnemyWanderRandomFly : EnemyWanderSOBase
 {
     [SerializeField] private float randomMovementRange;
-    [SerializeField] private float movementSpeed;
     private Vector3 targetPos;
     private Vector3 direction;
 
@@ -26,7 +23,7 @@ public class EnemyWanderRandomFly : EnemyWanderSOBase
 
         direction = (targetPos - enemy.transform.position).normalized;
 
-        enemy.SetVelocity(direction * movementSpeed);
+        enemy.SetVelocity(direction * enemy.Stats.CurrentMovementSpeed);
         enemy.CheckFlip(direction.x);
 
         if ((enemy.transform.position - targetPos).sqrMagnitude < 0.01f)

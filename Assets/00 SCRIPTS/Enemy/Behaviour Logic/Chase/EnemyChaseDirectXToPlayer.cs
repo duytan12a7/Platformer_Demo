@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Chase-DirectX Chase", menuName = "Enemy Logic/Chase Logic/ Direct Chase X")]
 public class EnemyChaseDirectXToPlayer : EnemyChaseSOBase
 {
-    [SerializeField] private float movementSpeed;
     [SerializeField] private float timeTillExit;
 
     public override void Enter()
@@ -19,7 +16,7 @@ public class EnemyChaseDirectXToPlayer : EnemyChaseSOBase
         base.LogicUpdate();
 
         Vector2 direction = (playerTransform.position - enemy.transform.position).normalized;
-        enemy.SetVelocityX(direction.x * movementSpeed);
+        enemy.SetVelocityX(direction.x * enemy.Stats.CurrentMovementSpeed);
         enemy.CheckFlip(direction.x);
 
         if (!enemy.CheckAggroDistance() && stateTimer < 0)

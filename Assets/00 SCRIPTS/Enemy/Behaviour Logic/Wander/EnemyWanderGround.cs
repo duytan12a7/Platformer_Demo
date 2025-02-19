@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Wander Ground", menuName = "Enemy Logic/Wander Logic/Wander Ground")]
 public class EnemyWanderGround : EnemyWanderSOBase
 {
-    [SerializeField] private float movementSpeed;
     [SerializeField] private float minChangeDirectionTime, maxChangeDirectionTime;
 
     private float changeDirectionTimer;
@@ -23,7 +19,7 @@ public class EnemyWanderGround : EnemyWanderSOBase
 
         changeDirectionTimer -= Time.deltaTime;
 
-        enemy.SetVelocityX(enemy.FacingDirection * movementSpeed);
+        enemy.SetVelocityX(enemy.FacingDirection * enemy.Stats.CurrentMovementSpeed);
 
         if (ShouldFlipDirection())
             HandleDirectionChange();
