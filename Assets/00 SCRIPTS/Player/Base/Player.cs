@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -62,6 +63,12 @@ public class Player : Entity
 
         Stats = GetComponentInChildren<PlayerStats>();
         StateMachine.Initialize(IdleState);
+        UpdateCurrentStats();
+    }
+
+    private void UpdateCurrentStats()
+    {
+        Stats.UpdateMovementSpeed(playerData.MovementVelocity);
     }
 
     protected override void Update()

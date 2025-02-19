@@ -160,5 +160,14 @@ public class Enemy : Entity
         entityFX.Reset();
     }
 
+    public void EnterHurtState()
+    {
+        Vector2 playerPosition = GameManager.Instance.Player.transform.position;
+        float direction = Mathf.Sign(transform.position.x - playerPosition.x);
+        HurtState.SetHitDirection(direction);
+
+        StateMachine.ChangeState(HurtState);
+    }
+
     #endregion
 }

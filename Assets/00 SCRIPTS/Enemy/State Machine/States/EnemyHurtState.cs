@@ -4,8 +4,17 @@ using UnityEngine;
 
 public class EnemyHurtState : EnemyState
 {
+    private float hitDirection;
+
     public EnemyHurtState(Enemy enemy, EnemyStateMachine stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
     {
+    }
+
+    public override void Enter()
+    {
+        base.Enter();
+        if (Mathf.Sign(enemy.FacingDirection) != hitDirection)
+            enemy.Flip();
     }
 
     public override void LogicUpdate()
@@ -15,5 +24,7 @@ public class EnemyHurtState : EnemyState
         if (isAnimationFinished)
             enemy.StateMachine.ChangeState(enemy.ChaseState);
     }
+
+    public void SetHitDirection(float direction) => hitDirection = direction;
 
 }
