@@ -6,6 +6,16 @@ public class PlayerStats : CharacterStats
 {
     private Player player;
 
+    private int level = 0;
+    private int xp = 0;
+    private int xpToNextLevel = 100;
+    [SerializeField] private SkillManager skillManager;
+
+    [SerializeField] private SkillSelectionUI skillSelectionUI;
+
+
+    public List<SkillCard> OwnedSkills = new();
+
     protected override void Start()
     {
         base.Start();
@@ -24,4 +34,28 @@ public class PlayerStats : CharacterStats
     {
         player.StateMachine.ChangeState(player.DieState);
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+            LevelUp();
+    }
+
+    public void GainXP(int amount)
+    {
+        xp += amount;
+        if (xp >= xpToNextLevel)
+        {
+            LevelUp();
+        }
+    }
+
+    private void LevelUp()
+    {
+        level++;
+        xp = 0;
+        xpToNextLevel += 50;
+        skillSelectionUI.ShowSkillSelection(skillManager.GetRandomSkills(3));
+    }
+
 }

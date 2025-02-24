@@ -1,8 +1,12 @@
 using System;
+using Spine.Unity;
 using UnityEngine;
+using Spine;
 
 public class Enemy : Entity
 {
+    protected ICharacterAnimation characterAnimation;
+    public SkeletonAnimation skeletonAnimation;
     #region State Machine Variables
 
     public EnemyStateMachine StateMachine { get; private set; }
@@ -48,6 +52,13 @@ public class Enemy : Entity
 
         InitializeEnemyInstances();
         InitializeStateMachine();
+
+        skeletonAnimation = GetComponentInChildren<SkeletonAnimation>();
+
+        if (skeletonAnimation != null)
+            characterAnimation = new SpineAdapter(skeletonAnimation);
+        else if (Anim != null)
+            characterAnimation = new AnimatorAdapter(Anim);
     }
 
     private void InitializeEnemyInstances()
@@ -61,12 +72,12 @@ public class Enemy : Entity
     {
         StateMachine = new EnemyStateMachine();
 
-        IdleState = new EnemyIdleState(this, StateMachine, Global.AnimatorParams.Idle);
-        WanderState = new EnemyWanderState(this, StateMachine, Global.AnimatorParams.Move);
-        ChaseState = new EnemyChaseState(this, StateMachine, Global.AnimatorParams.Move);
-        AttackState = new EnemyAttackState(this, StateMachine, Global.AnimatorParams.Attack);
-        HurtState = new EnemyHurtState(this, StateMachine, Global.AnimatorParams.Hurt);
-        DieState = new EnemyDieState(this, StateMachine, Global.AnimatorParams.Die);
+        IdleState = new EnemyIdleState(this, StateMachine, "idle");
+        WanderState = new EnemyWanderState(this, StateMachine, "move");
+        ChaseState = new EnemyChaseState(this, StateMachine, "move");
+        AttackState = new EnemyAttackState(this, StateMachine, "skill_0");
+        HurtState = new EnemyHurtState(this, StateMachine, "hurt");
+        DieState = new EnemyDieState(this, StateMachine, "die");
     }
 
     protected override void Start()
@@ -170,4 +181,25 @@ public class Enemy : Entity
     }
 
     #endregion
+
+    public void PlayAnimation(string animationName, bool loop = false)
+    {
+        if (characterAnimation == null)
+        {
+            Debug.LogError($"[Enemy] characterAnimation is NULL! Không thể chơi animation {animationName}");
+            return;
+        }
+
+        characterAnimation.PlayAnimation(animationName, loop);
+    }
+
+    public virtual void SetTrigger(string triggerName)
+    {
+        characterAnimation.SetTrigger(triggerName);
+    }
+
+    public virtual void StopAnimation()
+    {
+        characterAnimation.StopAnimation();
+    }
 }

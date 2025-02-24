@@ -21,7 +21,8 @@ public class EnemyHurtState : EnemyState
     {
         base.LogicUpdate();
 
-        if (isAnimationFinished)
+        if (isAnimationFinished 
+        || enemy.skeletonAnimation.AnimationState.GetCurrent(0).IsComplete)
             enemy.StateMachine.ChangeState(enemy.ChaseState);
     }
 
