@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyChaseSOBase : ScriptableObject
@@ -15,6 +13,8 @@ public class EnemyChaseSOBase : ScriptableObject
     public float AttackCheckDistance;
     public float AttackCheckRadius;
 
+    public float movementSpeed;
+
     public virtual void Initialize(GameObject gameObject, Enemy enemy)
     {
         this.gameObject = gameObject;
@@ -24,7 +24,10 @@ public class EnemyChaseSOBase : ScriptableObject
         playerTransform = GameManager.Instance.Player.transform;
     }
 
-    public virtual void Enter() { }
+    public virtual void Enter()
+    {
+        enemy.Stats.UpdateMovementSpeed(movementSpeed);
+    }
     public virtual void Exit()
     {
         ResetValues();

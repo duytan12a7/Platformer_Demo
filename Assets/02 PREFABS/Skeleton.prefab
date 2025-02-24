@@ -72,6 +72,8 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   CurrentHealth: 0
+  CurrentMovementSpeed: 0
+  canKnock: 1
 --- !u!1 &1348628845115708399
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,7 +19,11 @@ public abstract class CharacterStats : MonoBehaviour
     public Stat Armor;
     public Stat Evasion;
 
+
+    [Header("Current Stats")]
     public int CurrentHealth;
+
+    public float CurrentMovementSpeed;
 
     private const int defaultCritPower = 150;
     private const int maxChance = 100;
@@ -86,6 +90,11 @@ public abstract class CharacterStats : MonoBehaviour
         CurrentHealth = GetMaxHealthValue(); 
         CriticalPower.SetDefaultValue(defaultCritPower);
         GameEvent.CallOnHealthChanged();
+    }
+
+    public virtual void UpdateMovementSpeed(float newSpeed)
+    {
+        CurrentMovementSpeed = newSpeed;
     }
 
     protected abstract void Die();
