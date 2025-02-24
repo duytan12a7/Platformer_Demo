@@ -13,11 +13,14 @@ public abstract class CharacterStats : MonoBehaviour
     public Stat PhysicalDamage;
     public Stat CriticalChance;
     public Stat CriticalPower;
+    public void AddModifyPhysicalDamage(int amount) => PhysicalDamage.AddModifier(amount);
+    public void AddModifyCriticalChance(int amount) => CriticalChance.AddModifier(amount);
 
     [Header("Defensive Stats")]
     public Stat MaxHealth;
     public Stat Armor;
     public Stat Evasion;
+    public void AddModifyArmor(int amount) => Armor.AddModifier(amount);
 
 
     [Header("Current Stats")]
@@ -67,8 +70,8 @@ public abstract class CharacterStats : MonoBehaviour
 
     private bool IsCriticalHit()
     {
-        int critChance = CriticalChance.GetValue() + Agility.GetValue();
-        return Random.Range(0, maxChance) < critChance;
+        int criticalChance = CriticalChance.GetValue() + Agility.GetValue();
+        return Random.Range(0, maxChance) < criticalChance;
     }
 
     private int CalculateCriticalDamage(int baseDamage)
@@ -87,7 +90,7 @@ public abstract class CharacterStats : MonoBehaviour
 
     public void Reset()
     {
-        CurrentHealth = GetMaxHealthValue(); 
+        CurrentHealth = GetMaxHealthValue();
         CriticalPower.SetDefaultValue(defaultCritPower);
         GameEvent.CallOnHealthChanged();
     }

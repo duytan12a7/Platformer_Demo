@@ -1,0 +1,97 @@
+
+1001.skel.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+L Leg
+  rotate: false
+  xy: 911, 861
+  size: 111, 161
+  orig: 111, 161
+  offset: 0, 0
+  index: -1
+L_Hand
+  rotate: true
+  xy: 717, 940
+  size: 82, 192
+  orig: 82, 192
+  offset: 0, 0
+  index: -1
+Layer 1
+  rotate: false
+  xy: 2, 790
+  size: 245, 161
+  orig: 245, 161
+  offset: 0, 0
+  index: -1
+R Leg
+  rotate: true
+  xy: 519, 723
+  size: 115, 170
+  orig: 115, 170
+  offset: 0, 0
+  index: -1
+R_Hand
+  rotate: true
+  xy: 2, 706
+  size: 82, 218
+  orig: 82, 218
+  offset: 0, 0
+  index: -1
+assesory
+  rotate: true
+  xy: 832, 620
+  size: 106, 127
+  orig: 106, 127
+  offset: 0, 0
+  index: -1
+body
+  rotate: false
+  xy: 519, 840
+  size: 196, 182
+  orig: 196, 182
+  offset: 0, 0
+  index: -1
+cry
+  rotate: true
+  xy: 896, 728
+  size: 131, 124
+  orig: 131, 124
+  offset: 0, 0
+  index: -1
+ear
+  rotate: false
+  xy: 717, 811
+  size: 177, 127
+  orig: 177, 127
+  offset: 0, 0
+  index: -1
+ear_b
+  rotate: false
+  xy: 222, 675
+  size: 110, 109
+  orig: 110, 109
+  offset: 0, 0
+  index: -1
+face
+  rotate: false
+  xy: 691, 713
+  size: 139, 96
+  orig: 139, 96
+  offset: 0, 0
+  index: -1
+head
+  rotate: false
+  xy: 267, 786
+  size: 250, 236
+  orig: 250, 236
+  offset: 0, 0
+  index: -1
+weapon
+  rotate: false
+  xy: 2, 953
+  size: 263, 69
+  orig: 263, 69
+  offset: 0, 0
+  index: -1

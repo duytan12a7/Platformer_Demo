@@ -4,21 +4,39 @@ using UnityEngine;
 public class EntityFX : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
+    private MeshRenderer meshRenderer;
 
     [Header("Flash FX")]
     [SerializeField] private Material hitMaterial;
-    private Material orignalMaterial;
-
+    private Material originalMaterial;
 
     private void Start()
     {
+        // Tìm cả SpriteRenderer và MeshRenderer
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        orignalMaterial = spriteRenderer.material;
+        meshRenderer = GetComponentInChildren<MeshRenderer>();
+
+        // Kiểm tra cái nào tồn tại và lưu material gốc
+        if (spriteRenderer != null)
+        {
+            originalMaterial = spriteRenderer.material;
+        }
+        else if (meshRenderer != null)
+        {
+            originalMaterial = meshRenderer.material;
+        }
     }
 
     public IEnumerator HitFlashFX()
     {
-        spriteRenderer.material = hitMaterial;
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.material = hitMaterial;
+        }
+        else if (meshRenderer != null)
+        {
+            meshRenderer.material = hitMaterial;
+        }
 
         yield return new WaitForSeconds(0.2f);
 
@@ -27,6 +45,13 @@ public class EntityFX : MonoBehaviour
 
     public void Reset()
     {
-        spriteRenderer.material = orignalMaterial;
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.material = originalMaterial;
+        }
+        else if (meshRenderer != null)
+        {
+            meshRenderer.material = originalMaterial;
+        }
     }
 }

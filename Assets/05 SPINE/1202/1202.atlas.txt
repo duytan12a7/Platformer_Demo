@@ -1,0 +1,82 @@
+
+1202.skel.png
+size: 1688,1598
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+L_Hand
+  rotate: false
+  xy: 2, 2
+  size: 110, 156
+  orig: 110, 156
+  offset: 0, 0
+  index: -1
+L_Leg
+  rotate: false
+  xy: 564, 2
+  size: 126, 154
+  orig: 126, 154
+  offset: 0, 0
+  index: -1
+L_ear
+  rotate: false
+  xy: 1126, 2
+  size: 64, 96
+  orig: 64, 96
+  offset: 0, 0
+  index: -1
+R_Hand
+  rotate: false
+  xy: 2, 534
+  size: 110, 156
+  orig: 110, 156
+  offset: 0, 0
+  index: -1
+R_Leg
+  rotate: false
+  xy: 564, 534
+  size: 126, 154
+  orig: 126, 154
+  offset: 0, 0
+  index: -1
+R_ear
+  rotate: false
+  xy: 1126, 534
+  size: 124, 106
+  orig: 124, 106
+  offset: 0, 0
+  index: -1
+body
+  rotate: false
+  xy: 2, 1066
+  size: 560, 530
+  orig: 560, 530
+  offset: 0, 0
+  index: -1
+cry
+  rotate: false
+  xy: 564, 1066
+  size: 165, 113
+  orig: 165, 113
+  offset: 0, 0
+  index: -1
+horn
+  rotate: false
+  xy: 1126, 1066
+  size: 100, 123
+  orig: 100, 123
+  offset: 0, 0
+  index: -1
+
+1202.skel2.png
+size: 564,534
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+tail
+  rotate: false
+  xy: 2, 2
+  size: 233, 185
+  orig: 233, 185
+  offset: 0, 0
+  index: -1

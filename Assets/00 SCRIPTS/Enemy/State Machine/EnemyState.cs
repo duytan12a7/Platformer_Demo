@@ -22,13 +22,15 @@ public class EnemyState
 
     public virtual void Enter()
     {
-        enemy.Anim.SetBool(animBoolName, true);
+        // enemy.Anim.SetBool(animBoolName, true);
+        enemy.PlayAnimation(animBoolName, true);
         isAnimationFinished = false;
     }
     
     public virtual void Exit()
     {
-        enemy.Anim.SetBool(animBoolName, false);
+        enemy.StopAnimation();
+        // enemy.Anim.SetBool(animBoolName, false);
     }
 
     public virtual void LogicUpdate()
