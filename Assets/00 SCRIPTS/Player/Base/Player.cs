@@ -17,7 +17,7 @@ public class Player : Entity
     public PlayerWallSlideState WallSlideState { get; private set; }
     public PlayerWallJumpState WallJumpState { get; private set; }
     public PlayerAttackState AttackState { get; private set; }
-    public PlayerDieState DieState { get; private set; }
+    public PlayerDieState DeadState { get; private set; }
     public PlayerHealState HealState { get; private set; }
     public PlayerCounterAttackState CounterAttackState { get; private set; }
 
@@ -51,7 +51,7 @@ public class Player : Entity
         WallSlideState = new PlayerWallSlideState(this, StateMachine, playerData, Global.AnimatorParams.WallSlide);
         WallJumpState = new PlayerWallJumpState(this, StateMachine, playerData, Global.AnimatorParams.InAir);
         AttackState = new PlayerAttackState(this, StateMachine, playerData, Global.AnimatorParams.Attack);
-        DieState = new PlayerDieState(this, StateMachine, playerData, Global.AnimatorParams.Die);
+        DeadState = new PlayerDieState(this, StateMachine, playerData, Global.AnimatorParams.Die);
         HealState = new PlayerHealState(this, StateMachine, playerData, Global.AnimatorParams.Heal);
         CounterAttackState = new PlayerCounterAttackState(this, StateMachine, playerData, Global.AnimatorParams.CounterAttack);
     }
@@ -116,6 +116,15 @@ public class Player : Entity
 
     private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
     public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
+
+
+
+    public override void Die()
+    {
+        base.Die();
+
+        StateMachine.ChangeState(DeadState);
+    }
 
     #endregion
 }

@@ -2629,10 +2629,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   playerData: {fileID: 11400000, guid: 64ae970fa63229b48a4a6cea75ae6e98, type: 2}
-  platformLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  counterAttackDuration: 0.2
 --- !u!61 &1228800323
 BoxCollider2D:
   m_ObjectHideFlags: 0

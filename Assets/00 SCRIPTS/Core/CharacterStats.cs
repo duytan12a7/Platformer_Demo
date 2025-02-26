@@ -32,6 +32,8 @@ public abstract class CharacterStats : MonoBehaviour
     private const int maxChance = 100;
     private const float multiplier = 0.01f;
 
+    public bool IsDead { get; private set; }
+
     protected virtual void Start()
     {
         CriticalPower.SetDefaultValue(defaultCritPower);
@@ -100,5 +102,5 @@ public abstract class CharacterStats : MonoBehaviour
         CurrentMovementSpeed = newSpeed;
     }
 
-    protected abstract void Die();
+    protected virtual void Die() => IsDead = true;
 }

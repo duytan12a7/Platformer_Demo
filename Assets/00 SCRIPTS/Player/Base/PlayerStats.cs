@@ -33,7 +33,9 @@ public class PlayerStats : CharacterStats
 
     protected override void Die()
     {
-        player.StateMachine.ChangeState(player.DieState);
+        base.Die();
+        
+        player.Die();
     }
 
     private void Update()
