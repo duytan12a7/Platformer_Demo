@@ -1,0 +1,104 @@
+
+2103.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+B_hand
+  rotate: true
+  xy: 1170, 1172
+  size: 210, 257
+  orig: 210, 257
+  offset: 0, 0
+  index: -1
+B_hand_1
+  rotate: true
+  xy: 1429, 1172
+  size: 210, 244
+  orig: 210, 244
+  offset: 0, 0
+  index: -1
+B_hand_2
+  rotate: false
+  xy: 1675, 1207
+  size: 132, 132
+  orig: 132, 132
+  offset: 0, 0
+  index: -1
+B_leg
+  rotate: true
+  xy: 621, 1245
+  size: 255, 284
+  orig: 255, 284
+  offset: 0, 0
+  index: -1
+F_hand
+  rotate: true
+  xy: 621, 1502
+  size: 226, 340
+  orig: 226, 340
+  offset: 0, 0
+  index: -1
+F_hand_1
+  rotate: true
+  xy: 907, 1230
+  size: 246, 261
+  orig: 246, 261
+  offset: 0, 0
+  index: -1
+F_leg
+  rotate: true
+  xy: 963, 1478
+  size: 250, 292
+  orig: 250, 292
+  offset: 0, 0
+  index: -1
+Layer 1
+  rotate: true
+  xy: 1257, 1384
+  size: 135, 138
+  orig: 135, 138
+  offset: 0, 0
+  index: -1
+belt
+  rotate: true
+  xy: 1453, 1384
+  size: 637, 259
+  orig: 637, 259
+  offset: 0, 0
+  index: -1
+body
+  rotate: false
+  xy: 2, 1410
+  size: 617, 611
+  orig: 617, 611
+  offset: 0, 0
+  index: -1
+ear
+  rotate: true
+  xy: 1257, 1521
+  size: 207, 133
+  orig: 207, 133
+  offset: 0, 0
+  index: -1
+head
+  rotate: false
+  xy: 1714, 1341
+  size: 307, 284
+  orig: 307, 284
+  offset: 0, 0
+  index: -1
+necklace
+  rotate: true
+  xy: 1714, 1627
+  size: 394, 293
+  orig: 394, 293
+  offset: 0, 0
+  index: -1
+wp
+  rotate: false
+  xy: 621, 1730
+  size: 830, 291
+  orig: 830, 291
+  offset: 0, 0
+  index: -1

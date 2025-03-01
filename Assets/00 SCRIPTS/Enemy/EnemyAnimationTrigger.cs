@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Spine;
 using Spine.Unity;
@@ -35,19 +33,15 @@ public class EnemyAnimationTrigger : MonoBehaviour
             case "AttackTrigger":
                 AttackTrigger();
                 break;
-
             case "AnimationFinish":
                 AnimationFinishTrigger();
                 break;
-
             case "OpenCounterWindow":
                 OpenCounterWindow();
                 break;
-
             case "CloseCounterWindow":
                 CloseCounterWindow();
                 break;
-
             default:
                 Debug.Log($"[Animator] Unhandled animation event: {eventName}");
                 break;
@@ -59,21 +53,24 @@ public class EnemyAnimationTrigger : MonoBehaviour
         switch (e.Data.Name)
         {
             case "Attack":
-                AttackTrigger();
+                // AttackTrigger();
                 break;
-
             case "AnimationFinish":
                 AnimationFinishTrigger();
                 break;
-
             case "OpenCounterWindow":
                 OpenCounterWindow();
                 break;
-
             case "CloseCounterWindow":
                 CloseCounterWindow();
                 break;
-
+            case "OpenSkillAttack":
+                // OpenSkillAttack();
+                break;
+            case "CloseSkillAttack":
+                break;
+            case "Vibranium":
+                break;
             default:
                 Debug.Log($"[Spine] Unhandled animation event: {e.Data.Name}");
                 break;
@@ -102,4 +99,7 @@ public class EnemyAnimationTrigger : MonoBehaviour
 
     protected void OpenCounterWindow() => enemy.OpenCounterAttackWindow();
     protected void CloseCounterWindow() => enemy.CloseCounterAttackWindow();
+
+    protected void OpenSkillAttack() => enemy.OpenSkillAttack();
+    protected void CloseSkillAttack() => enemy.CloseSkillAttack();
 }
