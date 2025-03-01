@@ -47,6 +47,13 @@ public class Enemy : Entity
     public float attackDistance = 1.5f;
     public float attackCheckDistance = 5f;
 
+    [Header(" Dash info")]
+    public float dashSpeed = 20f;
+    public float dashDuration = 5f;
+
+    [Header(" Skill info")]
+    public bool isSkillAttackActive = true;
+
     public string lastAnimBoolName { get; private set; }
 
     #endregion
@@ -155,6 +162,9 @@ public class Enemy : Entity
         canBeStunned = false;
         counterImage.SetActive(false);
     }
+
+    public virtual void OpenSkillAttack() => isSkillAttackActive = true;
+    public virtual void CloseSkillAttack() => isSkillAttackActive = false;
 
     public virtual bool CanBeStunned()
     {

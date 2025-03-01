@@ -1,21 +1,20 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Goblin : Enemy
+public class Gruk : Enemy
 {
 
     protected override void Awake()
     {
         base.Awake();
 
-        IdleState = new GoblinIdleState(this, StateMachine, "idle");
-        MoveState = new GoblinMoveState(this, StateMachine, "move");
-        BattleState = new GoblinBattleState(this, StateMachine, "move");
-        AttackState = new GoblinAttackState(this, StateMachine, "skill_0");
-        StunnedState = new GoblinStunnedState(this, StateMachine, "hurt");
-        DeadState = new GoblinDeadState(this, StateMachine, "idle");
+        IdleState = new GrukIdleState(this, StateMachine, "idle");
+        MoveState = new GrukMoveState(this, StateMachine, "move");
+        BattleState = new GrukBattleState(this, StateMachine, "move");
+        AttackState = new GrukAttackState(this, StateMachine, "attack_0", 1);
+        StunnedState = new GrukStunnedState(this, StateMachine, "hurt");
+        DeadState = new GrukDeadState(this, StateMachine, "idle");
     }
 
     protected override void Start()
