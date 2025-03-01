@@ -7,30 +7,31 @@ public class EnemyState
     protected Enemy enemy;
     protected EnemyStateMachine stateMachine;
 
+    protected Rigidbody2D rb;
+
     protected bool isAnimationFinished;
 
     protected float stateTimer;
 
     private string animBoolName;
 
-    public EnemyState(Enemy enemy, EnemyStateMachine stateMachine, string animBoolName)
+    public EnemyState(Enemy enemyBase, EnemyStateMachine stateMachine, string animBoolName)
     {
-        this.enemy = enemy;
+        enemy = enemyBase;
         this.stateMachine = stateMachine;
         this.animBoolName = animBoolName;
     }
 
     public virtual void Enter()
     {
-        // enemy.Anim.SetBool(animBoolName, true);
+        rb = enemy.Rigid;
         enemy.PlayAnimation(animBoolName, true);
         isAnimationFinished = false;
     }
-    
+
     public virtual void Exit()
     {
         enemy.StopAnimation();
-        // enemy.Anim.SetBool(animBoolName, false);
     }
 
     public virtual void LogicUpdate()

@@ -22,12 +22,13 @@ public class PlayerStats : CharacterStats
         player = GetComponentInParent<Player>();
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(int damage, Transform attacker)
     {
         if (player.IsDashing()) return;
 
-        base.TakeDamage(damage);
-        player.DamageEffect();
+        base.TakeDamage(damage, attacker);
+
+        player.DamageEffect(attacker);
     }
 
     protected override void Die()

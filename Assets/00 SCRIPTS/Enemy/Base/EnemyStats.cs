@@ -12,16 +12,17 @@ public class EnemyStats : CharacterStats
         base.Start();
         enemy = GetComponentInParent<Enemy>();
     }
-    public override void TakeDamage(int damage)
+    
+    public override void TakeDamage(int damage, Transform attacker)
     {
-        enemy.EnterHurtState();
-        base.TakeDamage(damage);
-        enemy.DamageEffect();
+        base.TakeDamage(damage, attacker);
+
+        enemy.DamageEffect(attacker);
     }
+
 
     protected override void Die()
     {
-        enemy.StateMachine.ChangeState(enemy.DieState);
         OnDeath?.Invoke();
     }
 

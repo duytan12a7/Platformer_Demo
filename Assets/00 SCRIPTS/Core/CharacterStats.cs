@@ -38,7 +38,7 @@ public abstract class CharacterStats : MonoBehaviour
         CurrentHealth = GetMaxHealthValue();
     }
 
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage, Transform attacker)
     {
         CurrentHealth -= damage;
         GameEvent.CallOnHealthChanged();
@@ -46,7 +46,7 @@ public abstract class CharacterStats : MonoBehaviour
             Die();
     }
 
-    public virtual void PerformAttack(CharacterStats target)
+    public virtual void PerformAttack(CharacterStats target, Transform attacker)
     {
         if (IsAttackEvaded(target)) return;
 
@@ -57,7 +57,7 @@ public abstract class CharacterStats : MonoBehaviour
 
         damage = ReduceDamageByArmor(target, damage);
 
-        target.TakeDamage(damage);
+        target.TakeDamage(damage, attacker);
     }
 
     private bool IsAttackEvaded(CharacterStats target)

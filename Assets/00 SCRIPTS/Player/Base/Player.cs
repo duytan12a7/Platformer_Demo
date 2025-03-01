@@ -19,6 +19,7 @@ public class Player : Entity
     public PlayerAttackState AttackState { get; private set; }
     public PlayerDieState DieState { get; private set; }
     public PlayerHealState HealState { get; private set; }
+    public PlayerCounterAttackState CounterAttackState { get; private set; }
 
     #endregion
 
@@ -26,8 +27,6 @@ public class Player : Entity
 
     [SerializeField] private PlayerData playerData;
     public PlayerStats Stats { get; private set; }
-
-    [SerializeField] private LayerMask platformLayer;
 
     #endregion
 
@@ -54,6 +53,7 @@ public class Player : Entity
         AttackState = new PlayerAttackState(this, StateMachine, playerData, Global.AnimatorParams.Attack);
         DieState = new PlayerDieState(this, StateMachine, playerData, Global.AnimatorParams.Die);
         HealState = new PlayerHealState(this, StateMachine, playerData, Global.AnimatorParams.Heal);
+        CounterAttackState = new PlayerCounterAttackState(this, StateMachine, playerData, Global.AnimatorParams.CounterAttack);
     }
 
     protected override void Start()

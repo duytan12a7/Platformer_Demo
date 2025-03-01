@@ -19,6 +19,7 @@ public class PlayerData : ScriptableObject
 
     [Header("Attack State")]
     public Vector2[] AttackMovement;
+    public float CounterAttackDuration;
     public int ComboWindow;
     public float AttackDuration;
 

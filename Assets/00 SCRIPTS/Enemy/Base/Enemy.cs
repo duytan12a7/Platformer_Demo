@@ -7,29 +7,11 @@ public class Enemy : Entity
 {
     protected ICharacterAnimation characterAnimation;
     public SkeletonAnimation skeletonAnimation;
-    #region State Machine Variables
+    // #region State Machine Variables
 
     public EnemyStateMachine StateMachine { get; private set; }
-    public EnemyIdleState IdleState { get; private set; }
-    public EnemyWanderState WanderState { get; private set; }
-    public EnemyChaseState ChaseState { get; private set; }
-    public EnemyAttackState AttackState { get; private set; }
-    public EnemyHurtState HurtState { get; private set; }
-    public EnemyDieState DieState { get; private set; }
 
-    #endregion
-
-    #region ScriptableObject Variables
-
-    [SerializeField] private EnemyWanderSOBase _enemyWanderBase;
-    [SerializeField] private EnemyChaseSOBase _enemyChaseBase;
-    [SerializeField] private EnemyAttackSOBase _enemyAttackBase;
-
-    public EnemyWanderSOBase EnemyWanderBaseInstance { get; private set; }
-    public EnemyChaseSOBase EnemyChaseBaseInstance { get; private set; }
-    public EnemyAttackSOBase EnemyAttackBaseInstance { get; private set; }
-
-    #endregion
+    // #endregion
 
     #region Components
 
@@ -44,40 +26,37 @@ public class Enemy : Entity
 
     public Action OnFlipped;
 
+    [Header("Stunned info")]
+    public float StunDuration;
+    public Vector2 StunDirection;
+    protected bool canBeStunned;
+    [SerializeField] protected GameObject counterImage;
+
+    [Header("Move info")]
+    public float MoveSpeed = 2f;
+    public float IdleTime = 1f;
+    public float BattleTime = 7f;
+    private float DefaultMoveSpeed;
+
+    [Header("Attack info")]
+    public float agroDistance = 2;
+    public float attackDistance = 1.5f;
+
     #region Unity Callback Functions
+
 
     protected override void Awake()
     {
         base.Awake();
 
-        InitializeEnemyInstances();
-        InitializeStateMachine();
+        StateMachine = new EnemyStateMachine();
 
         skeletonAnimation = GetComponentInChildren<SkeletonAnimation>();
 
         if (skeletonAnimation != null)
-            characterAnimation = new SpineAdapter(skeletonAnimation);
+            characterAnimation = new SpineCharacterAnimation(skeletonAnimation);
         else if (Anim != null)
-            characterAnimation = new AnimatorAdapter(Anim);
-    }
-
-    private void InitializeEnemyInstances()
-    {
-        EnemyWanderBaseInstance = Instantiate(_enemyWanderBase);
-        EnemyChaseBaseInstance = Instantiate(_enemyChaseBase);
-        EnemyAttackBaseInstance = Instantiate(_enemyAttackBase);
-    }
-
-    private void InitializeStateMachine()
-    {
-        StateMachine = new EnemyStateMachine();
-
-        IdleState = new EnemyIdleState(this, StateMachine, "idle");
-        WanderState = new EnemyWanderState(this, StateMachine, "move");
-        ChaseState = new EnemyChaseState(this, StateMachine, "move");
-        AttackState = new EnemyAttackState(this, StateMachine, "skill_0");
-        HurtState = new EnemyHurtState(this, StateMachine, "hurt");
-        DieState = new EnemyDieState(this, StateMachine, "die");
+            characterAnimation = new AnimatorCharacterAnimation(Anim);
     }
 
     protected override void Start()
@@ -85,20 +64,12 @@ public class Enemy : Entity
         base.Start();
 
         Stats = GetComponentInChildren<EnemyStats>();
-        InitializeBase();
-    }
-
-    private void InitializeBase()
-    {
-        EnemyWanderBaseInstance.Initialize(gameObject, this);
-        EnemyChaseBaseInstance.Initialize(gameObject, this);
-        EnemyAttackBaseInstance.Initialize(gameObject, this);
-
-        StateMachine.Initialize(IdleState);
     }
 
     protected override void Update()
     {
+        base.Update();
+
         StateMachine.CurrentState.LogicUpdate();
     }
 
@@ -120,13 +91,27 @@ public class Enemy : Entity
         OnFlipped();
     }
 
-    public bool CheckAggroDistance() => Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, _enemyWanderBase.AggroCheckDistance, whatIsCharacter);
 
-    public bool CheckAttackDistance() => Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, _enemyChaseBase.AttackCheckDistance, whatIsCharacter);
 
-    public bool CheckAggroRadius() => Physics2D.OverlapCircle(wallCheck.position, _enemyWanderBase.AggroCheckRadius, whatIsCharacter);
+    public virtual RaycastHit2D IsPlayerDetected()
+    {
+        RaycastHit2D rightDetected = Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, 50, whatIsCharacter);
+        RaycastHit2D leftDetected = Physics2D.Raycast(wallCheck.position, Vector2.left * FacingDirection, 50, whatIsCharacter);
+        RaycastHit2D wallDetected = Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, 50, whatIsGround);
 
-    public bool CheckAttackRadius() => Physics2D.OverlapCircle(wallCheck.position, _enemyChaseBase.AttackCheckRadius, whatIsCharacter);
+        if (leftDetected)
+            return leftDetected;
+
+        if (wallDetected)
+        {
+            if (wallDetected.distance < rightDetected.distance)
+                return default(RaycastHit2D);
+        }
+
+        return rightDetected;
+    }
+
+    public bool CheckAttackDistance() => Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, attackDistance, whatIsCharacter);
 
     #endregion
 
@@ -152,35 +137,31 @@ public class Enemy : Entity
 
     #region Other Functions
 
-    // protected override void OnDrawGizmos()
-    // {
-    //     base.OnDrawGizmos();
-    //     Gizmos.color = Color.yellow;
-    //     // Gizmos.DrawRay(wallCheck.position, Vector2.right * FacingDirection * _enemyIdleBase.AggroCheckDistance);
-    //     Gizmos.DrawWireSphere(wallCheck.position, _enemyIdleBase.AggroCheckRadius);
-    //     Gizmos.color = Color.blue;
-    //     // Gizmos.DrawRay(wallCheck.position, Vector2.right * FacingDirection * _enemyChaseBase.AttackCheckDistance);
-    //     Gizmos.DrawWireSphere(wallCheck.position, _enemyChaseBase.AttackCheckRadius);
-    // }
-
-    public virtual void Reset()
+    public virtual void OpenCounterAttackWindow()
     {
-        StateMachine.Initialize(IdleState);
-        DefaultFacing();
-        Stats.Reset();
-        entityFX.Reset();
+        canBeStunned = true;
+        counterImage.SetActive(true);
     }
 
-    public void EnterHurtState()
+    public virtual void CloseCounterAttackWindow()
     {
-        Vector2 playerPosition = GameManager.Instance.Player.transform.position;
-        float direction = Mathf.Sign(transform.position.x - playerPosition.x);
-        HurtState.SetHitDirection(direction);
+        canBeStunned = false;
+        counterImage.SetActive(false);
+    }
 
-        StateMachine.ChangeState(HurtState);
+    public virtual bool CanBeStunned()
+    {
+        if (canBeStunned)
+        {
+            CloseCounterAttackWindow();
+            return true;
+        }
+        return false;
     }
 
     #endregion
+
+    #region Skeleton Animation
 
     public void PlayAnimation(string animationName, bool loop = false)
     {
@@ -202,4 +183,6 @@ public class Enemy : Entity
     {
         characterAnimation.StopAnimation();
     }
+
+    #endregion
 }

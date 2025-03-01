@@ -1,24 +1,88 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Spine;
+using Spine.Unity;
 
 public class EnemyAnimationTrigger : MonoBehaviour
 {
     [SerializeField] private Enemy enemy;
+    private SkeletonAnimation skeletonAnimation;
 
     private void Start()
     {
         enemy = GetComponentInParent<Enemy>();
+        skeletonAnimation = GetComponent<SkeletonAnimation>();
+
+        if (skeletonAnimation != null)
+        {
+            skeletonAnimation.AnimationState.Event += HandleSpineAnimationEvent;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (skeletonAnimation != null)
+        {
+            skeletonAnimation.AnimationState.Event -= HandleSpineAnimationEvent;
+        }
+    }
+
+    public void AnimationEventTrigger(string eventName)
+    {
+        switch (eventName)
+        {
+            case "AttackTrigger":
+                AttackTrigger();
+                break;
+
+            case "AnimationFinish":
+                AnimationFinishTrigger();
+                break;
+
+            case "OpenCounterWindow":
+                OpenCounterWindow();
+                break;
+
+            case "CloseCounterWindow":
+                CloseCounterWindow();
+                break;
+
+            default:
+                Debug.Log($"[Animator] Unhandled animation event: {eventName}");
+                break;
+        }
+    }
+
+    private void HandleSpineAnimationEvent(TrackEntry trackEntry, Spine.Event e)
+    {
+        switch (e.Data.Name)
+        {
+            case "Attack":
+                AttackTrigger();
+                break;
+
+            case "AnimationFinish":
+                AnimationFinishTrigger();
+                break;
+
+            case "OpenCounterWindow":
+                OpenCounterWindow();
+                break;
+
+            case "CloseCounterWindow":
+                CloseCounterWindow();
+                break;
+
+            default:
+                Debug.Log($"[Spine] Unhandled animation event: {e.Data.Name}");
+                break;
+        }
     }
 
     private void AnimationFinishTrigger()
     {
         enemy.AnimationFinishTrigger();
-    }
-
-    private void AnimationTriggerEvent(Enemy.AnimationTriggerType triggerType)
-    {
-        enemy.AnimationTriggerEvent(triggerType);
     }
 
     private void AttackTrigger()
@@ -32,7 +96,10 @@ public class EnemyAnimationTrigger : MonoBehaviour
             PlayerStats target = hit.GetComponentInChildren<PlayerStats>();
             if (target == null) continue;
 
-            enemy.Stats.PerformAttack(target);
+            enemy.Stats.PerformAttack(target, enemy.transform);
         }
     }
+
+    protected void OpenCounterWindow() => enemy.OpenCounterAttackWindow();
+    protected void CloseCounterWindow() => enemy.CloseCounterAttackWindow();
 }

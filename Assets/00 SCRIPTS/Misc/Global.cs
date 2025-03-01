@@ -16,6 +16,7 @@ public static class Global
         public static string Hurt = "Hurt";
         public static string Die = "Die";
         public static string Heal = "Heal";
+        public static string CounterAttack = "CounterAttack";
         public static string ComboCounter = "ComboCounter";
         public static string xVelocity = "xVelocity";
         public static string yVelocity = "yVelocity";

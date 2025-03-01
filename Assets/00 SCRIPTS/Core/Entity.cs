@@ -8,7 +8,7 @@ public class Entity : MonoBehaviour
     #region Components
     public Animator Anim { get; private set; }
     public Rigidbody2D Rigid { get; private set; }
-    public EntityFX entityFX { get; private set; }
+    public EntityFX EntityFX { get; private set; }
     public float MaxHealth { get; set; }
     public float CurrentHealth { get; set; }
 
@@ -52,7 +52,7 @@ public class Entity : MonoBehaviour
     {
         Anim = GetComponentInChildren<Animator>();
         Rigid = GetComponent<Rigidbody2D>();
-        entityFX = GetComponentInChildren<EntityFX>();
+        EntityFX = GetComponentInChildren<EntityFX>();
         DefaultFacing();
     }
 
@@ -123,10 +123,10 @@ public class Entity : MonoBehaviour
 
     #endregion
 
-    public virtual void DamageEffect()
+    public virtual void DamageEffect(Transform attacker)
     {
-        StartCoroutine(HitKnockback());
-        entityFX.StartCoroutine(entityFX.HitFlashFX());
+        StartCoroutine(HitKnockback(attacker));
+        // EntityFX.StartCoroutine(EntityFX.FlashFX());
     }
 
     #region Other Functions
@@ -138,10 +138,13 @@ public class Entity : MonoBehaviour
         transform.Rotate(0f, 180f, 0f);
     }
 
-    protected virtual IEnumerator HitKnockback()
+    protected virtual IEnumerator HitKnockback(Transform attacker)
     {
         isKnocked = true;
-        Rigid.velocity = new Vector2(knockbackVelocity.x * -FacingDirection, knockbackVelocity.y);
+
+        float knockbackDirection = Mathf.Sign(transform.position.x - attacker.position.x);
+
+        Rigid.velocity = new Vector2(knockbackVelocity.x * knockbackDirection, knockbackVelocity.y);
 
         yield return new WaitForSeconds(knockBackDuration);
         isKnocked = false;
@@ -152,6 +155,7 @@ public class Entity : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawRay(wallCheck.position, Vector3.right * FacingDirection * wallCheckDistance);
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        Gizmos.DrawWireSphere(attackCheck.position, attackCheckRadius);
     }
 
     public virtual bool IsKnocked() => isKnocked;

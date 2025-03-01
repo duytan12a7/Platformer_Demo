@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9630827c5f83be46a4c6cd4d869fcd1, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  MaxHealth: 100
   MovementVelocity: 8
   JumpVelocity: 20
   AmountOfJumps: 2
@@ -23,6 +22,7 @@ MonoBehaviour:
   - {x: 2, y: 3}
   - {x: 2, y: 2}
   - {x: 3, y: 1}
+  CounterAttackDuration: 0.2
   ComboWindow: 2
   AttackDuration: 0.1
   WallSlideVelocity: 0.7
@@ -30,8 +30,3 @@ MonoBehaviour:
   WallJumpVelocityX: 10
   CoyoteTime: 0
   JumpHeightMultiplier: 0.4
-  GroundCheckRadius: 0.08
-  WallCheckDistance: 0.5
-  WhatIsGround:
-    serializedVersion: 2
-    m_Bits: 64
