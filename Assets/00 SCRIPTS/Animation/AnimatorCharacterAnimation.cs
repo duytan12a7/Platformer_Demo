@@ -15,5 +15,5 @@ public class AnimatorCharacterAnimation : ICharacterAnimation
 
     public void SetTrigger(string triggerName) => animator.SetTrigger(triggerName);
 
-    public void StopAnimation() => animator.Play("Idle");
+    public void StopAnimation(string animationName, bool loop) => animator.SetBool(animationName, loop);
 }

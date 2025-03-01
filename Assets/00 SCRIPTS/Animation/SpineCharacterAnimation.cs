@@ -15,5 +15,5 @@ public class SpineCharacterAnimation : ICharacterAnimation
 
     public void SetTrigger(string triggerName) => skeletonAnimation.AnimationState.SetAnimation(0, triggerName, false);
 
-    public void StopAnimation() => skeletonAnimation.AnimationState.ClearTracks();
+    public void StopAnimation(string animationName, bool loop) => skeletonAnimation.AnimationState.ClearTracks();
 }

@@ -2,21 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoblinIdleState : GoblinGroundedState
+public class GoblinIdleState : EnemyIdleState
 {
-    private Goblin enemy;
-    private Transform playerTransform;
 
-    public GoblinIdleState(Enemy enemyBase, EnemyStateMachine stateMachine, string animBoolName, Goblin enemy) : base(enemyBase, stateMachine, animBoolName, enemy)
+    public GoblinIdleState(Enemy enemy, EnemyStateMachine stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
     {
-        this.enemy = enemy;
     }
 
     public override void Enter()
     {
         base.Enter();
-        playerTransform = GameManager.Instance.Player.transform;
-        stateTimer = enemy.IdleTime;
     }
 
     public override void Exit()
@@ -27,7 +22,5 @@ public class GoblinIdleState : GoblinGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (stateTimer < 0)
-            stateMachine.ChangeState(enemy.MoveState);
     }
 }

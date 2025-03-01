@@ -1,28 +1,32 @@
 using System;
 using Spine.Unity;
 using UnityEngine;
-using Spine;
 
 public class Enemy : Entity
 {
-    protected ICharacterAnimation characterAnimation;
-    public SkeletonAnimation skeletonAnimation;
-    // #region State Machine Variables
+    #region State Machine Variables
 
     public EnemyStateMachine StateMachine { get; private set; }
+    public EnemyIdleState IdleState { get; set; }
+    public EnemyMoveState MoveState { get; set; }
+    public EnemyBattleState BattleState { get; set; }
+    public EnemyAttackState AttackState { get; set; }
+    public EnemyStunnedState StunnedState { get; set; }
+    public EnemyDeadState DeadState { get; set; }
 
-    // #endregion
+    #endregion
 
     #region Components
 
+    protected ICharacterAnimation characterAnimation;
+    public SkeletonAnimation skeletonAnimation;
+    public Animator animator;
     public EnemyStats Stats { get; private set; }
 
     #endregion
 
     #region Other Variables
     public AnimationTriggerType CurrentTriggerType { get; private set; }
-
-    #endregion
 
     public Action OnFlipped;
 
@@ -45,8 +49,9 @@ public class Enemy : Entity
 
     public string lastAnimBoolName { get; private set; }
 
-    #region Unity Callback Functions
+    #endregion
 
+    #region Unity Callback Functions
 
     protected override void Awake()
     {
@@ -55,11 +60,12 @@ public class Enemy : Entity
         StateMachine = new EnemyStateMachine();
 
         skeletonAnimation = GetComponentInChildren<SkeletonAnimation>();
+        animator = GetComponentInChildren<Animator>();
 
         if (skeletonAnimation != null)
             characterAnimation = new SpineCharacterAnimation(skeletonAnimation);
-        else if (Anim != null)
-            characterAnimation = new AnimatorCharacterAnimation(Anim);
+        else if (animator != null)
+            characterAnimation = new AnimatorCharacterAnimation(animator);
     }
 
     protected override void Start()
@@ -93,8 +99,6 @@ public class Enemy : Entity
         base.Flip();
         OnFlipped();
     }
-
-
 
     public virtual RaycastHit2D IsPlayerDetected()
     {
@@ -162,10 +166,23 @@ public class Enemy : Entity
         return false;
     }
 
+    public override void Die()
+    {
+        base.Die();
+        StateMachine.ChangeState(DeadState);
+    }
+
     public virtual void AssignLastAnimName(string _animBoolName) => lastAnimBoolName = _animBoolName;
 
     public virtual void Reset()
     {
+        StateMachine.ChangeState(IdleState);
+        DefaultFacing();
+        Stats.Reset();
+        CloseCounterAttackWindow();
+
+        SetSpeedAnimation(1f);
+        BoxCollider.enabled = true;
     }
 
     #endregion
@@ -190,19 +207,11 @@ public class Enemy : Entity
         characterAnimation.SetTrigger(triggerName);
     }
 
-    public virtual void StopAnimation()
+    public virtual void StopAnimation(string animationName, bool loop)
     {
         if (characterAnimation == null) return;
-        characterAnimation.StopAnimation();
+        characterAnimation.StopAnimation(animationName, loop);
     }
 
     #endregion
-
-    protected override void OnDrawGizmos()
-    {
-        base.OnDrawGizmos();
-        Gizmos.color = Color.yellow;
-        Debug.DrawRay(wallCheck.position, Vector2.right * FacingDirection * attackCheckDistance);
-        Debug.DrawRay(wallCheck.position, Vector2.left * FacingDirection * attackCheckDistance);
-    }
 }
