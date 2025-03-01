@@ -12,7 +12,7 @@ public class EnemyStats : CharacterStats
         base.Start();
         enemy = GetComponentInParent<Enemy>();
     }
-    
+
     public override void TakeDamage(int damage, Transform attacker)
     {
         base.TakeDamage(damage, attacker);
@@ -23,6 +23,9 @@ public class EnemyStats : CharacterStats
 
     protected override void Die()
     {
+        base.Die();
+        
+        enemy.Die();
         OnDeath?.Invoke();
     }
 

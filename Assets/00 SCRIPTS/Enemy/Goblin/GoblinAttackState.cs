@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class GoblinAttackState : EnemyState
 {
-    private Goblin _enemy;
+    private Goblin enemy;
 
     public GoblinAttackState(Enemy enemyBase, EnemyStateMachine stateMachine, string animBoolName, Goblin enemy) : base(enemy, stateMachine, animBoolName)
     {
-        _enemy = enemy;
+        this.enemy = enemy;
     }
 
     public override void Enter()
@@ -25,10 +25,10 @@ public class GoblinAttackState : EnemyState
     {
         base.LogicUpdate();
 
-        _enemy.SetZeroVelocity();
+        enemy.SetZeroVelocity();
 
-        if (_enemy.skeletonAnimation != null && _enemy.skeletonAnimation.AnimationState.GetCurrent(0).IsComplete
+        if (enemy.skeletonAnimation != null && enemy.skeletonAnimation.AnimationState.GetCurrent(0).IsComplete
        || isAnimationFinished)
-            stateMachine.ChangeState(_enemy.IdleState);
+            stateMachine.ChangeState(enemy.IdleState);
     }
 }

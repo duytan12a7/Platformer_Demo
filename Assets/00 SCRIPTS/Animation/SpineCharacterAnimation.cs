@@ -9,18 +9,11 @@ public class SpineCharacterAnimation : ICharacterAnimation
         this.skeletonAnimation = skeletonAnimation;
     }
 
-    public void PlayAnimation(string animationName, bool loop)
-    {
-        skeletonAnimation.AnimationState.SetAnimation(0, animationName, loop);
-    }
+    public void PlayAnimation(string animationName, bool loop) => skeletonAnimation.AnimationState.SetAnimation(0, animationName, loop);
 
-    public void SetTrigger(string triggerName)
-    {
-        skeletonAnimation.AnimationState.SetAnimation(0, triggerName, false);
-    }
+    public void SetSpeedAnimation(float speed) => skeletonAnimation.timeScale = speed;
 
-    public void StopAnimation()
-    {
-        skeletonAnimation.AnimationState.ClearTracks();
-    }
+    public void SetTrigger(string triggerName) => skeletonAnimation.AnimationState.SetAnimation(0, triggerName, false);
+
+    public void StopAnimation() => skeletonAnimation.AnimationState.ClearTracks();
 }

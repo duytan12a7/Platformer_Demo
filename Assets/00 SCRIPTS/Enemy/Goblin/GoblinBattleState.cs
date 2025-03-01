@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class GoblinBattleState : EnemyState
 {
-    private readonly Goblin _enemy;
+    private readonly Goblin enemy;
     private Transform playerTransform;
 
     public GoblinBattleState(Enemy enemyBase, EnemyStateMachine stateMachine, string animBoolName, Goblin enemy)
         : base(enemy, stateMachine, animBoolName)
     {
-        _enemy = enemy;
+        this.enemy = enemy;
     }
 
     public override void Enter()
@@ -23,17 +23,17 @@ public class GoblinBattleState : EnemyState
     {
         base.LogicUpdate();
 
-        if (_enemy.IsPlayerDetected())
+        if (enemy.IsPlayerDetected())
         {
-            stateTimer = _enemy.BattleTime;
-            if (_enemy.CheckAttackDistance())
-                _enemy.StateMachine.ChangeState(_enemy.AttackState);
+            stateTimer = enemy.BattleTime;
+            if (enemy.CheckAttackDistance())
+                enemy.StateMachine.ChangeState(enemy.AttackState);
         }
-        else if (stateTimer < 0 || Vector2.Distance(playerTransform.position, _enemy.transform.position) > 7)
-            stateMachine.ChangeState(_enemy.IdleState);
+        else if (stateTimer < 0 || Vector2.Distance(playerTransform.position, enemy.transform.position) > 7)
+            stateMachine.ChangeState(enemy.IdleState);
 
-        float directionX = (playerTransform.position.x - _enemy.transform.position.x) > 0 ? 1 : -1;
-        _enemy.SetVelocityX(directionX * _enemy.MoveSpeed);
-        _enemy.CheckFlip(directionX);
+        float directionX = (playerTransform.position.x - enemy.transform.position.x) > 0 ? 1 : -1;
+        enemy.SetVelocityX(directionX * enemy.MoveSpeed);
+        enemy.CheckFlip(directionX);
     }
 }

@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GoblinMoveState : GoblinGroundedState
 {
-    private Goblin _enemy;
+    private Goblin enemy;
     private Transform playerTransform;
 
     public GoblinMoveState(Enemy enemyBase, EnemyStateMachine stateMachine, string animBoolName, Goblin enemy) : base(enemyBase, stateMachine, animBoolName, enemy)
     {
-        _enemy = enemy;
+        this.enemy = enemy;
     }
 
     public override void Enter()
@@ -28,15 +29,14 @@ public class GoblinMoveState : GoblinGroundedState
         base.LogicUpdate();
 
 
-        _enemy.SetVelocity(_enemy.MoveSpeed * _enemy.FacingDirection, rb.velocity.y);
+        enemy.SetVelocity(enemy.MoveSpeed * enemy.FacingDirection, rb.velocity.y);
 
-        if (_enemy.IsWallDetected() || !_enemy.IsGroundDetected())
+        if (enemy.IsWallDetected() || !enemy.IsGroundDetected())
         {
-            _enemy.Flip();
-            stateMachine.ChangeState(_enemy.IdleState);
+            enemy.Flip();
+            stateMachine.ChangeState(enemy.IdleState);
         }
-
-        if (_enemy.IsPlayerDetected())
-            stateMachine.ChangeState(_enemy.BattleState);
+        else if (enemy.IsPlayerDetected())
+            stateMachine.ChangeState(enemy.BattleState);
     }
 }

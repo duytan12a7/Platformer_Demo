@@ -9,6 +9,7 @@ public class Entity : MonoBehaviour
     public Animator Anim { get; private set; }
     public Rigidbody2D Rigid { get; private set; }
     public EntityFX EntityFX { get; private set; }
+    public BoxCollider2D BoxCollider { get; private set; }
     public float MaxHealth { get; set; }
     public float CurrentHealth { get; set; }
 
@@ -53,6 +54,7 @@ public class Entity : MonoBehaviour
         Anim = GetComponentInChildren<Animator>();
         Rigid = GetComponent<Rigidbody2D>();
         EntityFX = GetComponentInChildren<EntityFX>();
+        BoxCollider = GetComponent<BoxCollider2D>();
         DefaultFacing();
     }
 
@@ -159,6 +161,9 @@ public class Entity : MonoBehaviour
     }
 
     public virtual bool IsKnocked() => isKnocked;
+
+
+    public virtual void Die() { }
 
     #endregion
 }

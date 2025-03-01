@@ -4,30 +4,30 @@ using UnityEngine;
 
 public class GoblinStunnedState : EnemyState
 {
-    private readonly Goblin _enemy;
+    private Goblin enemy;
 
     public GoblinStunnedState(Enemy enemyBase, EnemyStateMachine stateMachine, string animBoolName, Goblin enemy)
         : base(enemy, stateMachine, animBoolName)
     {
-        _enemy = enemy;
+        this.enemy = enemy;
     }
 
     public override void Enter()
     {
         base.Enter();
-        _enemy.PlayAnimation("hurt", false);
-        stateTimer = _enemy.StunDuration;
+        enemy.PlayAnimation("hurt", false);
+        stateTimer = enemy.StunDuration;
 
-        _enemy.EntityFX.InvokeRepeating("RedColorBlink", 0, .1f);
+        enemy.EntityFX.InvokeRepeating("RedColorBlink", 0, .1f);
 
-        rb.velocity = new Vector2(-_enemy.FacingDirection * _enemy.StunDirection.x, _enemy.StunDirection.y);
+        rb.velocity = new Vector2(-enemy.FacingDirection * enemy.StunDirection.x, enemy.StunDirection.y);
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        _enemy.EntityFX.Invoke("CancelColorChange", 0);
+        enemy.EntityFX.Invoke("CancelColorChange", 0);
     }
 
     public override void LogicUpdate()
@@ -35,6 +35,6 @@ public class GoblinStunnedState : EnemyState
         base.LogicUpdate();
 
         if (stateTimer < 0)
-            stateMachine.ChangeState(_enemy.IdleState);
+            stateMachine.ChangeState(enemy.IdleState);
     }
 }

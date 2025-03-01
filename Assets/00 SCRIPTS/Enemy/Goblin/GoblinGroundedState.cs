@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class GoblinGroundedState : EnemyState
 {
-    private Goblin _enemy;
+    private Goblin enemy;
     private Transform playerTransform;
 
     public GoblinGroundedState(Enemy enemyBase, EnemyStateMachine stateMachine, string animBoolName, Goblin enemy) : base(enemy, stateMachine, animBoolName)
     {
-        _enemy = enemy;
+        this.enemy = enemy;
     }
 
     public override void Enter()

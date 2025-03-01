@@ -41,6 +41,9 @@ public class Enemy : Entity
     [Header("Attack info")]
     public float agroDistance = 2;
     public float attackDistance = 1.5f;
+    public float attackCheckDistance = 5f;
+
+    public string lastAnimBoolName { get; private set; }
 
     #region Unity Callback Functions
 
@@ -95,9 +98,9 @@ public class Enemy : Entity
 
     public virtual RaycastHit2D IsPlayerDetected()
     {
-        RaycastHit2D rightDetected = Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, 50, whatIsCharacter);
-        RaycastHit2D leftDetected = Physics2D.Raycast(wallCheck.position, Vector2.left * FacingDirection, 50, whatIsCharacter);
-        RaycastHit2D wallDetected = Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, 50, whatIsGround);
+        RaycastHit2D rightDetected = Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, attackCheckDistance, whatIsCharacter);
+        RaycastHit2D leftDetected = Physics2D.Raycast(wallCheck.position, Vector2.left * FacingDirection, attackCheckDistance, whatIsCharacter);
+        RaycastHit2D wallDetected = Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, attackCheckDistance, whatIsGround);
 
         if (leftDetected)
             return leftDetected;
@@ -159,30 +162,47 @@ public class Enemy : Entity
         return false;
     }
 
+    public virtual void AssignLastAnimName(string _animBoolName) => lastAnimBoolName = _animBoolName;
+
+    public virtual void Reset()
+    {
+    }
+
     #endregion
 
     #region Skeleton Animation
 
-    public void PlayAnimation(string animationName, bool loop = false)
+    public virtual void PlayAnimation(string animationName, bool loop = false)
     {
-        if (characterAnimation == null)
-        {
-            Debug.LogError($"[Enemy] characterAnimation is NULL! Không thể chơi animation {animationName}");
-            return;
-        }
-
+        if (characterAnimation == null) return;
         characterAnimation.PlayAnimation(animationName, loop);
+    }
+
+    public virtual void SetSpeedAnimation(float speed)
+    {
+        if (characterAnimation == null) return;
+        characterAnimation.SetSpeedAnimation(speed);
     }
 
     public virtual void SetTrigger(string triggerName)
     {
+        if (characterAnimation == null) return;
         characterAnimation.SetTrigger(triggerName);
     }
 
     public virtual void StopAnimation()
     {
+        if (characterAnimation == null) return;
         characterAnimation.StopAnimation();
     }
 
     #endregion
+
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+        Gizmos.color = Color.yellow;
+        Debug.DrawRay(wallCheck.position, Vector2.right * FacingDirection * attackCheckDistance);
+        Debug.DrawRay(wallCheck.position, Vector2.left * FacingDirection * attackCheckDistance);
+    }
 }
