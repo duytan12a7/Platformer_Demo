@@ -22,8 +22,8 @@ public class PlayerDashState : PlayerState
     {
         base.LogicUpdate();
 
-        if (!player.IsGroundDetected() && player.IsWallDetected())
-            stateMachine.ChangeState(player.WallSlideState);
+        // if (!player.IsGroundDetected() && player.IsWallDetected())
+        //     stateMachine.ChangeState(player.WallSlideState);
     }
 
     public IEnumerator Dash()

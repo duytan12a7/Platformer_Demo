@@ -17,14 +17,15 @@ public class EnemyStats : CharacterStats
     {
         base.TakeDamage(damage, attacker);
 
-        enemy.DamageEffect(attacker);
+        if (CurrentHealth > 0)
+            enemy.DamageEffect(attacker);
     }
 
 
     protected override void Die()
     {
         base.Die();
-        
+
         enemy.Die();
         OnDeath?.Invoke();
     }

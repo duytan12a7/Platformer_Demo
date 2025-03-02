@@ -16,7 +16,9 @@ public class EnemyStunnedState : EnemyState
         enemy.PlayAnimation("hurt", false);
         stateTimer = enemy.StunDuration;
 
-        enemy.EntityFX.InvokeRepeating("RedColorBlink", 0, .1f);
+        enemy.StartCoroutine(enemy.EntityFX.FlashFX());
+
+        // enemy.EntityFX.InvokeRepeating("RedColorBlink", 0, .1f);
 
         rb.velocity = new Vector2(-enemy.FacingDirection * enemy.StunDirection.x, enemy.StunDirection.y);
     }
@@ -25,7 +27,7 @@ public class EnemyStunnedState : EnemyState
     {
         base.Exit();
 
-        enemy.EntityFX.Invoke("CancelColorChange", 0);
+        // enemy.EntityFX.Invoke("CancelColorChange", 0);
     }
 
     public override void LogicUpdate()

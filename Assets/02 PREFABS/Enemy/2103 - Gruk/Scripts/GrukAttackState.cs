@@ -31,12 +31,6 @@ public class GrukAttackState : EnemyAttackState
         }
     }
 
-    public override void Exit()
-    {
-        base.Exit();
-        enemy.isSkillAttackActive = false;
-    }
-
     public override void LogicUpdate()
     {
         if (attackType == 2 && comboAnimations[currentComboIndex] == "attack_1_1")
