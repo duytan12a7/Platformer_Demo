@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Spine.Unity;
 using UnityEngine;
 
 public class Player : Entity
@@ -8,8 +9,8 @@ public class Player : Entity
     #region StateMachine Variables
 
     public PlayerStateMachine StateMachine { get; private set; }
-    public PlayerIdleState IdleState { get; private set; }
-    public PlayerMoveState MoveState { get; private set; }
+    public PlayerIdleState IdleState { get; set; }
+    public PlayerMoveState MoveState { get; set; }
     public PlayerLandState LandState { get; private set; }
     public PlayerDashState DashState { get; private set; }
     public PlayerJumpState JumpState { get; private set; }
@@ -25,7 +26,11 @@ public class Player : Entity
 
     #region Components
 
-    [SerializeField] private PlayerData playerData;
+    protected ICharacterAnimation characterAnimation;
+    public SkeletonAnimation skeletonAnimation;
+    public Animator animator;
+
+    public PlayerData playerData;
     public PlayerStats Stats { get; private set; }
 
     #endregion
@@ -35,13 +40,20 @@ public class Player : Entity
     protected override void Awake()
     {
         base.Awake();
+        StateMachine = new PlayerStateMachine();
         InitializeStateMachine();
+
+        skeletonAnimation = GetComponentInChildren<SkeletonAnimation>();
+        animator = GetComponentInChildren<Animator>();
+
+        if (skeletonAnimation != null)
+            characterAnimation = new SpineCharacterAnimation(skeletonAnimation);
+        else if (animator != null)
+            characterAnimation = new AnimatorCharacterAnimation(animator);
     }
 
-    private void InitializeStateMachine()
+    protected virtual void InitializeStateMachine()
     {
-        StateMachine = new PlayerStateMachine();
-
         IdleState = new PlayerIdleState(this, StateMachine, playerData, Global.AnimatorParams.Idle);
         MoveState = new PlayerMoveState(this, StateMachine, playerData, Global.AnimatorParams.Move);
         JumpState = new PlayerJumpState(this, StateMachine, playerData, Global.AnimatorParams.InAir);
@@ -124,6 +136,34 @@ public class Player : Entity
         base.Die();
 
         StateMachine.ChangeState(DeadState);
+    }
+
+    #endregion
+
+    #region Skeleton Animation
+
+    public virtual void PlayAnimation(string animationName, bool loop = false)
+    {
+        if (characterAnimation == null) return;
+        characterAnimation.PlayAnimation(animationName, loop);
+    }
+
+    public virtual void SetSpeedAnimation(float speed)
+    {
+        if (characterAnimation == null) return;
+        characterAnimation.SetSpeedAnimation(speed);
+    }
+
+    public virtual void SetTrigger(string triggerName)
+    {
+        if (characterAnimation == null) return;
+        characterAnimation.SetTrigger(triggerName);
+    }
+
+    public virtual void StopAnimation(string animationName, bool loop)
+    {
+        if (characterAnimation == null) return;
+        characterAnimation.StopAnimation(animationName, loop);
     }
 
     #endregion

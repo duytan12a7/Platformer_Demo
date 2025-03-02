@@ -199,10 +199,10 @@ public class Enemy : Entity
 
     #region Skeleton Animation
 
-    public virtual void PlayAnimation(string animationName, bool loop = false)
+    public virtual void PlayAnimation(string animationName, bool isActive = false)
     {
         if (characterAnimation == null) return;
-        characterAnimation.PlayAnimation(animationName, loop);
+        characterAnimation.PlayAnimation(animationName, isActive);
     }
 
     public virtual void SetSpeedAnimation(float speed)
@@ -217,10 +217,10 @@ public class Enemy : Entity
         characterAnimation.SetTrigger(triggerName);
     }
 
-    public virtual void StopAnimation(string animationName, bool loop)
+    public virtual void StopAnimation(string animationName, bool isActive)
     {
         if (characterAnimation == null) return;
-        characterAnimation.StopAnimation(animationName, loop);
+        characterAnimation.StopAnimation(animationName, isActive);
     }
 
     #endregion

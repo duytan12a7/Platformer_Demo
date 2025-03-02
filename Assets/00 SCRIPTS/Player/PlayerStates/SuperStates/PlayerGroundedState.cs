@@ -12,25 +12,25 @@ public class PlayerGroundedState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        player.JumpState.ResetAmountJumpsLeft();
+        // player.JumpState.ResetAmountJumpsLeft();
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
-        if (Input.GetKeyDown(KeyCode.Q))
-            stateMachine.ChangeState(player.CounterAttackState);
+        // if (Input.GetKeyDown(KeyCode.Q))
+        //     stateMachine.ChangeState(player.CounterAttackState);
 
-        if (Input.GetKeyDown(KeyCode.C))
-            stateMachine.ChangeState(player.AttackState);
+        // if (Input.GetKeyDown(KeyCode.C))
+        //     stateMachine.ChangeState(player.AttackState);
 
-        if (Input.GetKeyDown(KeyCode.X) && yInput < 0)
-            player.DownJump();
-        else if (Input.GetKeyDown(KeyCode.X) && player.JumpState.CanJump())
-            stateMachine.ChangeState(player.JumpState);
-        else if (!player.IsGroundDetected())
-            stateMachine.ChangeState(player.InAirState);
+        // if (Input.GetKeyDown(KeyCode.X) && yInput < 0)
+        //     player.DownJump();
+        // else if (Input.GetKeyDown(KeyCode.X) && player.JumpState.CanJump())
+        //     stateMachine.ChangeState(player.JumpState);
+        // else if (!player.IsGroundDetected())
+        //     stateMachine.ChangeState(player.InAirState);
 
     }
 }
