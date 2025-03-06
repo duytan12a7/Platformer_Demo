@@ -26,7 +26,7 @@ public class EnemyDamageSender : MonoBehaviour
         PlayerStats target = collider?.GetComponentInChildren<PlayerStats>();
         if (target == null || attackedEnemies.Contains(target)) return;
 
-        enemy.Stats.PerformAttack(target, transform);
+        enemy.Stats.DoDamage(target, transform);
         attackedEnemies.Add(target);
     }
 

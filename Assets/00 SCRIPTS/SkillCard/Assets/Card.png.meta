@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Card_0
+      name: FireCard
       rect:
         serializedVersion: 2
         x: 1373
@@ -144,7 +144,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Card_1
+      name: PoisonCard
       rect:
         serializedVersion: 2
         x: 916
@@ -165,7 +165,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Card_2
+      name: IceCard
       rect:
         serializedVersion: 2
         x: 916
@@ -186,7 +186,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Card_3
+      name: NormalCard
       rect:
         serializedVersion: 2
         x: 460
@@ -207,7 +207,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Card_4
+      name: LightningCard
       rect:
         serializedVersion: 2
         x: 2
@@ -227,27 +227,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Card_5
-      rect:
-        serializedVersion: 2
-        x: 1830
-        y: 2
-        width: 150
-        height: 150
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f57d17cfebe47d04cbddbae3cf65029f
-      internalID: -636896563
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -259,12 +238,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Card_0: 613663506
-      Card_1: 2048582817
-      Card_2: 2032405899
-      Card_3: -275740900
-      Card_4: 787864694
       Card_5: -636896563
+      FireCard: 613663506
+      IceCard: 2032405899
+      LightningCard: 787864694
+      NormalCard: -275740900
+      PoisonCard: 2048582817
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

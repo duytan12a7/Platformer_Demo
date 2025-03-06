@@ -14,7 +14,7 @@ public class ChangeSceneTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            SceneManager sceneLoader = FindObjectOfType<SceneManager>();
+            SceneManage sceneLoader = FindObjectOfType<SceneManage>();
             if (sceneLoader != null)
             {
                 sceneLoader.LoadSceneWithFade(nextScenePrefab);

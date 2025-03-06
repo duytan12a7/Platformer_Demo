@@ -13,7 +13,7 @@ public class PlayerMoveState : PlayerGroundedState
         base.LogicUpdate();
 
         player.CheckFlip(xInput);
-        player.SetVelocity(xInput * playerData.MovementVelocity, rb.velocity.y);
+        player.SetVelocity(xInput * player.MoveSpeed, rb.velocity.y);
 
         if (xInput == 0)
             stateMachine.ChangeState(player.IdleState);

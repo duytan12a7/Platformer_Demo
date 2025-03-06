@@ -8,7 +8,6 @@ public class SkillManager : MonoBehaviour
     public static SkillManager Instance => instance;
 
     public List<SkillCard> availableSkills = new();
-    public List<SkillCard> chosenSkills = new();
 
     [SerializeField] private PlayerStats playerStats;
 
@@ -26,11 +25,25 @@ public class SkillManager : MonoBehaviour
         ApplySkillEffects(skill);
         availableSkills.Remove(skill);
     }
-
     public List<SkillCard> GetRandomSkills(int count)
     {
         List<SkillCard> randomSkills = new();
         List<SkillCard> copyList = new List<SkillCard>(availableSkills);
+
+        bool hasFireStrike = playerStats.HasFireStrike;
+        bool hasIceStrike = playerStats.HasIceStrike;
+        // bool hasPoisonStrike = playerStats.HasPoisonStrike;
+        bool hasElectricStrike = playerStats.HasElectricStrike;
+
+        if (hasFireStrike || hasIceStrike || hasElectricStrike)
+        {
+            copyList.RemoveAll(skill =>
+                skill.effectType == SkillEffect.FireStrike ||
+                skill.effectType == SkillEffect.IceStrike ||
+                // skill.effectType == SkillEffect.PoisonStrike ||
+                skill.effectType == SkillEffect.ElectricStrike
+                );
+        }
 
         for (int i = 0; i < count; i++)
         {
@@ -42,6 +55,7 @@ public class SkillManager : MonoBehaviour
         }
         return randomSkills;
     }
+
 
     public void ApplySkillEffects(SkillCard skill)
     {
@@ -61,12 +75,18 @@ public class SkillManager : MonoBehaviour
             case SkillEffect.CriticalBoost:
                 playerStats.AddModifyCriticalChance((int)skill.effectValue);
                 break;
+            case SkillEffect.FireStrike:
+                playerStats.HasFireStrike = true;
+                break;
+            case SkillEffect.IceStrike:
+                playerStats.HasIceStrike = true;
+                break;
             case SkillEffect.ElectricStrike:
-                // Tăng sát thương sét
+                playerStats.HasElectricStrike = true;
                 break;
-            case SkillEffect.Shield:
-                // Cung cấp lá chắn bảo vệ
-                break;
+            // case SkillEffect.PoisonStrike:
+            //     playerStats.HasPoisonStrike = true;
+            //     break;
         }
     }
 

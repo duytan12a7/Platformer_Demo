@@ -15,6 +15,7 @@ public class EnemyStunnedState : EnemyState
         base.Enter();
         enemy.PlayAnimation("hurt", false);
         stateTimer = enemy.StunDuration;
+        enemy.CloseCounterAttackWindow();
 
         enemy.StartCoroutine(enemy.EntityFX.FlashFX());
 

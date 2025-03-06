@@ -17,10 +17,6 @@ public class Enemy : Entity
     #endregion
 
     #region Components
-
-    protected ICharacterAnimation characterAnimation;
-    public SkeletonAnimation skeletonAnimation;
-    public Animator animator;
     public EnemyStats Stats { get; private set; }
 
     #endregion
@@ -34,28 +30,29 @@ public class Enemy : Entity
     public float StunDuration;
     public Vector2 StunDirection;
     protected bool canBeStunned;
-    public bool isStunned;
+    public bool IsStunned;
     [SerializeField] protected GameObject counterImage;
 
     [Header("Move info")]
     public float MoveSpeed = 2f;
     public float IdleTime = 1f;
     public float BattleTime = 7f;
-    private float DefaultMoveSpeed;
+    private float defaultMoveSpeed;
 
     [Header("Attack info")]
-    public float agroDistance = 2;
-    public float attackDistance = 1.5f;
-    public float attackCheckDistance = 5f;
+    public float AgroDistance = 2;
+    public float AttackDistance = 1.5f;
+    public float AttackCheckDistance = 5f;
 
     [Header(" Dash info")]
-    public float dashSpeed = 20f;
-    public float dashDuration = 5f;
+    public float DashSpeed = 20f;
+    public float DashDuration = 5f;
+    private float defaultDashSpeed;
 
     [Header(" Skill info")]
-    public bool isSkillAttackActive = true;
+    public bool IsSkillAttackActive = true;
 
-    public string lastAnimBoolName { get; private set; }
+    public string LastAnimBoolName { get; private set; }
 
     #endregion
 
@@ -66,14 +63,6 @@ public class Enemy : Entity
         base.Awake();
 
         StateMachine = new EnemyStateMachine();
-
-        skeletonAnimation = GetComponentInChildren<SkeletonAnimation>();
-        animator = GetComponentInChildren<Animator>();
-
-        if (skeletonAnimation != null)
-            characterAnimation = new SpineCharacterAnimation(skeletonAnimation);
-        else if (animator != null)
-            characterAnimation = new AnimatorCharacterAnimation(animator);
     }
 
     protected override void Start()
@@ -81,6 +70,8 @@ public class Enemy : Entity
         base.Start();
 
         Stats = GetComponentInChildren<EnemyStats>();
+        defaultMoveSpeed = MoveSpeed;
+        defaultDashSpeed = DashSpeed;
     }
 
     protected override void Update()
@@ -110,9 +101,9 @@ public class Enemy : Entity
 
     public virtual RaycastHit2D IsPlayerDetected()
     {
-        RaycastHit2D rightDetected = Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, attackCheckDistance, whatIsCharacter);
-        RaycastHit2D leftDetected = Physics2D.Raycast(wallCheck.position, Vector2.left * FacingDirection, attackCheckDistance, whatIsCharacter);
-        RaycastHit2D wallDetected = Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, attackCheckDistance, whatIsGround);
+        RaycastHit2D rightDetected = Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, AttackCheckDistance, whatIsCharacter);
+        RaycastHit2D leftDetected = Physics2D.Raycast(wallCheck.position, Vector2.left * FacingDirection, AttackCheckDistance, whatIsCharacter);
+        RaycastHit2D wallDetected = Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, AttackCheckDistance, whatIsGround);
 
         if (leftDetected)
             return leftDetected;
@@ -126,7 +117,7 @@ public class Enemy : Entity
         return rightDetected;
     }
 
-    public bool CheckAttackDistance() => Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, attackDistance, whatIsCharacter);
+    public bool CheckAttackDistance() => Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, AttackDistance, whatIsCharacter);
 
     #endregion
 
@@ -167,12 +158,12 @@ public class Enemy : Entity
     public override void DamageEffect(Transform attacker)
     {
         base.DamageEffect(attacker);
-        if (isStunned)
+        if (IsStunned)
             StateMachine.ChangeState(StunnedState);
     }
 
-    public virtual void OpenSkillAttack() => isSkillAttackActive = true;
-    public virtual void CloseSkillAttack() => isSkillAttackActive = false;
+    public virtual void OpenSkillAttack() => IsSkillAttackActive = true;
+    public virtual void CloseSkillAttack() => IsSkillAttackActive = false;
 
     public virtual bool CanBeStunned()
     {
@@ -190,7 +181,23 @@ public class Enemy : Entity
         StateMachine.ChangeState(DeadState);
     }
 
-    public virtual void AssignLastAnimName(string _animBoolName) => lastAnimBoolName = _animBoolName;
+    public virtual void AssignLastAnimName(string _animBoolName) => LastAnimBoolName = _animBoolName;
+
+    public override void SlowEntityBy(float slowPercentage, float slowDuration)
+    {
+        MoveSpeed *= (1 - slowPercentage);
+        DashSpeed *= (1- slowPercentage);
+        SetSpeedAnimation(1 - slowPercentage);
+
+        Invoke(nameof(ReturnDefaultSpeed), slowDuration);
+    }
+
+    protected override void ReturnDefaultSpeed()
+    {
+        base.ReturnDefaultSpeed();
+        MoveSpeed = defaultMoveSpeed;
+        DashSpeed = defaultDashSpeed;
+    }
 
     public virtual void Reset()
     {
@@ -205,38 +212,10 @@ public class Enemy : Entity
 
     #endregion
 
-    #region Skeleton Animation
-
-    public virtual void PlayAnimation(string animationName, bool isActive = false)
-    {
-        if (characterAnimation == null) return;
-        characterAnimation.PlayAnimation(animationName, isActive);
-    }
-
-    public virtual void SetSpeedAnimation(float speed)
-    {
-        if (characterAnimation == null) return;
-        characterAnimation.SetSpeedAnimation(speed);
-    }
-
-    public virtual void SetTrigger(string triggerName)
-    {
-        if (characterAnimation == null) return;
-        characterAnimation.SetTrigger(triggerName);
-    }
-
-    public virtual void StopAnimation(string animationName, bool isActive)
-    {
-        if (characterAnimation == null) return;
-        characterAnimation.StopAnimation(animationName, isActive);
-    }
-
     protected override void OnDrawGizmos()
     {
         // base.OnDrawGizmos();
-        Gizmos.DrawRay(wallCheck.position, Vector2.right * FacingDirection * attackCheckDistance);
-        Gizmos.DrawRay(wallCheck.position, Vector2.left * FacingDirection * attackCheckDistance);
+        Gizmos.DrawRay(wallCheck.position, Vector2.right * FacingDirection * AttackCheckDistance);
+        Gizmos.DrawRay(wallCheck.position, Vector2.left * FacingDirection * AttackCheckDistance);
     }
-
-    #endregion
 }

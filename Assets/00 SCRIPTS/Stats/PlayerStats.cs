@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class PlayerStats : CharacterStats
 
     [SerializeField] private SkillSelectionUI skillSelectionUI;
 
+    public event Action OnDeath;
 
     public List<SkillCard> OwnedSkills = new();
 
@@ -34,12 +36,14 @@ public class PlayerStats : CharacterStats
     protected override void Die()
     {
         base.Die();
-        
+
         player.Die();
+        OnDeath?.Invoke();
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         if (Input.GetKeyDown(KeyCode.L))
             LevelUp();
     }

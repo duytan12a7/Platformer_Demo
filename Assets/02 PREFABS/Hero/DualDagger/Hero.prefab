@@ -5073,6 +5073,7 @@ GameObject:
   - component: {fileID: 8468288364746265153}
   - component: {fileID: 7630035306388229782}
   - component: {fileID: 2492012563058913904}
+  - component: {fileID: 6470858990618161747}
   m_Layer: 9
   m_Name: Attack_3
   m_TagString: Untagged
@@ -5160,6 +5161,27 @@ PolygonCollider2D:
       - {x: 0.9996, y: 1.0001}
       - {x: -0.0002, y: 1.0001}
   m_UseDelaunayMesh: 0
+--- !u!114 &6470858990618161747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1962968707435154497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1fd8daaed7b64148a34acb96ba14ce1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skeletonRenderer: {fileID: 1560746949776312663}
+  boneName: hitbox_dagger_attack_3
+  followXYPosition: 1
+  followZPosition: 1
+  followBoneRotation: 1
+  followSkeletonFlip: 1
+  followLocalScale: 0
+  maintainedAxisOrientation: 1
+  initializeOnAwake: 1
 --- !u!1 &2078369094461369747
 GameObject:
   m_ObjectHideFlags: 0
@@ -10544,6 +10566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f3c91728b04f4748a4635752c016923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skeletonAnimation: {fileID: 0}
   CurrentVelocity: {x: 0, y: 0}
   FacingDirection: 0
   knockbackVelocity: {x: 7, y: 5}
@@ -10560,8 +10583,9 @@ MonoBehaviour:
   whatIsCharacter:
     serializedVersion: 2
     m_Bits: 128
-  skeletonAnimation: {fileID: 0}
-  animator: {fileID: 0}
+  MoveSpeed: 8
+  JumpForce: 20
+  DashSpeed: 20
   playerData: {fileID: 11400000, guid: 64ae970fa63229b48a4a6cea75ae6e98, type: 2}
 --- !u!114 &2342740983596031881
 MonoBehaviour:
@@ -10577,6 +10601,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashDuration: 0
   hitMaterial: {fileID: 2100000, guid: 81f2cdd8580602f4eb7bb737911fde9c, type: 2}
+  igniteColor:
+  - {r: 1, g: 0.27058825, b: 0.27058825, a: 1}
+  - {r: 0.95294124, g: 0.75294125, b: 0.75294125, a: 1}
+  chillColor:
+  - {r: 0.5803922, g: 0.6666667, b: 1, a: 1}
+  - {r: 0.73018867, g: 0.7856639, b: 1, a: 1}
+  shockColor:
+  - {r: 1, g: 0.89019614, b: 0.38823533, a: 1}
+  - {r: 1, g: 0.9294118, b: 0.6156863, a: 1}
 --- !u!1 &5106933894767395871
 GameObject:
   m_ObjectHideFlags: 0
@@ -20592,6 +20625,9 @@ MonoBehaviour:
   Vitality:
     baseValue: 0
     modifiers: 
+  Intelligence:
+    baseValue: 1
+    modifiers: 
   PhysicalDamage:
     baseValue: 20
     modifiers: 
@@ -20607,9 +20643,26 @@ MonoBehaviour:
   Armor:
     baseValue: 0
     modifiers: 
+  MagicResistance:
+    baseValue: 5
+    modifiers: 
   Evasion:
     baseValue: 0
     modifiers: 
+  FireDamage:
+    baseValue: 0
+    modifiers: 
+  IceDamage:
+    baseValue: 0
+    modifiers: 
+  LightningDamage:
+    baseValue: 0
+    modifiers: 
+  IsIgnited: 0
+  IsChilled: 0
+  IsShocked: 0
+  ailmentsDuration: 4
+  shockStrikePrefab: {fileID: 0}
   CurrentHealth: 0
   CurrentMovementSpeed: 0
   skillManager: {fileID: 0}

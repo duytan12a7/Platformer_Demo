@@ -18,17 +18,22 @@ public class Player : Entity
     public PlayerWallSlideState WallSlideState { get; private set; }
     public PlayerWallJumpState WallJumpState { get; private set; }
     public PlayerAttackState AttackState { get; set; }
-    public PlayerDieState DeadState { get; set; }
+    public PlayerDeadState DeadState { get; set; }
     public PlayerHealState HealState { get; private set; }
     public PlayerCounterAttackState CounterAttackState { get; private set; }
 
     #endregion
 
-    #region Components
+    [Header(" Move info ")]
+    public float MoveSpeed = 12f;
+    public float JumpForce;
+    private float defaultMoveSpeed;
+    private float defaultJumpForce;
+    [Header(" Dash info ")]
+    public float DashSpeed;
+    private float defaultDashSpeed;
 
-    protected ICharacterAnimation characterAnimation;
-    public SkeletonAnimation skeletonAnimation;
-    public Animator animator;
+    #region Components
 
     public PlayerData playerData;
     public PlayerStats Stats { get; private set; }
@@ -40,15 +45,6 @@ public class Player : Entity
     protected override void Awake()
     {
         base.Awake();
-
-        skeletonAnimation = GetComponentInChildren<SkeletonAnimation>();
-        animator = GetComponentInChildren<Animator>();
-
-        if (skeletonAnimation != null)
-            characterAnimation = new SpineCharacterAnimation(skeletonAnimation);
-        else if (animator != null)
-            characterAnimation = new AnimatorCharacterAnimation(animator);
-            
         StateMachine = new PlayerStateMachine();
         InitializeStateMachine();
     }
@@ -64,7 +60,7 @@ public class Player : Entity
         WallSlideState = new PlayerWallSlideState(this, StateMachine, playerData, Global.AnimatorParams.WallSlide);
         WallJumpState = new PlayerWallJumpState(this, StateMachine, playerData, Global.AnimatorParams.InAir);
         AttackState = new PlayerAttackState(this, StateMachine, playerData, Global.AnimatorParams.Attack);
-        DeadState = new PlayerDieState(this, StateMachine, playerData, Global.AnimatorParams.Die);
+        DeadState = new PlayerDeadState(this, StateMachine, playerData, Global.AnimatorParams.Die);
         HealState = new PlayerHealState(this, StateMachine, playerData, Global.AnimatorParams.Heal);
         CounterAttackState = new PlayerCounterAttackState(this, StateMachine, playerData, Global.AnimatorParams.CounterAttack);
     }
@@ -76,12 +72,10 @@ public class Player : Entity
 
         Stats = GetComponentInChildren<PlayerStats>();
         StateMachine.Initialize(IdleState);
-        UpdateCurrentStats();
-    }
 
-    private void UpdateCurrentStats()
-    {
-        Stats.UpdateMovementSpeed(playerData.MovementVelocity);
+        defaultMoveSpeed = MoveSpeed;
+        defaultJumpForce = JumpForce;
+        defaultDashSpeed = DashSpeed;
     }
 
     protected override void Update()
@@ -130,41 +124,29 @@ public class Player : Entity
     private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
     public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
 
+    public override void SlowEntityBy(float slowPercentage, float slowDuration)
+    {
+        MoveSpeed *= (1 - slowPercentage);
+        JumpForce *= (1 - slowPercentage);
+        DashSpeed *= (1 - slowPercentage);
+        SetSpeedAnimation(1 - slowPercentage);
 
+        Invoke(nameof(ReturnDefaultSpeed), slowDuration);
+    }
+
+    protected override void ReturnDefaultSpeed()
+    {
+        base.ReturnDefaultSpeed();
+        MoveSpeed = defaultMoveSpeed;
+        JumpForce = defaultJumpForce;
+        DashSpeed = defaultDashSpeed;
+    }
 
     public override void Die()
     {
         base.Die();
 
         StateMachine.ChangeState(DeadState);
-    }
-
-    #endregion
-
-    #region Skeleton Animation
-
-    public virtual void PlayAnimation(string animationName, bool loop = false)
-    {
-        if (characterAnimation == null) return;
-        characterAnimation.PlayAnimation(animationName, loop);
-    }
-
-    public virtual void SetSpeedAnimation(float speed)
-    {
-        if (characterAnimation == null) return;
-        characterAnimation.SetSpeedAnimation(speed);
-    }
-
-    public virtual void SetTrigger(string triggerName)
-    {
-        if (characterAnimation == null) return;
-        characterAnimation.SetTrigger(triggerName);
-    }
-
-    public virtual void StopAnimation(string animationName, bool loop)
-    {
-        if (characterAnimation == null) return;
-        characterAnimation.StopAnimation(animationName, loop);
     }
 
     #endregion

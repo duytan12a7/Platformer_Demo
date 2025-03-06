@@ -20,7 +20,7 @@ public class SkillSelectionUI : MonoBehaviour
             if (i < skills.Count)
             {
                 skillButtons[i].gameObject.SetActive(true);
-                skillCards[i].SetCardInfo(skills[i].skillName, skills[i].description);
+                skillCards[i].SetCardInfo(skills[i].skillName, skills[i].description, skills[i].skillIcon, skills[i].skillType.ToString());
 
                 int index = i;
                 skillButtons[i].onClick.RemoveAllListeners();

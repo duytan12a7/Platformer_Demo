@@ -2,7 +2,7 @@ using UnityEngine;
 using Cinemachine;
 using System.Collections;
 
-public class SceneManager : MonoBehaviour
+public class SceneManage : MonoBehaviour
 {
     public CinemachineConfiner2D cinemachineConfiner;
     public CanvasGroup fadeCanvas;
