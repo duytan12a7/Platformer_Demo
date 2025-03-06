@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBattleState : EnemyState
+public class GrukBattleState : EnemyBattleState
 {
-    protected Transform playerTransform;
+    private int lastAttackType = 2;
 
-    public EnemyBattleState(Enemy enemy, EnemyStateMachine stateMachine, string animBoolName)
+    public GrukBattleState(Enemy enemy, EnemyStateMachine stateMachine, string animBoolName)
         : base(enemy, stateMachine, animBoolName)
     {
     }
@@ -14,7 +14,6 @@ public class EnemyBattleState : EnemyState
     public override void Enter()
     {
         base.Enter();
-        playerTransform = GameManager.Instance.Player.transform;
     }
 
     public override void LogicUpdate()
@@ -25,10 +24,16 @@ public class EnemyBattleState : EnemyState
         {
             stateTimer = enemy.BattleTime;
             if (enemy.CheckAttackDistance())
-                enemy.StateMachine.ChangeState(enemy.AttackState);
+            {
+                // enemy.StateMachine.ChangeState(enemy.AttackState);
+                enemy.StateMachine.ChangeState(new GrukAttackState(enemy, enemy.StateMachine, "idle", lastAttackType));
+                lastAttackType = (lastAttackType == 1) ? 2 : 1;
+            }
         }
         else if (stateTimer < 0 || Vector2.Distance(playerTransform.position, enemy.transform.position) > 7)
+        {
             stateMachine.ChangeState(enemy.IdleState);
+        }
 
         float directionX = (playerTransform.position.x - enemy.transform.position.x) > 0 ? 1 : -1;
         enemy.SetVelocityX(directionX * enemy.MoveSpeed);
