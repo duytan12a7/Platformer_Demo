@@ -128,7 +128,6 @@ public class Entity : MonoBehaviour
     public virtual void DamageEffect(Transform attacker)
     {
         StartCoroutine(HitKnockback(attacker));
-        // EntityFX.StartCoroutine(EntityFX.FlashFX());
     }
 
     #region Other Functions

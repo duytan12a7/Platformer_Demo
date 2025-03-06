@@ -34,6 +34,7 @@ public class Enemy : Entity
     public float StunDuration;
     public Vector2 StunDirection;
     protected bool canBeStunned;
+    public bool isStunned;
     [SerializeField] protected GameObject counterImage;
 
     [Header("Move info")]
@@ -163,6 +164,13 @@ public class Enemy : Entity
         counterImage.SetActive(false);
     }
 
+    public override void DamageEffect(Transform attacker)
+    {
+        base.DamageEffect(attacker);
+        if (isStunned)
+            StateMachine.ChangeState(StunnedState);
+    }
+
     public virtual void OpenSkillAttack() => isSkillAttackActive = true;
     public virtual void CloseSkillAttack() => isSkillAttackActive = false;
 
@@ -199,10 +207,10 @@ public class Enemy : Entity
 
     #region Skeleton Animation
 
-    public virtual void PlayAnimation(string animationName, bool loop = false)
+    public virtual void PlayAnimation(string animationName, bool isActive = false)
     {
         if (characterAnimation == null) return;
-        characterAnimation.PlayAnimation(animationName, loop);
+        characterAnimation.PlayAnimation(animationName, isActive);
     }
 
     public virtual void SetSpeedAnimation(float speed)
@@ -217,10 +225,17 @@ public class Enemy : Entity
         characterAnimation.SetTrigger(triggerName);
     }
 
-    public virtual void StopAnimation(string animationName, bool loop)
+    public virtual void StopAnimation(string animationName, bool isActive)
     {
         if (characterAnimation == null) return;
-        characterAnimation.StopAnimation(animationName, loop);
+        characterAnimation.StopAnimation(animationName, isActive);
+    }
+
+    protected override void OnDrawGizmos()
+    {
+        // base.OnDrawGizmos();
+        Gizmos.DrawRay(wallCheck.position, Vector2.right * FacingDirection * attackCheckDistance);
+        Gizmos.DrawRay(wallCheck.position, Vector2.left * FacingDirection * attackCheckDistance);
     }
 
     #endregion

@@ -17,6 +17,7 @@ public class EnemyAttackState : EnemyState
     public override void Exit()
     {
         base.Exit();
+        enemy.GetComponentInChildren<EnemyDamageSender>().ClearAttackedEnemies();
     }
 
     public override void LogicUpdate()

@@ -19,11 +19,12 @@ MonoBehaviour:
   DashDuration: 0.3
   DashCoolDown: 1
   AttackMovement:
-  - {x: 2, y: 3}
-  - {x: 2, y: 2}
-  - {x: 3, y: 1}
+  - {x: 3, y: 0}
+  - {x: 0.5, y: 0}
+  - {x: 0.5, y: 0}
+  - {x: 0.5, y: 0}
   CounterAttackDuration: 0.2
-  ComboWindow: 2
+  ComboWindow: 3
   AttackDuration: 0.1
   WallSlideVelocity: 0.7
   WallJumpDuration: 0.5

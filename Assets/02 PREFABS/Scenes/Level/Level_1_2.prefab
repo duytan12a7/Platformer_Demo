@@ -409,10 +409,10 @@ MonoBehaviour:
       spawnPoint: {fileID: 8254753112490262456}
       delay: 0
   - enemies:
-    - enemyPrefab: {fileID: 2106460836267844155, guid: 34a1dc6429c608b4f8cdfe733cddc1f9, type: 3}
+    - enemyPrefab: {fileID: 1343947209359925535, guid: 313e50cc9a15c744a8cdb2196c0713f7, type: 3}
       spawnPoint: {fileID: 8714988526209947450}
       delay: 0
-    - enemyPrefab: {fileID: 2106460836267844155, guid: 34a1dc6429c608b4f8cdfe733cddc1f9, type: 3}
+    - enemyPrefab: {fileID: 1343947209359925535, guid: 313e50cc9a15c744a8cdb2196c0713f7, type: 3}
       spawnPoint: {fileID: 8254753112490262456}
       delay: 0
   timeBetweenWaves: 1
