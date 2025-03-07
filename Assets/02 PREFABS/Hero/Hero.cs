@@ -20,7 +20,7 @@ public class Hero : Player
         LandState = new PlayerLandState(this, StateMachine, playerData, Global.AnimatorParams.Land);
         DashState = new PlayerDashState(this, StateMachine, playerData, Global.AnimatorParams.Dash);
         AttackState = new PlayerAttackState(this, StateMachine, playerData, Global.AnimatorParams.Attack);
-        DeadState = new PlayerDieState(this, StateMachine, playerData, Global.AnimatorParams.Die);
+        DeadState = new PlayerDeadState(this, StateMachine, playerData, Global.AnimatorParams.Die);
     }
 
     protected override void Start()

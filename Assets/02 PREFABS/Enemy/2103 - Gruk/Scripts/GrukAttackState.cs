@@ -43,12 +43,12 @@ public class GrukAttackState : EnemyAttackState
     private void HandleDash()
     {
         if (dashTimer <= 0)
-            dashTimer = enemy.dashDuration;
+            dashTimer = enemy.DashDuration;
 
         if (dashTimer > 0)
         {
             dashTimer -= Time.deltaTime;
-            enemy.SetVelocityX(enemy.FacingDirection * enemy.dashSpeed);
+            enemy.SetVelocityX(enemy.FacingDirection * enemy.DashSpeed);
         }
         else
             enemy.SetZeroVelocity();

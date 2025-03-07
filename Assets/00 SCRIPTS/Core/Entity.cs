@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Spine.Unity;
 using UnityEditor.Callbacks;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
     #region Components
+
+    protected ICharacterAnimation characterAnimation;
+    public SkeletonAnimation skeletonAnimation;
     public Animator Anim { get; private set; }
     public Rigidbody2D Rigid { get; private set; }
     public EntityFX EntityFX { get; private set; }
@@ -46,12 +50,17 @@ public class Entity : MonoBehaviour
 
     protected virtual void Awake()
     {
+        skeletonAnimation = GetComponentInChildren<SkeletonAnimation>();
+        Anim = GetComponentInChildren<Animator>();
 
+        if (skeletonAnimation != null)
+            characterAnimation = new SpineCharacterAnimation(skeletonAnimation);
+        else if (Anim != null)
+            characterAnimation = new AnimatorCharacterAnimation(Anim);
     }
 
     protected virtual void Start()
     {
-        Anim = GetComponentInChildren<Animator>();
         Rigid = GetComponent<Rigidbody2D>();
         EntityFX = GetComponentInChildren<EntityFX>();
         BoxCollider = GetComponent<BoxCollider2D>();
@@ -151,6 +160,16 @@ public class Entity : MonoBehaviour
         isKnocked = false;
     }
 
+    public virtual void SlowEntityBy(float slowPercentage, float slowDuration)
+    {
+
+    }
+
+    protected virtual void ReturnDefaultSpeed()
+    {
+        SetSpeedAnimation(1f);
+    }
+
     protected virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -163,6 +182,34 @@ public class Entity : MonoBehaviour
 
 
     public virtual void Die() { }
+
+    #endregion
+
+    #region Skeleton Animation
+
+    public virtual void PlayAnimation(string animationName, bool isActive = false)
+    {
+        if (characterAnimation == null) return;
+        characterAnimation.PlayAnimation(animationName, isActive);
+    }
+
+    public virtual void SetSpeedAnimation(float speed)
+    {
+        if (characterAnimation == null) return;
+        characterAnimation.SetSpeedAnimation(speed);
+    }
+
+    public virtual void SetTrigger(string triggerName)
+    {
+        if (characterAnimation == null) return;
+        characterAnimation.SetTrigger(triggerName);
+    }
+
+    public virtual void StopAnimation(string animationName, bool isActive)
+    {
+        if (characterAnimation == null) return;
+        characterAnimation.StopAnimation(animationName, isActive);
+    }
 
     #endregion
 }

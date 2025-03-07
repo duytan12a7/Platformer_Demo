@@ -15,7 +15,7 @@ public class SkillCard
 
 public enum SkillType
 {
-    Attack, Defense, Support
+    Fire, Ice, Poison, Lightning, Normal
 }
 
 public enum SkillEffect
@@ -26,4 +26,6 @@ public enum SkillEffect
     CriticalBoost,   // Tăng chí mạng
     ElectricStrike,  // Kiếm Sấm Sét
     Shield,          // Nhận lá chắn
+    FireStrike,
+    IceStrike
 }

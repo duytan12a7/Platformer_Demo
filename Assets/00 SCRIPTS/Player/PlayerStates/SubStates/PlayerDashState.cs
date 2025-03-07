@@ -34,7 +34,7 @@ public class PlayerDashState : PlayerState
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0;
 
-        player.SetVelocityX(playerData.DashSpeed * player.FacingDirection);
+        player.SetVelocityX(player.DashSpeed * player.FacingDirection);
 
         yield return new WaitForSeconds(playerData.DashDuration);
         rb.gravityScale = originalGravity;

@@ -12,7 +12,7 @@ public class EnemyDeadState : EnemyState
     public override void Enter()
     {
         base.Enter();
-        enemy.PlayAnimation(enemy.lastAnimBoolName, true);
+        enemy.PlayAnimation(enemy.LastAnimBoolName, true);
         enemy.SetSpeedAnimation(0f);
         enemy.BoxCollider.enabled = false;
 
