@@ -186,7 +186,7 @@ public class Enemy : Entity
     public override void SlowEntityBy(float slowPercentage, float slowDuration)
     {
         MoveSpeed *= (1 - slowPercentage);
-        DashSpeed *= (1- slowPercentage);
+        DashSpeed *= (1 - slowPercentage);
         SetSpeedAnimation(1 - slowPercentage);
 
         Invoke(nameof(ReturnDefaultSpeed), slowDuration);
@@ -215,7 +215,10 @@ public class Enemy : Entity
     protected override void OnDrawGizmos()
     {
         // base.OnDrawGizmos();
+        Gizmos.color = Color.red;
         Gizmos.DrawRay(wallCheck.position, Vector2.right * FacingDirection * AttackCheckDistance);
         Gizmos.DrawRay(wallCheck.position, Vector2.left * FacingDirection * AttackCheckDistance);
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(wallCheck.position, Vector2.right * FacingDirection * AttackDistance);
     }
 }

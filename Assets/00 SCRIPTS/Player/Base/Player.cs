@@ -38,6 +38,8 @@ public class Player : Entity
     public PlayerData playerData;
     public PlayerStats Stats { get; private set; }
 
+    public Action OnFlipped;
+
     #endregion
 
     #region Unity Callback Functions
@@ -140,6 +142,12 @@ public class Player : Entity
         MoveSpeed = defaultMoveSpeed;
         JumpForce = defaultJumpForce;
         DashSpeed = defaultDashSpeed;
+    }
+
+    public override void Flip()
+    {
+        base.Flip();
+        OnFlipped();
     }
 
     public override void Die()

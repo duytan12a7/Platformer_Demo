@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,6 +10,8 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] private Slider sliderHP;
+    [SerializeField] private TMP_Text textHP;
+    [SerializeField] private TMP_Text textLevel;
     [SerializeField] private GameObject gameOverPanel;
 
     private void Awake()
@@ -24,6 +27,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        UpdateUI();
         DefaultPanel();
     }
 
@@ -34,8 +38,13 @@ public class UIManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        sliderHP.maxValue = playerStats.GetMaxHealthValue();
-        sliderHP.value = playerStats.CurrentHealth;
+        int currentHealth = playerStats.CurrentHealth;
+        int maxHealth = playerStats.GetMaxHealthValue();
+
+        sliderHP.maxValue = maxHealth;
+        sliderHP.value = currentHealth;
+        textHP.text = $"{currentHealth}/{maxHealth}";
+        textLevel.text = $"Cấp 1";
     }
 
     private void OnDisable()
