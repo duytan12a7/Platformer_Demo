@@ -18,7 +18,7 @@ TagManager:
   - CameraBounds
   - AttackEnemy
   - AttackPlayer
-  - 
+  - Item
   - 
   - 
   - 
@@ -54,6 +54,9 @@ TagManager:
     locked: 0
   - name: Decoration
     uniqueID: 21327527
+    locked: 0
+  - name: Item
+    uniqueID: 2466799579
     locked: 0
   - name: Instances
     uniqueID: 393833685
