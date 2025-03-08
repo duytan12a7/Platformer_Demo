@@ -7,7 +7,7 @@ public class SkillManager : MonoBehaviour
     private static SkillManager instance;
     public static SkillManager Instance => instance;
 
-    public List<SkillCard> availableSkills = new();
+    public List<SkillCard> AvailableSkills = new();
 
     [SerializeField] private PlayerStats playerStats;
 
@@ -23,16 +23,15 @@ public class SkillManager : MonoBehaviour
     {
         playerStats.OwnedSkills.Add(skill);
         ApplySkillEffects(skill);
-        availableSkills.Remove(skill);
+        AvailableSkills.Remove(skill);
     }
     public List<SkillCard> GetRandomSkills(int count)
     {
         List<SkillCard> randomSkills = new();
-        List<SkillCard> copyList = new List<SkillCard>(availableSkills);
+        List<SkillCard> copyList = new(AvailableSkills);
 
         bool hasFireStrike = playerStats.HasFireStrike;
         bool hasIceStrike = playerStats.HasIceStrike;
-        // bool hasPoisonStrike = playerStats.HasPoisonStrike;
         bool hasElectricStrike = playerStats.HasElectricStrike;
 
         if (hasFireStrike || hasIceStrike || hasElectricStrike)
@@ -40,7 +39,6 @@ public class SkillManager : MonoBehaviour
             copyList.RemoveAll(skill =>
                 skill.effectType == SkillEffect.FireStrike ||
                 skill.effectType == SkillEffect.IceStrike ||
-                // skill.effectType == SkillEffect.PoisonStrike ||
                 skill.effectType == SkillEffect.ElectricStrike
                 );
         }
@@ -84,9 +82,9 @@ public class SkillManager : MonoBehaviour
             case SkillEffect.ElectricStrike:
                 playerStats.HasElectricStrike = true;
                 break;
-            // case SkillEffect.PoisonStrike:
-            //     playerStats.HasPoisonStrike = true;
-            //     break;
+                // case SkillEffect.PoisonStrike:
+                //     playerStats.HasPoisonStrike = true;
+                //     break;
         }
     }
 

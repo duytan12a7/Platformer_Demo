@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class ItemObject : MonoBehaviour
 {
-
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private ItemData itemData;
 
@@ -28,7 +26,14 @@ public class ItemObject : MonoBehaviour
 
     public void Collect()
     {
-        Debug.Log($"{itemData.ItemName} - {itemData.ItemValue}");
+        switch (itemData.ItemType)
+        {
+            case ItemType.Gold:
+                break;
+            case ItemType.Experience:
+                GameEvent.CallOnGainExp(itemData.ItemValue);
+                break;
+        }
         Destroy(gameObject);
     }
 }

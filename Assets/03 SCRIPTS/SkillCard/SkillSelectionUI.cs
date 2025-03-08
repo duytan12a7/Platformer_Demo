@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 using System.Collections.Generic;
 
 public class SkillSelectionUI : MonoBehaviour
@@ -9,11 +10,15 @@ public class SkillSelectionUI : MonoBehaviour
     public Button[] skillButtons;
     private List<SkillCard> currentSkills;
     [SerializeField] private SkillCardUI[] skillCards;
+    private Action onSelectionComplete;
 
-    public void ShowSkillSelection(List<SkillCard> skills)
+    public void ShowSkillSelection(List<SkillCard> skills, Action onComplete)
     {
         skillSelectionPanel.SetActive(true);
+        GameManager.Instance.PauseGame();
+
         currentSkills = skills;
+        onSelectionComplete = onComplete;
 
         for (int i = 0; i < skillButtons.Length; i++)
         {
@@ -35,5 +40,9 @@ public class SkillSelectionUI : MonoBehaviour
     {
         skillManager.AddSkill(currentSkills[index]);
         skillSelectionPanel.SetActive(false);
+
+        GameManager.Instance.ResumeGame();
+
+        onSelectionComplete?.Invoke();
     }
 }

@@ -37,6 +37,7 @@ public class Player : Entity
 
     public PlayerData playerData;
     public PlayerStats Stats { get; private set; }
+    public bool IsMove { get; set; } = true;
 
     public Action OnFlipped;
 
