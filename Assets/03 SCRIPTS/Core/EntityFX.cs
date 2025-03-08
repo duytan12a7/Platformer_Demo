@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class EntityFX : MonoBehaviour
 {
+    [Header(" Elements ")]
     private SpriteRenderer spriteRenderer;
     private SkeletonAnimation skeletonAnimation;
     private SkeletonMecanim skeletonMecanim;
 
-    [Header("Flash FX")]
+    [Header(" Flash FX ")]
     [SerializeField] private float flashDuration;
     [SerializeField] private Material hitMaterial;
     private Material originalMaterial;
@@ -16,10 +17,13 @@ public class EntityFX : MonoBehaviour
     private Color skeletonColor;
 
 
-    [Header("Ailment colors")]
+    [Header(" Ailment colors ")]
     [SerializeField] private Color[] igniteColor;
     [SerializeField] private Color[] chillColor;
     [SerializeField] private Color[] shockColor;
+
+    [Header(" Ailment Fx")]
+    [SerializeField] private ParticleSystem fxIgnite;
 
     private void Start()
     {
@@ -94,7 +98,7 @@ public class EntityFX : MonoBehaviour
     public void CancelColorChange()
     {
         CancelInvoke();
-
+        fxIgnite?.Stop();
         if (skeletonAnimation != null)
         {
             skeletonAnimation.skeleton.SetColor(Color.white);
@@ -112,8 +116,17 @@ public class EntityFX : MonoBehaviour
 
     public void IgniteFxFor(float _seconds)
     {
+        StartCoroutine(IgniteCoroutine(_seconds));
+
         InvokeRepeating(nameof(IgniteColorFx), 0, .3f);
         Invoke(nameof(CancelColorChange), _seconds);
+    }
+
+    private IEnumerator IgniteCoroutine(float seconds)
+    {
+        fxIgnite.Play();
+        yield return new WaitForSeconds(seconds);
+        fxIgnite.Stop();
     }
 
     public void ChillFxFor(float _seconds)
