@@ -59,7 +59,7 @@ public class ItemDrop : MonoBehaviour
 
         ItemObject itemObject = newDrop.GetComponent<ItemObject>();
         itemObject.SetupItem(_itemData, randomVelocity);
-        PickupManager.Instance.AddItem(itemObject);
+        PickupManager.Instance.RegisterDroppedItem(itemObject);
     }
 
     private ItemData GetItemByType(ItemType type)

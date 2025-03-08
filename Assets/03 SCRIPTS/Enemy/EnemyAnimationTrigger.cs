@@ -6,6 +6,7 @@ public class EnemyAnimationTrigger : MonoBehaviour
 {
     [SerializeField] private Enemy enemy;
     private SkeletonAnimation skeletonAnimation;
+    [SerializeField] private ParticleSystem fxAttack;
 
     private void Start()
     {
@@ -63,6 +64,7 @@ public class EnemyAnimationTrigger : MonoBehaviour
                 break;
             case "CloseCounterWindow":
                 CloseCounterWindow();
+                fxAttack?.Play();
                 break;
             case "OpenSkillAttack":
                 // OpenSkillAttack();

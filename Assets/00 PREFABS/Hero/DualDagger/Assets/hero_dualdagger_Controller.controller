@@ -389,22 +389,22 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: lock_action
-    data: 
+    functionName: AnimationEventTrigger
+    data: lock_action
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 1
   - time: 0.0667
-    functionName: move_combo
-    data: 
+    functionName: AnimationEventTrigger
+    data: move_combo
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 1
   - time: 0.1667
-    functionName: cancel_attack
-    data: 
+    functionName: AnimationEventTrigger
+    data: unlock_action
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
@@ -3116,22 +3116,22 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: lock_action
-    data: 
+    functionName: AnimationEventTrigger
+    data: lock_action
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 1
   - time: 0.0333
-    functionName: move_combo
-    data: 
+    functionName: AnimationEventTrigger
+    data: move_combo
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 1
   - time: 0.1667
-    functionName: cancel_attack
-    data: 
+    functionName: AnimationEventTrigger
+    data: unlock_action
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
@@ -3271,15 +3271,15 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.0667
-    functionName: lock_action
-    data: 
+    functionName: AnimationEventTrigger
+    data: lock_action
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 1
   - time: 0.1333
-    functionName: move_combo
-    data: 
+    functionName: AnimationEventTrigger
+    data: move_combo
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
@@ -3292,8 +3292,8 @@ AnimationClip:
     intParameter: 0
     messageOptions: 1
   - time: 0.3
-    functionName: cancel_attack
-    data: 
+    functionName: AnimationEventTrigger
+    data: unlock_action
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
@@ -3523,22 +3523,22 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: lock_action
-    data: 
+    functionName: AnimationEventTrigger
+    data: lock_action
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 1
-  - time: 0.0333
-    functionName: move_combo
-    data: 
+  - time: 0.033333335
+    functionName: AnimationEventTrigger
+    data: move_combo
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 1
   - time: 0.1667
-    functionName: cancel_attack
-    data: 
+    functionName: AnimationEventTrigger
+    data: unlock_action
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
