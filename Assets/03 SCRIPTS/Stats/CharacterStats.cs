@@ -36,7 +36,7 @@ public abstract class CharacterStats : MonoBehaviour
     public bool IsShocked; // Reduce accuracy by 20%
 
 
-    [SerializeField] private float ailmentsDuration = 4;
+    [SerializeField] private float ignitedDuration = 4;
     private float ignitedTimer;
     private float chilledTimer;
     private float shockedTimer;
@@ -44,8 +44,10 @@ public abstract class CharacterStats : MonoBehaviour
     private float igniteDamageTimer;
     private int igniteDamage;
     [SerializeField] private GameObject shockStrikePrefab;
+    [SerializeField] private float shockDuration = 2;
     private float shockDamageTimer;
     private int shockDamage;
+    [SerializeField] private float chillDuration = 2;
     private float chillDamageTimer;
     private int chillDamage;
 
@@ -129,15 +131,9 @@ public abstract class CharacterStats : MonoBehaviour
             target.SetupIgniteDamage(Mathf.RoundToInt(damage * 0.2f));
         }
         else if (HasIceStrike)
-        {
             target.ApplyAilments(false, true, false);
-            target.SetupChillDamage(Mathf.RoundToInt(damage * 0.1f));
-        }
         else if (HasElectricStrike)
-        {
             target.ApplyAilments(false, false, true);
-            target.SetupShockDamage(Mathf.RoundToInt(damage * 0.1f));
-        }
     }
 
     #endregion
@@ -153,28 +149,28 @@ public abstract class CharacterStats : MonoBehaviour
         if (isIgnite && canApplyIgnite)
         {
             IsIgnited = isIgnite;
-            ignitedTimer = ailmentsDuration;
+            ignitedTimer = ignitedDuration;
 
-            fx.IgniteFxFor(ailmentsDuration);
+            fx.IgniteFxFor(ignitedDuration);
         }
 
         if (isChill && canApplyChill)
         {
             IsChilled = isChill;
-            chilledTimer = ailmentsDuration;
+            chilledTimer = chillDuration;
 
             float slowPercentage = .2f;
 
-            GetComponentInParent<Entity>().SlowEntityBy(slowPercentage, ailmentsDuration);
-            fx.ChillFxFor(ailmentsDuration);
+            GetComponentInParent<Entity>().SlowEntityBy(slowPercentage, chillDuration);
+            fx.ChillFxFor(chillDuration);
         }
 
         if (isShock && canApplyShock)
         {
             IsShocked = isShock;
-            shockedTimer = ailmentsDuration;
+            shockedTimer = shockDuration;
 
-            fx.ShockFxFor(ailmentsDuration);
+            fx.ShockFxFor(shockDuration);
         }
     }
 
@@ -266,7 +262,18 @@ public abstract class CharacterStats : MonoBehaviour
     {
         CurrentHealth = GetMaxHealthValue();
         CriticalPower.SetDefaultValue(defaultCritPower);
+
+        ResetStats();
+
         GameEvent.CallOnHealthChanged();
+    }
+
+    private void ResetStats()
+    {
+        IsDead = false;
+        IsIgnited = false;
+        IsShocked = false;
+        IsChilled = false;
     }
 
     private void DecreaseHealthBy(int damage)

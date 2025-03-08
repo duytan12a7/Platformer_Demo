@@ -32,8 +32,8 @@ public class PlayerStats : CharacterStats
         InitializeExpTable();
         xpToNextLevel = expTable[level];
 
-        GainXP(100);
         GameEvent.OnGainExp += GainXP;
+        Invoke(nameof(LevelUp), 1.5f);
     }
 
     private void InitializeExpTable()
