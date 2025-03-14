@@ -73,7 +73,7 @@ public class PoolManager : MonoBehaviour
     {
         GameObject newPooled = Instantiate(objectKey, poolParent.transform);
         newPooled.name = objectKey.name;
-        newPooled.SetActive(false);
+        // newPooled.SetActive(false);
 
         pooledObjects[objectKey].Add(newPooled);
         return newPooled;

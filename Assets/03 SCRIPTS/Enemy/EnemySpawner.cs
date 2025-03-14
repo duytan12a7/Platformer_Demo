@@ -57,7 +57,9 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnData.delay);
             GameObject enemy = PoolManager.Instance.SpawnObject(spawnData.enemyPrefab);
             enemy.transform.position = spawnData.spawnPoint.position;
-            enemy.SetActive(true);
+
+            if (!enemy.activeSelf)
+                enemy.SetActive(true);
 
             aliveEnemies.Add(enemy);
             enemy.GetComponentInChildren<EnemyStats>().OnDeath += () => aliveEnemies.Remove(enemy);

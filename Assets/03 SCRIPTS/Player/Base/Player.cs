@@ -39,8 +39,6 @@ public class Player : Entity
     public PlayerStats Stats { get; private set; }
     public bool IsMove { get; set; } = true;
 
-    public Action OnFlipped;
-
     [SerializeField] public ParticleSystem[] fxAttack;
 
     #endregion
@@ -145,12 +143,6 @@ public class Player : Entity
         MoveSpeed = defaultMoveSpeed;
         JumpForce = defaultJumpForce;
         DashSpeed = defaultDashSpeed;
-    }
-
-    public override void Flip()
-    {
-        base.Flip();
-        OnFlipped();
     }
 
     public override void Die()

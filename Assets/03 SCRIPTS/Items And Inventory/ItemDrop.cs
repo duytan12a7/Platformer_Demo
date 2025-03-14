@@ -39,7 +39,7 @@ public class ItemDrop : MonoBehaviour
                     filteredDropList.Add(item);
         }
 
-        int randomItemCount = Random.Range(0, 2);
+        int randomItemCount = Random.Range(1, 2);
 
         for (int i = 0; i < randomItemCount; i++)
         {

@@ -24,8 +24,6 @@ public class Enemy : Entity
     #region Other Variables
     public AnimationTriggerType CurrentTriggerType { get; private set; }
 
-    public Action OnFlipped;
-
     [Header("Stunned info")]
     public float StunDuration;
     public Vector2 StunDirection;
@@ -91,12 +89,6 @@ public class Enemy : Entity
 
         if (xInput < 0f && isFacingRight || xInput > 0f && !isFacingRight)
             Flip();
-    }
-
-    public override void Flip()
-    {
-        base.Flip();
-        OnFlipped();
     }
 
     public virtual RaycastHit2D IsPlayerDetected()

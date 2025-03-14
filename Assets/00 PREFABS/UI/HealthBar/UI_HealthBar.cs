@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHealthBar_UI : MonoBehaviour
+public class UI_HealthBar : MonoBehaviour
 {
-    private Player player;
-    private PlayerStats playerStats;
+    private Entity entity;
+    private CharacterStats characterStats;
     private RectTransform rectTransform;
     private Slider slider;
 
     private void Awake()
     {
-        player = GetComponentInParent<Player>();
-        playerStats = player.GetComponentInChildren<PlayerStats>();
+        entity = GetComponentInParent<Entity>();
+        characterStats = entity.GetComponentInChildren<CharacterStats>();
         rectTransform = GetComponent<RectTransform>();
         slider = GetComponentInChildren<Slider>();
     }
@@ -21,21 +21,21 @@ public class PlayerHealthBar_UI : MonoBehaviour
     private void OnEnable()
     {
         transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-        player.OnFlipped += Flip;
+        entity.OnFlipped += Flip;
         GameEvent.OnHealthChanged += UpdateHealthUI;
     }
 
     private void UpdateHealthUI()
     {
-        slider.maxValue = playerStats.GetMaxHealthValue();
-        slider.value = playerStats.CurrentHealth;
+        slider.maxValue = characterStats.GetMaxHealthValue();
+        slider.value = characterStats.CurrentHealth;
     }
 
     private void Flip() => rectTransform.Rotate(0f, 180f, 0f);
 
     private void OnDisable()
     {
-        player.OnFlipped -= Flip;
+        entity.OnFlipped -= Flip;
         GameEvent.OnHealthChanged -= UpdateHealthUI;
     }
 }

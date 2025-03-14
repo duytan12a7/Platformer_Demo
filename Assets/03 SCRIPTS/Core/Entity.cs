@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Spine.Unity;
@@ -46,7 +47,10 @@ public class Entity : MonoBehaviour
     public Transform attackCheck;
     public float attackCheckRadius;
     public LayerMask whatIsCharacter;
+
     #endregion
+
+    public Action OnFlipped;
 
     protected virtual void Awake()
     {
@@ -146,6 +150,8 @@ public class Entity : MonoBehaviour
         FacingDirection *= -1;
         isFacingRight = !isFacingRight;
         transform.Rotate(0f, 180f, 0f);
+
+        OnFlipped();
     }
 
     protected virtual IEnumerator HitKnockback(Transform attacker)
