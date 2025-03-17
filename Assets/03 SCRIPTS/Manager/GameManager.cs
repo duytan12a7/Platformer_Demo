@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
 
     public Transform PlayerSpawn { get; private set; }
 
+    public int Level = 0;
+
     private void Awake()
     {
         if (instance != null || instance == this)

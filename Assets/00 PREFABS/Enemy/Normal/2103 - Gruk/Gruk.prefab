@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 2154785246029207231}
   - component: {fileID: 2403645155547785824}
   - component: {fileID: 715433794472567698}
-  - component: {fileID: 2435639633484079012}
+  - component: {fileID: 2530768843710187566}
   m_Layer: 7
-  m_Name: HealthBar_UI
+  m_Name: UI_HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &2435639633484079012
+--- !u!114 &2530768843710187566
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 540230863062371500}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77ef5a0399d69be44b5243a60f144fab, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e2146b071e6a14438983c5c0a898488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &664198906083866558
@@ -475,6 +475,7 @@ GameObject:
   - component: {fileID: 7337548127654351253}
   - component: {fileID: 7449250292057405385}
   - component: {fileID: 4232126723275679401}
+  - component: {fileID: 7402149226323508962}
   m_Layer: 7
   m_Name: Gruk
   m_TagString: Untagged
@@ -709,6 +710,27 @@ PolygonCollider2D:
       - {x: 13.0013, y: 10.499499}
       - {x: 13.000999, y: 0.00059999997}
   m_UseDelaunayMesh: 0
+--- !u!114 &7402149226323508962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343947209359925535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 650a4edc55d67534ca85a95d01749628, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleDrop:
+  - {fileID: 11400000, guid: 6fa679ba349cabb42a1b7111ca64e486, type: 2}
+  - {fileID: 11400000, guid: eb64569d70749a044a95154a6f6cda62, type: 2}
+  - {fileID: 11400000, guid: 2874a902839b82a42b76979aeec307b7, type: 2}
+  - {fileID: 11400000, guid: 9fcf0507da99f694ea4f8231957813ef, type: 2}
+  - {fileID: 11400000, guid: 22ec75f8278b4614fb4f5c666973d7a2, type: 2}
+  - {fileID: 11400000, guid: 453fba6e6a739e0469e8c3cab4e1f471, type: 2}
+  - {fileID: 11400000, guid: 56c8f15d22b397b4790b5e156affdfee, type: 2}
+  dropPrefab: {fileID: 5658573980447581802, guid: f436e51c03018af4c94c3d93d6189ad0, type: 3}
 --- !u!1 &1443260492728424863
 GameObject:
   m_ObjectHideFlags: 0
