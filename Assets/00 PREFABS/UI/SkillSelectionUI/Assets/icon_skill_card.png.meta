@@ -248,6 +248,111 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: icon_tangchimang2
+      rect:
+        serializedVersion: 2
+        x: 1574
+        y: 811
+        width: 152
+        height: 178
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cf7d7ef6a745f1429f608c6e0e560cb
+      internalID: 40866690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_tangsatthuong2
+      rect:
+        serializedVersion: 2
+        x: 1860
+        y: 1186
+        width: 155
+        height: 154
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea706b46ad024f1419d721d59e36f8a5
+      internalID: -836219712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_tangsatthuong3
+      rect:
+        serializedVersion: 2
+        x: 1667
+        y: 1176
+        width: 160
+        height: 156
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ea30c07333fca3499149e1b843817cf
+      internalID: 1240615579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_hoimau
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 1703
+        width: 186
+        height: 168
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68f5959e46bc81b42bd438e7a2956faa
+      internalID: 998780154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_tangmau
+      rect:
+        serializedVersion: 2
+        x: 1343
+        y: 1527
+        width: 168
+        height: 154
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f2fca33c30c233409062c07f0252bb8
+      internalID: -1275404805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -260,11 +365,16 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       icon_firestrike: 1851793265
+      icon_hoimau: 998780154
       icon_icestrike: -181066897
       icon_lightningstrike: 106753306
       icon_tangchimang: -1455218738
+      icon_tangchimang2: 40866690
       icon_tanggiap: -537237455
+      icon_tangmau: -1275404805
       icon_tangsatthuong: -539462651
+      icon_tangsatthuong2: -836219712
+      icon_tangsatthuong3: 1240615579
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

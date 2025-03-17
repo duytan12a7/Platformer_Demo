@@ -12,5 +12,8 @@ public class PlayerDeadState : PlayerState
     {
         base.LogicUpdate();
         player.SetZeroVelocity();
+
+        if (isAnimationFinished)
+            player.Stats.CallOnDeath();
     }
 }

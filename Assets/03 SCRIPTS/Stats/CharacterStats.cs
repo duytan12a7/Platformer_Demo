@@ -252,8 +252,6 @@ public abstract class CharacterStats : MonoBehaviour
         return Mathf.Clamp(damage, 0, int.MaxValue);
     }
 
-    public int GetMaxHealthValue() => MaxHealth.GetValue() + Vitality.GetValue() * 5;
-
     #endregion
 
     #region Others Function
@@ -276,13 +274,46 @@ public abstract class CharacterStats : MonoBehaviour
         IsChilled = false;
     }
 
+    protected virtual void Die() => IsDead = true;
+
+    #endregion
+
+    #region Health Function
+
+    public int GetMaxHealthValue() => MaxHealth.GetValue() + Vitality.GetValue() * 5;
+
     private void DecreaseHealthBy(int damage)
     {
         CurrentHealth -= damage;
         GameEvent.CallOnHealthChanged();
     }
 
-    protected virtual void Die() => IsDead = true;
+    public void IncreaseHealth(float percent) => ModifyHealth(percent, true);
+
+    public void Heal(float percent) => ModifyHealth(percent, false);
+
+    private void ModifyHealth(float percent, bool increaseMaxHealth)
+    {
+        if (percent <= 0) return;
+
+        int maxHealth = GetMaxHealthValue();
+        int amount = (int)(maxHealth * percent);
+
+        if (increaseMaxHealth)
+            MaxHealth.AddModifier(amount);
+
+        CurrentHealth += amount;
+        ClampHealth();
+    }
+
+    private void ClampHealth()
+    {
+        int maxHealth = GetMaxHealthValue();
+        if (CurrentHealth > maxHealth)
+            CurrentHealth = maxHealth;
+
+        GameEvent.CallOnHealthChanged();
+    }
 
     #endregion
 }

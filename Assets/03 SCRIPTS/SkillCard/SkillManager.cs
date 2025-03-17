@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,10 +20,17 @@ public class SkillManager : MonoBehaviour
 
     public void AddSkill(SkillCard skill)
     {
+        if (playerStats.OwnedSkills.Contains(skill))
+        {
+            Debug.Log("Đã sở hữu kỹ năng này, có thể nâng cấp!");
+            return;
+        }
+
         playerStats.OwnedSkills.Add(skill);
-        ApplySkillEffects(skill);
+        skill.ApplySkill(playerStats);
         AvailableSkills.Remove(skill);
     }
+
     public List<SkillCard> GetRandomSkills(int count)
     {
         List<SkillCard> randomSkills = new();
@@ -34,15 +40,14 @@ public class SkillManager : MonoBehaviour
         bool hasIceStrike = playerStats.HasIceStrike;
         bool hasElectricStrike = playerStats.HasElectricStrike;
 
-        if (hasFireStrike || hasIceStrike || hasElectricStrike)
-        {
-            copyList.RemoveAll(skill =>
-                skill.effectType == SkillEffect.FireStrike ||
-                skill.effectType == SkillEffect.IceStrike ||
-                skill.effectType == SkillEffect.ElectricStrike
-                );
-        }
+        if (hasFireStrike)
+            copyList.RemoveAll(skill => skill is SkillCard_KiemBang || skill is SkillCard_KiemDien);
+        else if (hasIceStrike)
+            copyList.RemoveAll(skill => skill is SkillCard_KiemLua || skill is SkillCard_KiemDien);
+        else if (hasElectricStrike)
+            copyList.RemoveAll(skill => skill is SkillCard_KiemLua || skill is SkillCard_KiemBang);
 
+        // Random Skill từ danh sách đã lọc
         for (int i = 0; i < count; i++)
         {
             if (copyList.Count == 0) break;
@@ -51,41 +56,8 @@ public class SkillManager : MonoBehaviour
             randomSkills.Add(copyList[index]);
             copyList.RemoveAt(index);
         }
+
         return randomSkills;
-    }
-
-
-    public void ApplySkillEffects(SkillCard skill)
-    {
-        if (skill == null) return;
-
-        switch (skill.effectType)
-        {
-            case SkillEffect.IncreaseAttack:
-                playerStats.AddModifyPhysicalDamage((int)skill.effectValue);
-                break;
-            case SkillEffect.IncreaseDefense:
-                playerStats.AddModifyArmor((int)skill.effectValue);
-                break;
-            case SkillEffect.LifeSteal:
-                // Cập nhật giá trị hút máu
-                break;
-            case SkillEffect.CriticalBoost:
-                playerStats.AddModifyCriticalChance((int)skill.effectValue);
-                break;
-            case SkillEffect.FireStrike:
-                playerStats.HasFireStrike = true;
-                break;
-            case SkillEffect.IceStrike:
-                playerStats.HasIceStrike = true;
-                break;
-            case SkillEffect.ElectricStrike:
-                playerStats.HasElectricStrike = true;
-                break;
-                // case SkillEffect.PoisonStrike:
-                //     playerStats.HasPoisonStrike = true;
-                //     break;
-        }
     }
 
 }

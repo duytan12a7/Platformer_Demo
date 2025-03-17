@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -74,10 +73,11 @@ public class Inventory : MonoBehaviour
         UpdateSlotUI();
     }
 
-    private void UnEquipItem(ItemData_Equipment itemToRemove)
+    public void UnEquipItem(ItemData_Equipment itemToRemove)
     {
         if (equipmentDictionary.TryGetValue(itemToRemove, out InventoryItem item))
         {
+            AddItem(itemToRemove);
             equipment.Remove(item);
             equipmentDictionary.Remove(itemToRemove);
             itemToRemove.RemoveModifier();
