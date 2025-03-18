@@ -10,19 +10,18 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] private Slider sliderHP;
+    [SerializeField] private Slider sliderExp;
     [SerializeField] private TMP_Text textHP;
     [SerializeField] private TMP_Text textLevel;
     [SerializeField] private GameObject gameOverPanel;
 
-    private void Awake()
-    {
-        sliderHP = GetComponentInChildren<Slider>();
-    }
-
     private void OnEnable()
     {
         GameEvent.OnHealthChanged += UpdateUI;
+        GameEvent.OnExpChanged += UpdateXP;
+
         playerStats.OnDeath += ShowGameOver;
+        playerStats.OnLevelUp += UpdateLevel;
     }
 
     private void Start()
@@ -44,13 +43,27 @@ public class UIManager : MonoBehaviour
         sliderHP.maxValue = maxHealth;
         sliderHP.value = currentHealth;
         textHP.text = $"{currentHealth}/{maxHealth}";
-        textLevel.text = $"Cấp 1";
+    }
+
+    private void UpdateXP()
+    {
+        sliderExp.maxValue = playerStats.GetXPToNextLevel();
+        sliderExp.value = playerStats.GetCurrentXP();
+    }
+
+    private void UpdateLevel(int level)
+    {
+        textLevel.text = $"Cấp {level}";
+        UpdateXP();
     }
 
     private void OnDisable()
     {
         GameEvent.OnHealthChanged -= UpdateUI;
+        GameEvent.OnExpChanged -= UpdateXP;
+
         playerStats.OnDeath -= ShowGameOver;
+        playerStats.OnLevelUp -= UpdateLevel;
     }
 
     public void ShowGameOver()

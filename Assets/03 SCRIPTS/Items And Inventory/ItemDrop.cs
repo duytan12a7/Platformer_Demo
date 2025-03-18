@@ -55,7 +55,7 @@ public class ItemDrop : MonoBehaviour
     {
         GameObject newDrop = Instantiate(dropPrefab, transform.position, Quaternion.identity);
 
-        Vector2 randomVelocity = new(Random.Range(-5, 5), Random.Range(5, 10));
+        Vector2 randomVelocity = new(Random.Range(-4, 4), Random.Range(5, 10));
 
         ItemObject itemObject = newDrop.GetComponent<ItemObject>();
         itemObject.SetupItem(_itemData, randomVelocity);

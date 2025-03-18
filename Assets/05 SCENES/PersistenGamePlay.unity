@@ -437,6 +437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStats: {fileID: 153190718}
   sliderHP: {fileID: 2033541934821006547}
+  sliderExp: {fileID: 1447892397}
   textHP: {fileID: 1926778827}
   textLevel: {fileID: 1988268588}
   gameOverPanel: {fileID: 280332017}
@@ -1166,6 +1167,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be502a67f6854f04c9d2b82f0532ca52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1447892397 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7427211351006928167, guid: a7996942eeb71d14aa78a44ca68a0135, type: 3}
+  m_PrefabInstance: {fileID: 5663965286170610059}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1460479183
 GameObject:
   m_ObjectHideFlags: 0
@@ -1643,34 +1655,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff0946ef2369e142ae892895afd464b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  availableSkills:
-  - skillName: "T\u0103ng T\u1EC9 L\u1EC7 Ch\xED M\u1EA1ng"
-    description: "T\u0103ng t\u1EC9 l\u1EC7 ch\xED m\u1EA1ng"
+  AvailableSkills:
+  - skillName: "T\u1EC9 L\u1EC7 Ch\xED M\u1EA1ng"
+    description: "T\u0103ng 10% t\u1EC9 l\u1EC7 ch\xED m\u1EA1ng"
     skillIcon: {fileID: -539462651, guid: 049cb4a63b8ffc1469bb0f54cb6b3c97, type: 3}
     skillType: 4
     effectType: 3
     effectValue: 10
-  - skillName: "Ch\xE9m L\u1EEDa"
-    description: "\u0110\xF2n \u0111\xE1nh th\u01B0\u1EDDng g\xE2y th\xEAm s\xE1t
-      th\u01B0\u01A1ng v\xE0 thi\xEAu \u0111\u1ED1t m\u1EE5c ti\xEAu."
+  - skillName: "Ki\u1EBFm L\u1EEDa"
+    description: "T\u0103ng s\xE1t th\u01B0\u01A1ng v\xE0 thi\xEAu \u0111\u1ED1t
+      m\u1EE5c ti\xEAu"
     skillIcon: {fileID: 1851793265, guid: 049cb4a63b8ffc1469bb0f54cb6b3c97, type: 3}
     skillType: 0
     effectType: 6
     effectValue: 0
-  - skillName: "Ch\xE9m \u0110i\u1EC7n"
-    description: "\u0110\xF2n \u0111\xE1nh th\u01B0\u1EDDng g\xE2y th\xEAm s\xE1t
-      th\u01B0\u01A1ng v\xE0 gi\u1EA3m gi\xE1p c\u1EE7a m\u1EE5c ti\xEAu."
-    skillIcon: {fileID: 106753306, guid: 049cb4a63b8ffc1469bb0f54cb6b3c97, type: 3}
-    skillType: 3
-    effectType: 4
-    effectValue: 0
-  - skillName: "Ch\xE9m B\u0103ng"
-    description: "\u0110\xF2n \u0111\xE1nh th\u01B0\u1EDDng g\xE2y th\xEAm s\xE1t
-      th\u01B0\u01A1ng v\xE0 hi\u1EC7u \u1EE9ng L\u1EA1nh l\xE0m ch\u1EADm m\u1EE5c
+  - skillName: "Ki\u1EBFm B\u0103ng"
+    description: "T\u0103ng s\xE1t th\u01B0\u01A1ng v\xE0 l\xE0m ch\u1EADm m\u1EE5c
       ti\xEAu"
     skillIcon: {fileID: -181066897, guid: 049cb4a63b8ffc1469bb0f54cb6b3c97, type: 3}
     skillType: 1
     effectType: 7
+    effectValue: 0
+  - skillName: "Ki\u1EBFm S\u1EA5m S\xE9t"
+    description: "T\u0103ng s\xE1t th\u01B0\u01A1ng v\xE0 gi\u1EA3m gi\xE1p m\u1EE5c
+      ti\xEAu"
+    skillIcon: {fileID: 106753306, guid: 049cb4a63b8ffc1469bb0f54cb6b3c97, type: 3}
+    skillType: 3
+    effectType: 4
     effectValue: 0
   playerStats: {fileID: 153190718}
 --- !u!4 &2096411482
@@ -1707,6 +1718,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 298589278}
     m_Modifications:
+    - target: {fileID: 1624205201479665951, guid: 01373163f46af3244a7d28aa56eca48f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 237
+      objectReference: {fileID: 0}
+    - target: {fileID: 3467362460167364251, guid: 01373163f46af3244a7d28aa56eca48f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -612
+      objectReference: {fileID: 0}
     - target: {fileID: 3679341092875633240, guid: 01373163f46af3244a7d28aa56eca48f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -2162,6 +2181,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5177694758841257050, guid: a7996942eeb71d14aa78a44ca68a0135, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6174360499304834313, guid: a7996942eeb71d14aa78a44ca68a0135, type: 3}
+      propertyPath: m_text
+      value: "C\u1EA5p: 0"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7427211351006928167, guid: a7996942eeb71d14aa78a44ca68a0135, type: 3}
+      propertyPath: m_Value
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

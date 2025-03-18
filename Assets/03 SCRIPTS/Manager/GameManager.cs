@@ -33,4 +33,16 @@ public class GameManager : MonoBehaviour
         Player = FindObjectOfType<Player>();
         Debug.Log(transform.name + " :LoadPlayer", gameObject);
     }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+        Player.IsMove = false;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        Player.IsMove = true;
+    }
 }
