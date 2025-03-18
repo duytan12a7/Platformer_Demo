@@ -27,6 +27,7 @@ public class SceneManage : MonoBehaviour
 
         currentScene = Instantiate(scenePrefab, transform);
         currentScene.name = scenePrefab.name;
+        GameManager.Instance.Level++;
 
         UpdateCameraBounds();
         UpdatePlayerPosition();
