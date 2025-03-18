@@ -4267,45 +4267,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AvailableSkills:
-  - skillName: "T\u1EC9 L\u1EC7 Ch\xED M\u1EA1ng"
-    description: "T\u0103ng 10% t\u1EC9 l\u1EC7 ch\xED m\u1EA1ng"
-    skillIcon: {fileID: -1455218738, guid: 049cb4a63b8ffc1469bb0f54cb6b3c97, type: 3}
-    skillType: 4
-    effectType: 3
-    effectValue: 10
-  - skillName: "Ki\u1EBFm L\u1EEDa"
-    description: "T\u0103ng s\xE1t th\u01B0\u01A1ng v\xE0 thi\xEAu \u0111\u1ED1t
-      m\u1EE5c ti\xEAu"
-    skillIcon: {fileID: 1851793265, guid: 049cb4a63b8ffc1469bb0f54cb6b3c97, type: 3}
-    skillType: 0
-    effectType: 6
-    effectValue: 0
-  - skillName: "Ki\u1EBFm B\u0103ng"
-    description: "T\u0103ng s\xE1t th\u01B0\u01A1ng v\xE0 l\xE0m ch\u1EADm m\u1EE5c
-      ti\xEAu"
-    skillIcon: {fileID: -181066897, guid: 049cb4a63b8ffc1469bb0f54cb6b3c97, type: 3}
-    skillType: 1
-    effectType: 7
-    effectValue: 0
-  - skillName: "Ki\u1EBFm S\u1EA5m S\xE9t"
-    description: "T\u0103ng s\xE1t th\u01B0\u01A1ng v\xE0 gi\u1EA3m gi\xE1p m\u1EE5c
-      ti\xEAu"
-    skillIcon: {fileID: 106753306, guid: 049cb4a63b8ffc1469bb0f54cb6b3c97, type: 3}
-    skillType: 3
-    effectType: 4
-    effectValue: 0
-  - skillName: "T\u0103ng S\xE1t Th\u01B0\u01A1ng"
-    description: "T\u0103ng 20 S\xE1t Th\u01B0\u01A1ng"
-    skillIcon: {fileID: -539462651, guid: 049cb4a63b8ffc1469bb0f54cb6b3c97, type: 3}
-    skillType: 4
-    effectType: 0
-    effectValue: 20
-  - skillName: "T\u0103ng Gi\xE1p"
-    description: "T\u0103ng 10 Gi\xE1p"
-    skillIcon: {fileID: -537237455, guid: 049cb4a63b8ffc1469bb0f54cb6b3c97, type: 3}
-    skillType: 4
-    effectType: 1
-    effectValue: 10
+  - {fileID: 11400000, guid: b4c1accc473f22649a9cadc79b6ff74d, type: 2}
+  - {fileID: 11400000, guid: 4b801e616df41b1428dd772499a9de0a, type: 2}
+  - {fileID: 11400000, guid: 48e3e14274b67ad4bac987c71224fa6d, type: 2}
+  - {fileID: 11400000, guid: abbf7c5ec4554fb4983115ddf272e798, type: 2}
+  - {fileID: 11400000, guid: 55a468fe8f8eae54daa1f1deaa59a897, type: 2}
+  - {fileID: 11400000, guid: 5d7661097871d9e43b38ba6192b2c817, type: 2}
+  - {fileID: 11400000, guid: f86173d68cf74ae4497e6c2fcb530533, type: 2}
+  - {fileID: 11400000, guid: c0188c44b3f890740a1b6428948366a4, type: 2}
+  - {fileID: 11400000, guid: aba3035fe4f46a34ebc5b4a1ef659d7c, type: 2}
+  - {fileID: 11400000, guid: 3b9d7d9b836a137468c1578ed4659f54, type: 2}
+  - {fileID: 11400000, guid: cf557f11b6f31124dba7cb4562604566, type: 2}
   playerStats: {fileID: 153190718}
 --- !u!4 &2096411482
 Transform:

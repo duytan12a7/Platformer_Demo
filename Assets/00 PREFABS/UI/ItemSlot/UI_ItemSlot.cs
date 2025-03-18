@@ -8,33 +8,33 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
     [SerializeField] private Image itemImage;
     [SerializeField] private TextMeshProUGUI itemText;
 
-    public InventoryItem inventoryItem;
+    public InventoryItem item;
 
     public void UpdateSlot(InventoryItem _newItem)
     {
-        inventoryItem = _newItem;
+        item = _newItem;
         itemImage.color = Color.white;
 
-        if (inventoryItem == null) return;
+        if (item == null) return;
 
-        itemImage.sprite = inventoryItem.data.ItemIcon;
-        if (inventoryItem.stackSize > 1)
-            itemText.text = inventoryItem.stackSize.ToString();
+        itemImage.sprite = item.data.ItemIcon;
+        if (item.stackSize > 1)
+            itemText.text = item.stackSize.ToString();
         else
             itemText.text = "";
     }
 
     public void CleanUpSlot()
     {
-        inventoryItem = null;
+        item = null;
         itemImage.sprite = null;
         itemImage.color = Color.clear;
         itemText.text = "";
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public virtual void OnPointerDown(PointerEventData eventData)
     {
-        if (inventoryItem.data.ItemType == ItemType.Equipment)
-            Inventory.Instance.EquipItem(inventoryItem.data);
+        if (item.data.ItemType == ItemType.Equipment)
+            Inventory.Instance.EquipItem(item.data);
     }
 }

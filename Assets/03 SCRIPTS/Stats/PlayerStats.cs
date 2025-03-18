@@ -60,8 +60,9 @@ public class PlayerStats : CharacterStats
         base.Die();
 
         player.Die();
-        OnDeath?.Invoke();
     }
+
+    public void CallOnDeath() => OnDeath?.Invoke();
 
     public void GainXP(int amount)
     {

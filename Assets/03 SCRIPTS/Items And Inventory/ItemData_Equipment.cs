@@ -13,6 +13,7 @@ public enum EquipmentType
 public class ItemData_Equipment : ItemData
 {
     public EquipmentType EquipmentType;
+    public ItemEffect[] itemEffects;
 
     [Header(" Major Stats ")]
     public int Strength;
@@ -35,6 +36,14 @@ public class ItemData_Equipment : ItemData
     public int FireDamage;
     public int IceDamage;
     public int LightningDamage;
+
+    public void ItemEffect()
+    {
+        foreach(var item in itemEffects)
+        {
+            item.ExcuteEffect();
+        }
+    }
 
     public void AddModifier()
     {

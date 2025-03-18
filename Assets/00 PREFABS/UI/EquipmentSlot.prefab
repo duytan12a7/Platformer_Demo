@@ -91,7 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemImage: {fileID: 0}
   itemText: {fileID: 0}
-  inventoryItem:
+  item:
     data: {fileID: 0}
     stackSize: 0
   slotType: 0
