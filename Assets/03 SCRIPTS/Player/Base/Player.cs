@@ -41,6 +41,8 @@ public class Player : Entity
 
     public Action OnFlipped;
 
+    [SerializeField] public ParticleSystem[] fxAttack;
+
     #endregion
 
     #region Unity Callback Functions

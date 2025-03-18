@@ -47,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
         }
 
         sceneTrigger.SetActive(true);
-        PickupManager.Instance.CollectAllItems();
+        PickupManager.Instance.ScheduleAutoCollect();
     }
 
     IEnumerator SpawnWave(Wave wave)
