@@ -61,7 +61,7 @@ public class Inventory : MonoBehaviour
         if (oldEquipment != null)
         {
             UnEquipItem(oldEquipment);
-            AddItem(oldEquipment);
+            // AddItem(oldEquipment);
         }
 
         equipment.Add(newItem);

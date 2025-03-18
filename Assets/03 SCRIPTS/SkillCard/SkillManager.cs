@@ -41,11 +41,11 @@ public class SkillManager : MonoBehaviour
         bool hasElectricStrike = playerStats.HasElectricStrike;
 
         if (hasFireStrike)
-            copyList.RemoveAll(skill => skill is SkillCard_KiemBang || skill is SkillCard_KiemDien);
+            copyList.RemoveAll(skill => skill is SkillCard_IceSword || skill is SkillCard_LightningSword);
         else if (hasIceStrike)
-            copyList.RemoveAll(skill => skill is SkillCard_KiemLua || skill is SkillCard_KiemDien);
+            copyList.RemoveAll(skill => skill is SkillCard_FlameSword || skill is SkillCard_LightningSword);
         else if (hasElectricStrike)
-            copyList.RemoveAll(skill => skill is SkillCard_KiemLua || skill is SkillCard_KiemBang);
+            copyList.RemoveAll(skill => skill is SkillCard_FlameSword || skill is SkillCard_IceSword);
 
         // Random Skill từ danh sách đã lọc
         for (int i = 0; i < count; i++)

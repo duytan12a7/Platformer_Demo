@@ -4,8 +4,10 @@ public enum EquipmentType
 {
     Weapon,
     Armor,
-    Amulet,
-    Flask
+    Gloves,
+    Boots,
+    Necklace,  // Dây Chuyền
+    Gemstone   // Ngọc Bảo
 }
 
 

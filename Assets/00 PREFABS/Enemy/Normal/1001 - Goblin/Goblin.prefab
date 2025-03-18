@@ -5433,16 +5433,16 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   PhysicalDamage:
-    baseValue: 5
+    baseValue: 10
     modifiers: 
   CriticalChance:
-    baseValue: 0
+    baseValue: 5
     modifiers: 
   CriticalPower:
     baseValue: 0
     modifiers: 
   MaxHealth:
-    baseValue: 100
+    baseValue: 125
     modifiers: 
   Armor:
     baseValue: 0
@@ -5451,13 +5451,13 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   Evasion:
-    baseValue: 0
+    baseValue: 5
     modifiers: 
   FireDamage:
     baseValue: 0
     modifiers: 
   IceDamage:
-    baseValue: 5
+    baseValue: 0
     modifiers: 
   LightningDamage:
     baseValue: 0
@@ -5480,6 +5480,7 @@ MonoBehaviour:
   - {fileID: 8748125167567574148, guid: 9cd5f4115676382468a0479cc6c45864, type: 3}
   - {fileID: 8748125167567574148, guid: d3a3c4ed6195ec94091493df29daafdd, type: 3}
   CanKnock: 1
+  percentageModifier: 0.4
 --- !u!1 &1476221772331617708
 GameObject:
   m_ObjectHideFlags: 0

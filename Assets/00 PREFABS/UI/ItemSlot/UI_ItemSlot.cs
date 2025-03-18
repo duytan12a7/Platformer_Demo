@@ -5,18 +5,17 @@ using UnityEngine.EventSystems;
 
 public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
 {
-    [SerializeField] private Image itemImage;
-    [SerializeField] private TextMeshProUGUI itemText;
+    [SerializeField] protected Image itemImage;
+    [SerializeField] protected TextMeshProUGUI itemText;
 
     public InventoryItem item;
 
-    public void UpdateSlot(InventoryItem _newItem)
+    public virtual void UpdateSlot(InventoryItem _newItem)
     {
         item = _newItem;
         itemImage.color = Color.white;
 
         if (item == null) return;
-
         itemImage.sprite = item.data.ItemIcon;
         if (item.stackSize > 1)
             itemText.text = item.stackSize.ToString();
@@ -24,7 +23,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
             itemText.text = "";
     }
 
-    public void CleanUpSlot()
+    public virtual void CleanUpSlot()
     {
         item = null;
         itemImage.sprite = null;
