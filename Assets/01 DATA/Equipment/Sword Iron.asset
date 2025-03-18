@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c0f00411657ef44fba0b8d4d4c68970, type: 3}
-  m_Name: Armor
+  m_Name: Sword Iron
   m_EditorClassIdentifier: 
   ItemType: 2
-  ItemName: Armor
+  ItemName: Sword Iron
   ItemValue: 1
-  ItemIcon: {fileID: 2007117837, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  ItemIcon: {fileID: -1888760358, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
   DropChance: 100
-  EquipmentType: 1
-  Strength: 0
+  EquipmentType: 0
+  Strength: 3
   Agility: 0
   Intelligence: 0
   Vitality: 0
-  Damage: 0
+  Damage: 20
   CriticalChance: 0
   CriticalPower: 0
   Health: 0
-  Armor: 10
+  Armor: 0
   Evasion: 0
   MagicResistance: 0
   FireDamage: 0

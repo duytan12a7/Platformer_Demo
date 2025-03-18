@@ -33,6 +33,10 @@ public class ItemObject : MonoBehaviour
             case ItemType.Experience:
                 GameEvent.CallOnGainExp(itemData.ItemValue);
                 break;
+            case ItemType.Material:
+            case ItemType.Equipment:
+                Inventory.Instance.AddItem(itemData);
+                break;
         }
         Destroy(gameObject);
     }

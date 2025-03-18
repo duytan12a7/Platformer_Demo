@@ -69,10 +69,12 @@ public class UIManager : MonoBehaviour
     public void ShowGameOver()
     {
         gameOverPanel.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void RestartGame()
     {
         SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
     }
 }

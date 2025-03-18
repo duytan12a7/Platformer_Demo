@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c0f00411657ef44fba0b8d4d4c68970, type: 3}
-  m_Name: Sword
+  m_Script: {fileID: 11500000, guid: 472060c54e5d07a4c80da8a0217ac45f, type: 3}
+  m_Name: IronMaterial
   m_EditorClassIdentifier: 
-  ItemType: 2
-  ItemName: Sword
+  ItemType: 1
+  ItemName: Iron Material
   ItemValue: 1
-  ItemIcon: {fileID: -953664141, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  ItemIcon: {fileID: -786104421, guid: 56c0740a5bdb3ea4d9a7ef593a2787e7, type: 3}
   DropChance: 100
-  EquipmentType: 0
