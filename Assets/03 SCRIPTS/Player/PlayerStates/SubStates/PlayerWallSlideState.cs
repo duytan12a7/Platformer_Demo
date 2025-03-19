@@ -12,8 +12,9 @@ public class PlayerWallSlideState : PlayerState
     {
         base.LogicUpdate();
 
-        if (Input.GetKeyDown(KeyCode.X))
+        if (player.InputHandler.JumpInput)
         {
+            player.InputHandler.UseJumpInput();
             stateMachine.ChangeState(player.WallJumpState);
             player.Flip();
             return;

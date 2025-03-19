@@ -34,7 +34,7 @@ public class Player : Entity
     private float defaultDashSpeed;
 
     #region Components
-
+    public PlayerInputHandler InputHandler { get; private set; }
     public PlayerData playerData;
     public PlayerStats Stats { get; private set; }
     public bool IsMove { get; set; } = true;
@@ -48,6 +48,7 @@ public class Player : Entity
     protected override void Awake()
     {
         base.Awake();
+        InputHandler = GetComponent<PlayerInputHandler>();
         StateMachine = new PlayerStateMachine();
         InitializeStateMachine();
     }
@@ -96,7 +97,7 @@ public class Player : Entity
 
     private void CheckIfDashInput()
     {
-        if (Input.GetKeyDown(KeyCode.Z) && DashState.CanDash())
+        if (InputHandler.DashInput && DashState.CanDash())
             StateMachine.ChangeState(DashState);
     }
 
