@@ -12,11 +12,14 @@ public class PlayerInAirState : PlayerState
     {
         base.LogicUpdate();
 
-        if (Input.GetKeyDown(KeyCode.C))
+        if (player.InputHandler.AttackInput)
             stateMachine.ChangeState(player.AttackState);
 
-        if (Input.GetKeyDown(KeyCode.X) && player.JumpState.CanJump())
+        if (player.InputHandler.JumpInput && player.JumpState.CanJump())
+        {
             stateMachine.ChangeState(player.JumpState);
+            player.InputHandler.UseJumpInput();
+        }
 
         // if (player.IsWallDetected() && rb.velocity.y < 0.01f)
         //     stateMachine.ChangeState(player.WallSlideState);

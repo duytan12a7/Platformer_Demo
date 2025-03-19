@@ -51,18 +51,18 @@ public abstract class CharacterStats : MonoBehaviour
     public bool IsShocked; // Reduce accuracy by 20%
 
 
-    [SerializeField] private float ignitedDuration = 4;
+    [SerializeField] private float ignitedDuration = 1f;
     private float ignitedTimer;
     private float chilledTimer;
     private float shockedTimer;
-    private float damageCooldown = .3f;
+    private float damageCooldown = .2f;
     private float igniteDamageTimer;
     private int igniteDamage;
     [SerializeField] private GameObject shockStrikePrefab;
-    [SerializeField] private float shockDuration = 2;
+    [SerializeField] private float shockDuration = 2f;
     private float shockDamageTimer;
     private int shockDamage;
-    [SerializeField] private float chillDuration = 2;
+    [SerializeField] private float chillDuration = 2f;
     private float chillDamageTimer;
     private int chillDamage;
 

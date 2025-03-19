@@ -1367,7 +1367,7 @@ GameObject:
   - component: {fileID: 402306206}
   - component: {fileID: 402306207}
   m_Layer: 0
-  m_Name: ' PickupManager'
+  m_Name: PickupManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5192,7 +5192,7 @@ GameObject:
   - component: {fileID: 1277608510}
   - component: {fileID: 1277608509}
   m_Layer: 0
-  m_Name: Inventory
+  m_Name: InventoryManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5229,7 +5229,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1990520599}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1277885133
 GameObject:
@@ -9407,6 +9407,7 @@ Transform:
   - {fileID: 926578577}
   - {fileID: 2096411482}
   - {fileID: 402306206}
+  - {fileID: 1277608510}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2027809627
@@ -10411,4 +10412,3 @@ SceneRoots:
   - {fileID: 576204418}
   - {fileID: 298589278}
   - {fileID: 1990520599}
-  - {fileID: 1277608510}

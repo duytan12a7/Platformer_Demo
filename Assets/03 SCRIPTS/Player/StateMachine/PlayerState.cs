@@ -43,8 +43,10 @@ public class PlayerState
         stateTimer -= Time.deltaTime;
 
         if (!player.IsMove) return;
-        xInput = (Input.GetKey(KeyCode.RightArrow) ? 1 : 0) - (Input.GetKey(KeyCode.LeftArrow) ? 1 : 0);
-        yInput = (Input.GetKey(KeyCode.UpArrow) ? 1 : 0) - (Input.GetKey(KeyCode.DownArrow) ? 1 : 0);
+        // xInput = (Input.GetKey(KeyCode.RightArrow) ? 1 : 0) - (Input.GetKey(KeyCode.LeftArrow) ? 1 : 0);
+        // yInput = (Input.GetKey(KeyCode.UpArrow) ? 1 : 0) - (Input.GetKey(KeyCode.DownArrow) ? 1 : 0);
+        xInput = player.InputHandler.NormInputX;
+        yInput = player.InputHandler.NormInputY;
 
         if (player.Anim == null) return;
         player.Anim.SetFloat(Global.AnimatorParams.xVelocity, rb.velocity.x);
