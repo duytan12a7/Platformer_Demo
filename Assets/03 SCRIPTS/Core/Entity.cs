@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Spine.Unity;
-using UnityEditor.Callbacks;
 using UnityEngine;
 
 public class Entity : MonoBehaviour

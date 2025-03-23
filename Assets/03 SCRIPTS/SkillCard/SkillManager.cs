@@ -20,15 +20,16 @@ public class SkillManager : MonoBehaviour
 
     public void AddSkill(SkillCard skill)
     {
-        if (playerStats.OwnedSkills.Contains(skill))
-        {
-            Debug.Log("Đã sở hữu kỹ năng này, có thể nâng cấp!");
-            return;
-        }
+        // if (playerStats.OwnedSkills.Contains(skill))
+        // {
+        //     Debug.Log("Đã sở hữu kỹ năng này, có thể nâng cấp!");
+        //     return;
+        // }
 
         playerStats.OwnedSkills.Add(skill);
         skill.ApplySkill(playerStats);
-        AvailableSkills.Remove(skill);
+        if (!(skill.skillType == SkillType.Normal))
+            AvailableSkills.Remove(skill);
     }
 
     public List<SkillCard> GetRandomSkills(int count)
@@ -47,7 +48,6 @@ public class SkillManager : MonoBehaviour
         else if (hasElectricStrike)
             copyList.RemoveAll(skill => skill is SkillCard_FlameSword || skill is SkillCard_IceSword);
 
-        // Random Skill từ danh sách đã lọc
         for (int i = 0; i < count; i++)
         {
             if (copyList.Count == 0) break;

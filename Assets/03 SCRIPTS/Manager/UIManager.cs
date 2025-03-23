@@ -47,7 +47,6 @@ public class UIManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(0);
-        Time.timeScale = 1f;
     }
 
     public void SwitchTo(GameObject _menu)

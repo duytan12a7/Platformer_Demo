@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,14 @@ public class PlayerInputHandler : MonoBehaviour
     public bool JumpInput { get; private set; }
     public bool AttackInput { get; private set; }
     public bool DashInput { get; private set; }
+
+    void Start() => JoyStick.onStickValueUpdated += MoveStickUpdated;
+
+    private void MoveStickUpdated(Vector2 inputVal)
+    {
+        NormInputX = (int)(inputVal * Vector2.right).normalized.x;
+        NormInputY = (int)(inputVal * Vector2.up).normalized.y;
+    }
 
     public void OnAttackInput(InputAction.CallbackContext context)
     {
@@ -52,4 +61,6 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void UseJumpInput() => JumpInput = false;
     public void UseDashInput() => DashInput = false;
+
+    void OnDestroy() => JoyStick.onStickValueUpdated -= MoveStickUpdated;
 }

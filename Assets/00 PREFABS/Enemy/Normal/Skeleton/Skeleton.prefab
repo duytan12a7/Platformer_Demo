@@ -53,6 +53,9 @@ MonoBehaviour:
   Vitality:
     baseValue: 0
     modifiers: 
+  Intelligence:
+    baseValue: 0
+    modifiers: 
   PhysicalDamage:
     baseValue: 5
     modifiers: 
@@ -68,12 +71,36 @@ MonoBehaviour:
   Armor:
     baseValue: 0
     modifiers: 
+  MagicResistance:
+    baseValue: 0
+    modifiers: 
   Evasion:
     baseValue: 0
     modifiers: 
+  FireDamage:
+    baseValue: 0
+    modifiers: 
+  IceDamage:
+    baseValue: 0
+    modifiers: 
+  LightningDamage:
+    baseValue: 0
+    modifiers: 
+  IsIgnited: 0
+  IsChilled: 0
+  IsShocked: 0
+  ignitedDuration: 1
+  shockStrikePrefab: {fileID: 0}
+  shockDuration: 2
+  chillDuration: 2
+  HasFireStrike: 0
+  HasIceStrike: 0
+  HasElectricStrike: 0
   CurrentHealth: 0
   CurrentMovementSpeed: 0
+  lootPrefabs: []
   CanKnock: 1
+  percentageModifier: 0.4
 --- !u!1 &1348628845115708399
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,7 +203,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 393833685
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: -10
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
@@ -201,7 +228,7 @@ GameObject:
   - component: {fileID: 888790364769060668}
   - component: {fileID: 1130465133380482523}
   - component: {fileID: 153011501970496574}
-  - component: {fileID: 8351732102484949857}
+  - component: {fileID: 1873645421287705866}
   m_Layer: 5
   m_Name: HealthBar_UI
   m_TagString: Untagged
@@ -292,7 +319,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &8351732102484949857
+--- !u!114 &1873645421287705866
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -301,7 +328,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2369987739269383101}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77ef5a0399d69be44b5243a60f144fab, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e2146b071e6a14438983c5c0a898488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3519336101512505810
@@ -452,7 +479,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 393833685
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -1030125260, guid: eadfbcf7b070c4040ae134035c4baeb6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -499,6 +526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
+  fxAttack: {fileID: 0}
 --- !u!1 &5983483040894637167
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,6 +948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d31c013079d1d154e8e7c46492ae1ec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skeletonAnimation: {fileID: 0}
   CurrentVelocity: {x: 0, y: 0}
   FacingDirection: 0
   knockbackVelocity: {x: 2, y: 1}
@@ -936,16 +965,19 @@ MonoBehaviour:
   whatIsCharacter:
     serializedVersion: 2
     m_Bits: 8
-  skeletonAnimation: {fileID: 0}
   StunDuration: 0.35
   StunDirection: {x: 2, y: 1}
+  IsStunned: 0
   counterImage: {fileID: 1531082993512807476}
   MoveSpeed: 2
   IdleTime: 1
   BattleTime: 7
-  agroDistance: 2
-  attackDistance: 1.5
-  attackCheckDistance: 5
+  AgroDistance: 2
+  AttackDistance: 1.5
+  AttackCheckDistance: 5
+  DashSpeed: 20
+  DashDuration: 5
+  IsSkillAttackActive: 1
 --- !u!114 &5561971786241925443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -960,6 +992,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashDuration: 1
   hitMaterial: {fileID: 2100000, guid: 81f2cdd8580602f4eb7bb737911fde9c, type: 2}
+  igniteColor: []
+  chillColor: []
+  shockColor: []
+  fxIgnite: {fileID: 0}
 --- !u!114 &-8816095019960405939
 MonoBehaviour:
   m_ObjectHideFlags: 0
