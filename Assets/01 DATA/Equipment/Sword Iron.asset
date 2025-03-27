@@ -15,9 +15,10 @@ MonoBehaviour:
   ItemType: 2
   ItemName: Sword Iron
   ItemValue: 1
-  ItemIcon: {fileID: -1888760358, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  ItemIcon: {fileID: -1377389997, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
   DropChance: 100
   EquipmentType: 0
+  itemEffects: []
   Strength: 3
   Agility: 0
   Intelligence: 0

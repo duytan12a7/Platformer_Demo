@@ -15,9 +15,10 @@ MonoBehaviour:
   ItemType: 2
   ItemName: Armor
   ItemValue: 1
-  ItemIcon: {fileID: 2007117837, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  ItemIcon: {fileID: 1367664053, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
   DropChance: 100
   EquipmentType: 1
+  itemEffects: []
   Strength: 0
   Agility: 0
   Intelligence: 0

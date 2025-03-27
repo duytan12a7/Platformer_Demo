@@ -788,16 +788,16 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   PhysicalDamage:
-    baseValue: 20
+    baseValue: 25
     modifiers: 
   CriticalChance:
-    baseValue: 0
+    baseValue: 5
     modifiers: 
   CriticalPower:
     baseValue: 0
     modifiers: 
   MaxHealth:
-    baseValue: 200
+    baseValue: 250
     modifiers: 
   Armor:
     baseValue: 0
@@ -806,7 +806,7 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   Evasion:
-    baseValue: 0
+    baseValue: 5
     modifiers: 
   FireDamage:
     baseValue: 0
@@ -830,7 +830,8 @@ MonoBehaviour:
   CurrentHealth: 0
   CurrentMovementSpeed: 0
   lootPrefabs: []
-  CanKnock: 1
+  CanKnock: 0
+  percentageModifier: 0.4
 --- !u!1 &1476221772331617708
 GameObject:
   m_ObjectHideFlags: 0

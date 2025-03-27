@@ -2,6 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum StatType
+{
+    Strength,
+    Agility,
+    Intelegence,
+    Vitality,
+    Damage,
+    CritChance,
+    CritPower,
+    Health,
+    Armor,
+    Evasion,
+    MagicRes,
+    FireDamage,
+    IceDamage,
+    LightningDamage
+}
+
 public abstract class CharacterStats : MonoBehaviour
 {
     private EntityFX fx;
@@ -16,15 +34,12 @@ public abstract class CharacterStats : MonoBehaviour
     public Stat PhysicalDamage;
     public Stat CriticalChance;
     public Stat CriticalPower;
-    public void AddModifyPhysicalDamage(int amount) => PhysicalDamage.AddModifier(amount);
-    public void AddModifyCriticalChance(int amount) => CriticalChance.AddModifier(amount);
 
     [Header("Defensive Stats")]
     public Stat MaxHealth;
     public Stat Armor;
     public Stat MagicResistance;
     public Stat Evasion;
-    public void AddModifyArmor(int amount) => Armor.AddModifier(amount);
 
     [Header(" Magic Stats")]
     public Stat FireDamage;
@@ -288,32 +303,39 @@ public abstract class CharacterStats : MonoBehaviour
         GameEvent.CallOnHealthChanged();
     }
 
-    public void IncreaseHealth(float percent) => ModifyHealth(percent, true);
-
-    public void Heal(float percent) => ModifyHealth(percent, false);
-
-    private void ModifyHealth(float percent, bool increaseMaxHealth)
+    public void Heal(int value)
     {
-        if (percent <= 0) return;
-
-        int maxHealth = GetMaxHealthValue();
-        int amount = (int)(maxHealth * percent);
-
-        if (increaseMaxHealth)
-            MaxHealth.AddModifier(amount);
-
-        CurrentHealth += amount;
+        CurrentHealth += value;
         ClampHealth();
     }
 
     private void ClampHealth()
     {
-        int maxHealth = GetMaxHealthValue();
-        if (CurrentHealth > maxHealth)
-            CurrentHealth = maxHealth;
+        if (CurrentHealth > GetMaxHealthValue())
+            CurrentHealth = GetMaxHealthValue();
 
         GameEvent.CallOnHealthChanged();
     }
 
     #endregion
+    
+    public Stat GetStat(StatType _statType)
+    {
+        if (_statType == StatType.Strength) return Strength;
+        else if (_statType == StatType.Agility) return Agility;
+        else if (_statType == StatType.Intelegence) return Intelligence;
+        else if (_statType == StatType.Vitality) return Vitality;
+        else if (_statType == StatType.Damage) return PhysicalDamage;
+        else if (_statType == StatType.CritChance) return CriticalChance;
+        else if (_statType == StatType.CritPower) return CriticalPower;
+        else if (_statType == StatType.Health) return MaxHealth;
+        else if (_statType == StatType.Armor) return Armor;
+        else if (_statType == StatType.Evasion) return Evasion;
+        else if (_statType == StatType.MagicRes) return MagicResistance;
+        else if (_statType == StatType.FireDamage) return FireDamage;
+        else if (_statType == StatType.IceDamage) return IceDamage;
+        else if (_statType == StatType.LightningDamage) return LightningDamage;
+
+        return null;
+    }
 }
