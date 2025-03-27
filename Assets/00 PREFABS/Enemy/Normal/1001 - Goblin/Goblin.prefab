@@ -5465,7 +5465,7 @@ MonoBehaviour:
   IsIgnited: 0
   IsChilled: 0
   IsShocked: 0
-  ignitedDuration: 4
+  ignitedDuration: 1
   shockStrikePrefab: {fileID: 0}
   shockDuration: 2
   chillDuration: 2
