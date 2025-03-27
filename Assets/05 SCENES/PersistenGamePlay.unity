@@ -3964,7 +3964,7 @@ MonoBehaviour:
   cinemachineConfiner: {fileID: 1608360478}
   fadeCanvas: {fileID: 426384238}
   fadeDuration: 0.8
-  initialScenePrefab: {fileID: 4625843933835900943, guid: b22e716b6d59c4243a5709d7f7393925, type: 3}
+  initialScenePrefab: {fileID: 4625843933835900943, guid: e13b5f3c232321f488c921c2d1b0c1de, type: 3}
   player: {fileID: 988033012}
 --- !u!1 &930136645
 GameObject:

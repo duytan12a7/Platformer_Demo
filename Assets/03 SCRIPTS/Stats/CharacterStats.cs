@@ -318,7 +318,7 @@ public abstract class CharacterStats : MonoBehaviour
     }
 
     #endregion
-    
+
     public Stat GetStat(StatType _statType)
     {
         if (_statType == StatType.Strength) return Strength;

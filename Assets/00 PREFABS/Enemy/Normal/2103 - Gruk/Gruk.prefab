@@ -592,8 +592,8 @@ MonoBehaviour:
   skeletonAnimation: {fileID: 0}
   CurrentVelocity: {x: 0, y: 0}
   FacingDirection: 0
-  knockbackVelocity: {x: 0, y: 0}
-  knockBackDuration: 0
+  knockbackVelocity: {x: 2, y: 1}
+  knockBackDuration: 0.07
   groundCheck: {fileID: 5236544952417232598}
   wallCheck: {fileID: 5529952708703772391}
   groundCheckRadius: 0.08

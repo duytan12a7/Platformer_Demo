@@ -29,8 +29,8 @@ public class Entity : MonoBehaviour
     #region Knockback Variables
 
     [Header("Knockback Variables")]
-    [SerializeField] protected Vector2 knockbackVelocity;
-    [SerializeField] protected float knockBackDuration;
+    [SerializeField] protected Vector2 knockbackVelocity = new(2f, 1f);
+    [SerializeField] protected float knockBackDuration = .07f;
     protected bool isKnocked;
 
     #endregion
@@ -43,7 +43,7 @@ public class Entity : MonoBehaviour
     [SerializeField] protected float wallCheckDistance = 0.5f;
     [SerializeField] protected LayerMask whatIsGround;
     public Transform attackCheck;
-    public float attackCheckRadius;
+    public float attackCheckRadius = 0.75f;
     public LayerMask whatIsCharacter;
 
     #endregion
@@ -71,10 +71,10 @@ public class Entity : MonoBehaviour
 
     protected virtual void DefaultFacing()
     {
-        isFacingRight = true;
-        FacingDirection = 1;
+        isFacingRight = false;
+        FacingDirection = -1;
         transform.localScale = Vector3.one;
-        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        transform.rotation = Quaternion.Euler(0f, -180f, 0f);
     }
 
     protected virtual void Update() { }

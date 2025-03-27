@@ -79,10 +79,9 @@ public class EnemyAnimationTrigger : MonoBehaviour
         }
     }
 
-    private void AnimationFinishTrigger()
-    {
-        enemy.AnimationFinishTrigger();
-    }
+    private void AnimationFinishTrigger() => enemy.AnimationFinishTrigger();
+
+    private void AnimationSpecialAttackTrigger() => enemy.AnimationSpecialAttackTrigger();
 
     private void AttackTrigger()
     {

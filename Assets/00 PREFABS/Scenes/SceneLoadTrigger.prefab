@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scenesToLoad:
-  - m_SceneAsset: {fileID: 102900000, guid: 159641f8160ec264d849280617d77548, type: 3}
+  - m_SceneAsset: {fileID: 0}
     m_SceneName: Stage2
   _scenesToUnload:
   - m_SceneAsset: {fileID: 0}

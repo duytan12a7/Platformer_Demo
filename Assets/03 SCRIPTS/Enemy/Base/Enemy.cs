@@ -25,10 +25,10 @@ public class Enemy : Entity
     public AnimationTriggerType CurrentTriggerType { get; private set; }
 
     [Header("Stunned info")]
-    public float StunDuration;
-    public Vector2 StunDirection;
+    public float StunDuration = .35f;
+    public Vector2 StunDirection = new(2, 1);
     protected bool canBeStunned;
-    public bool IsStunned;
+    public bool IsStunned = true;
     [SerializeField] protected GameObject counterImage;
 
     [Header("Move info")]
@@ -93,9 +93,13 @@ public class Enemy : Entity
 
     public virtual RaycastHit2D IsPlayerDetected()
     {
+        RaycastHit2D bottomDetected = Physics2D.Raycast(groundCheck.position, Vector2.right * FacingDirection, AttackCheckDistance, whatIsCharacter);
         RaycastHit2D rightDetected = Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, AttackCheckDistance, whatIsCharacter);
         RaycastHit2D leftDetected = Physics2D.Raycast(wallCheck.position, Vector2.left * FacingDirection, AttackCheckDistance, whatIsCharacter);
         RaycastHit2D wallDetected = Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, AttackCheckDistance, whatIsGround);
+
+        if (bottomDetected)
+            return bottomDetected;
 
         if (leftDetected)
             return leftDetected;
@@ -109,7 +113,15 @@ public class Enemy : Entity
         return rightDetected;
     }
 
-    public bool CheckAttackDistance() => Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, AttackDistance, whatIsCharacter);
+    public bool CheckAttackDistance()
+    {
+        RaycastHit2D bottomDetected = Physics2D.Raycast(groundCheck.position, Vector2.right * FacingDirection, AttackDistance, whatIsCharacter);
+        RaycastHit2D attackDetected = Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, AttackDistance, whatIsCharacter);
+
+        if (bottomDetected)
+            return bottomDetected;
+        return attackDetected;
+    }
 
     #endregion
 
@@ -123,17 +135,10 @@ public class Enemy : Entity
 
     public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
 
-    public enum AnimationTriggerType
+    public virtual void AnimationSpecialAttackTrigger()
     {
-        None,
-        EffectAttack,
-        EnemyDamaged,
-        PlayerFootstepsound
+
     }
-
-    #endregion
-
-    #region Other Functions
 
     public virtual void OpenCounterAttackWindow()
     {
@@ -146,6 +151,18 @@ public class Enemy : Entity
         canBeStunned = false;
         counterImage.SetActive(false);
     }
+
+    public enum AnimationTriggerType
+    {
+        None,
+        EffectAttack,
+        EnemyDamaged,
+        PlayerFootstepsound
+    }
+
+    #endregion
+
+    #region Other Functions
 
     public override void DamageEffect(Transform attacker)
     {
@@ -207,10 +224,10 @@ public class Enemy : Entity
     protected override void OnDrawGizmos()
     {
         // base.OnDrawGizmos();
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(wallCheck.position, Vector2.right * FacingDirection * AttackCheckDistance);
-        Gizmos.DrawRay(wallCheck.position, Vector2.left * FacingDirection * AttackCheckDistance);
-        Gizmos.color = Color.green;
-        Gizmos.DrawRay(wallCheck.position, Vector2.right * FacingDirection * AttackDistance);
+        // Gizmos.color = Color.red;
+        // Gizmos.DrawRay(wallCheck.position, Vector2.right * FacingDirection * AttackCheckDistance);
+        // Gizmos.DrawRay(wallCheck.position, Vector2.left * FacingDirection * AttackCheckDistance);
+        // Gizmos.color = Color.green;
+        // Gizmos.DrawRay(wallCheck.position, Vector2.right * FacingDirection * AttackDistance);
     }
 }

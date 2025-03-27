@@ -398,11 +398,11 @@ MonoBehaviour:
     - enemyPrefab: {fileID: 1343947209359925535, guid: ea74aa6e0794aa64c95d85716c02ed08, type: 3}
       spawnPoint: {fileID: 8714988526209947450}
       delay: 0
-    - enemyPrefab: {fileID: 1343947209359925535, guid: 313e50cc9a15c744a8cdb2196c0713f7, type: 3}
-      spawnPoint: {fileID: 9077638858442363011}
-      delay: 0
     - enemyPrefab: {fileID: 1343947209359925535, guid: ea74aa6e0794aa64c95d85716c02ed08, type: 3}
       spawnPoint: {fileID: 8254753112490262456}
+      delay: 0
+    - enemyPrefab: {fileID: 7820696765855278073, guid: 62220d02fa941934b981572890a7f54e, type: 3}
+      spawnPoint: {fileID: 3306081581011361576}
       delay: 0
   timeBetweenWaves: 1
   sceneTrigger: {fileID: 1805390401982747944}
@@ -515,7 +515,7 @@ Transform:
   m_GameObject: {fileID: 3042784140275361692}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12, y: 0, z: 0}
+  m_LocalPosition: {x: 11.9, y: 3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
