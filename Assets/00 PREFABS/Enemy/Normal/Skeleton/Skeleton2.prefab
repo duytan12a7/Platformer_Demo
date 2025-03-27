@@ -84,6 +84,9 @@ MonoBehaviour:
   Vitality:
     baseValue: 2
     modifiers: 
+  Intelligence:
+    baseValue: 0
+    modifiers: 
   PhysicalDamage:
     baseValue: 20
     modifiers: 
@@ -99,12 +102,36 @@ MonoBehaviour:
   Armor:
     baseValue: 0
     modifiers: 
+  MagicResistance:
+    baseValue: 0
+    modifiers: 
   Evasion:
     baseValue: 0
     modifiers: 
+  FireDamage:
+    baseValue: 0
+    modifiers: 
+  IceDamage:
+    baseValue: 0
+    modifiers: 
+  LightningDamage:
+    baseValue: 0
+    modifiers: 
+  IsIgnited: 0
+  IsChilled: 0
+  IsShocked: 0
+  ignitedDuration: 1
+  shockStrikePrefab: {fileID: 0}
+  shockDuration: 2
+  chillDuration: 2
+  HasFireStrike: 0
+  HasIceStrike: 0
+  HasElectricStrike: 0
   CurrentHealth: 0
   CurrentMovementSpeed: 0
+  lootPrefabs: []
   CanKnock: 0
+  percentageModifier: 0.4
 --- !u!1 &1783488391609953142
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,6 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d31c013079d1d154e8e7c46492ae1ec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skeletonAnimation: {fileID: 0}
   CurrentVelocity: {x: 0, y: 0}
   FacingDirection: 0
   knockbackVelocity: {x: 0, y: 0}
@@ -276,9 +304,19 @@ MonoBehaviour:
   whatIsCharacter:
     serializedVersion: 2
     m_Bits: 8
-  _enemyWanderBase: {fileID: 11400000, guid: dc44e881bf0c98b40bf2db9b548fb58e, type: 2}
-  _enemyChaseBase: {fileID: 11400000, guid: 8480a3f6244c91a448da5fbb661cd6e4, type: 2}
-  _enemyAttackBase: {fileID: 11400000, guid: 7117f356a7f81be41a1f235034850dc0, type: 2}
+  StunDuration: 0
+  StunDirection: {x: 0, y: 0}
+  IsStunned: 0
+  counterImage: {fileID: 0}
+  MoveSpeed: 2
+  IdleTime: 1
+  BattleTime: 7
+  AgroDistance: 2
+  AttackDistance: 1.5
+  AttackCheckDistance: 5
+  DashSpeed: 20
+  DashDuration: 5
+  IsSkillAttackActive: 1
 --- !u!114 &3956654457817697512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,7 +329,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 599cf2c6ee55fa34b8644391502f34f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flashDuration: 0
   hitMaterial: {fileID: 2100000, guid: 81f2cdd8580602f4eb7bb737911fde9c, type: 2}
+  igniteColor: []
+  chillColor: []
+  shockColor: []
+  fxIgnite: {fileID: 0}
 --- !u!114 &4700205993603129747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,7 +365,7 @@ GameObject:
   - component: {fileID: 998112514102675723}
   - component: {fileID: 1676234309716889979}
   - component: {fileID: 7163193966282433922}
-  - component: {fileID: 5170317582006246776}
+  - component: {fileID: 8805187558176568794}
   m_Layer: 5
   m_Name: HealthBar_UI
   m_TagString: Untagged
@@ -413,7 +456,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &5170317582006246776
+--- !u!114 &8805187558176568794
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -422,7 +465,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2199083512007697240}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77ef5a0399d69be44b5243a60f144fab, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e2146b071e6a14438983c5c0a898488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2741140270596771259
@@ -652,7 +695,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 393833685
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -1030125260, guid: eadfbcf7b070c4040ae134035c4baeb6, type: 3}
   m_Color: {r: 0.7056604, g: 0.04127444, b: 0.04127444, a: 1}
@@ -699,6 +742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
+  fxAttack: {fileID: 0}
 --- !u!1 &4795195119738452954
 GameObject:
   m_ObjectHideFlags: 0

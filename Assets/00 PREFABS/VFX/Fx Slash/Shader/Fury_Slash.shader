@@ -18,19 +18,17 @@ Shader "FuryShader/Fury_Slash" {
             "Queue"="Transparent"
             "RenderType"="Transparent"
         }
-        GrabPass{ "Refraction" }
+        GrabPass { "Refraction" }
         Pass {
             Name "FORWARD"
-            Tags {
-                "LightMode"="ForwardBase"
-            }
+            Tags { "LightMode"="ForwardBase" }
             Blend SrcAlpha OneMinusSrcAlpha
             ZWrite Off
             
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            #define UNITY_PASS_FORWARDBASE
+            // Xóa dòng #define UNITY_PASS_FORWARDBASE để tránh trùng lặp
             #include "UnityCG.cginc"
             #pragma multi_compile_fwdbase
             #pragma only_renderers d3d9 d3d11 
@@ -97,8 +95,6 @@ Shader "FuryShader/Fury_Slash" {
                 float node_5099 = (((node_8211.g+node_8211.b)/2.0)*node_6216.a);
                 float2 sceneUVs = float2(1,grabSign)*i.screenPos.xy*0.5+0.5 + (UV*node_5099*(_RefractionStrength*(i.uv1.r*0.5+0.5)*i.uv2.r));
                 float4 sceneColor = tex2D(Refraction, sceneUVs);
-////// Lighting:
-////// Emissive:
                 float3 emissive = (((((_Color.rgb*node_8211.g)+(node_8211.r*_SharpEdge))*_EmissStrength)*i.vertexColor.rgb)*saturate(i.uv1.b));
                 float3 finalColor = emissive;
                 float2 node_4219 = (node_5346+i.uv1.r*float2(0.25,0));
