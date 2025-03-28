@@ -5309,7 +5309,7 @@ MonoBehaviour:
   BattleTime: 7
   AgroDistance: 2
   AttackDistance: 1.5
-  AttackCheckDistance: 5
+  AttackCheckDistance: 50
   DashSpeed: 20
   DashDuration: 5
   IsSkillAttackActive: 1

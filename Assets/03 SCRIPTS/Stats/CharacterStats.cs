@@ -195,7 +195,7 @@ public abstract class CharacterStats : MonoBehaviour
         {
             DecreaseHealthBy(igniteDamage);
 
-            if (CurrentHealth < 0 && !IsDead)
+            if (CurrentHealth <= 0 && !IsDead)
                 Die();
 
             igniteDamageTimer = damageCooldown;
@@ -208,7 +208,7 @@ public abstract class CharacterStats : MonoBehaviour
         {
             DecreaseHealthBy(chillDamage);
 
-            if (CurrentHealth < 0 && !IsDead)
+            if (CurrentHealth <= 0 && !IsDead)
                 Die();
 
             chillDamageTimer = damageCooldown;
@@ -221,7 +221,7 @@ public abstract class CharacterStats : MonoBehaviour
         {
             DecreaseHealthBy(shockDamage);
 
-            if (CurrentHealth < 0 && !IsDead)
+            if (CurrentHealth <= 0 && !IsDead)
                 Die();
 
             shockDamageTimer = damageCooldown;

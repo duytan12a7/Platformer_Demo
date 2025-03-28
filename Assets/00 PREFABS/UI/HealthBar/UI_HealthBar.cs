@@ -18,9 +18,10 @@ public class UI_HealthBar : MonoBehaviour
         slider = GetComponentInChildren<Slider>();
     }
 
+
     private void OnEnable()
     {
-        transform.rotation = Quaternion.Euler(0f, -180f, 0f);
+        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         entity.OnFlipped += Flip;
         GameEvent.OnHealthChanged += UpdateHealthUI;
     }

@@ -21,6 +21,12 @@ public class EnemyBattleState : EnemyState
     {
         base.LogicUpdate();
 
+        if (!enemy.IsGroundDetected())
+        {
+            stateMachine.ChangeState(enemy.IdleState);
+            return;
+        }
+
         if (enemy.IsPlayerDetected())
         {
             stateTimer = enemy.BattleTime;

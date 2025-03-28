@@ -13,7 +13,7 @@ public class EnemyState
 
     protected float stateTimer;
 
-    private string animBoolName;
+    protected string animBoolName;
 
     public EnemyState(Enemy enemy, EnemyStateMachine stateMachine, string animBoolName)
     {

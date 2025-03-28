@@ -24,7 +24,6 @@ public class EnemyMoveState : EnemyState
     {
         base.LogicUpdate();
 
-
         enemy.SetVelocity(enemy.MoveSpeed * enemy.FacingDirection, rb.velocity.y);
 
         if (enemy.IsWallDetected() || !enemy.IsGroundDetected())

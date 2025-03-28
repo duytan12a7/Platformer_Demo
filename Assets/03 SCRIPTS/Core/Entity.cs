@@ -71,10 +71,10 @@ public class Entity : MonoBehaviour
 
     protected virtual void DefaultFacing()
     {
-        isFacingRight = false;
-        FacingDirection = -1;
+        isFacingRight = true;
+        FacingDirection = 1;
         transform.localScale = Vector3.one;
-        transform.rotation = Quaternion.Euler(0f, -180f, 0f);
+        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
     }
 
     protected virtual void Update() { }

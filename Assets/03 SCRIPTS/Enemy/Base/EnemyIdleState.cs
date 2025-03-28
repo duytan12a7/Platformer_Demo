@@ -13,6 +13,7 @@ public class EnemyIdleState : EnemyState
     {
         base.Enter();
         stateTimer = enemy.IdleTime;
+        enemy.SetVelocityX(0f);
     }
 
     public override void Exit()
@@ -23,6 +24,7 @@ public class EnemyIdleState : EnemyState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
         if (stateTimer < 0)
             stateMachine.ChangeState(enemy.MoveState);
     }

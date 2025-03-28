@@ -13,7 +13,7 @@ public class EnemyStunnedState : EnemyState
     public override void Enter()
     {
         base.Enter();
-        enemy.PlayAnimation("hurt", false);
+        enemy.PlayAnimation(animBoolName, false);
         stateTimer = enemy.StunDuration;
         enemy.CloseCounterAttackWindow();
 
