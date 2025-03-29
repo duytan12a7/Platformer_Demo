@@ -8,10 +8,7 @@ public class EnemyDamageSender : MonoBehaviour
     [SerializeField] private Enemy enemy;
     private HashSet<PlayerStats> attackedEnemies = new();
 
-    private void Start()
-    {
-        LoadComponent();
-    }
+    private void Start() => LoadComponent();
 
     private void LoadComponent()
     {

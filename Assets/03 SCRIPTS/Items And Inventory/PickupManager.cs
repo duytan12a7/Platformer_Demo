@@ -39,10 +39,14 @@ public class PickupManager : MonoBehaviour
 
     private IEnumerator MoveItemToPlayer(ItemObject item)
     {
-        Vector3 targetPos = new(playerTransform.position.x, playerTransform.position.y + 1.5f, playerTransform.position.z);
-        while (item != null && Vector3.Distance(item.transform.position, targetPos) > 0.5f)
+        while (item != null && playerTransform != null)
         {
+            Vector3 targetPos = new Vector3(playerTransform.position.x, playerTransform.position.y + 1.5f, playerTransform.position.z);
             item.transform.position = Vector3.MoveTowards(item.transform.position, targetPos, moveSpeed * Time.deltaTime);
+
+            if (Vector3.Distance(item.transform.position, targetPos) <= 0.5f)
+                break;
+
             yield return null;
         }
 

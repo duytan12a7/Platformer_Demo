@@ -54,7 +54,7 @@ public class EnemyAnimationTrigger : MonoBehaviour
         switch (e.Data.Name)
         {
             case "Attack":
-                // AttackTrigger();
+                AudioManager.Instance.PlaySFX(1);
                 break;
             case "AnimationFinish":
                 AnimationFinishTrigger();

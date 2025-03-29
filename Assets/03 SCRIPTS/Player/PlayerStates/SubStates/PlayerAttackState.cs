@@ -16,6 +16,7 @@ public class PlayerAttackState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        AudioManager.Instance.PlaySFX(1);
         if (comboCounter > playerData.ComboWindow || Time.time >= lastTimeAttacked + 0.5f)
             comboCounter = 0;
 

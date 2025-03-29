@@ -8,6 +8,12 @@ public class PlayerDeadState : PlayerState
     {
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+        AudioManager.Instance.PlaySFX(10);
+    }
+
     public override void LogicUpdate()
     {
         base.LogicUpdate();
